@@ -727,7 +727,7 @@
 
       <!-- CHAPTER VIEWS (dynamically loaded) -->
       <div class="chapter-view" id="view-ch1"><div class="chapter-loading">Loading chapter...</div></div>
-      <div class="chapter-view" id="view-ch2"><div class="md-content coming-soon-view"><span class="phase-tag phase-pre">Pre-Construction</span><h1>Chapter 2: Site Selection &amp; Due Diligence</h1><p>This chapter is coming soon. Content will appear here once it has been built out.</p></div></div>
+      <div class="chapter-view" id="view-ch2"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch3"><div class="md-content coming-soon-view"><span class="phase-tag phase-pre">Pre-Construction</span><h1>Chapter 3: Financing &amp; Capital Stack</h1><p>This chapter is coming soon.</p></div></div>
       <div class="chapter-view" id="view-ch4"><div class="md-content coming-soon-view"><span class="phase-tag phase-pre">Pre-Construction</span><h1>Chapter 4: Entitlements, Zoning &amp; Permits</h1><p>This chapter is coming soon.</p></div></div>
       <div class="chapter-view" id="view-ch5"><div class="md-content coming-soon-view"><span class="phase-tag phase-pre">Pre-Construction</span><h1>Chapter 5: Project Team Assembly</h1><p>This chapter is coming soon.</p></div></div>
@@ -756,6 +756,7 @@
 
 <!-- Quiz data files -->
 <script src="quizzes/quiz-1.js"></script>
+<script src="quizzes/quiz-2.js"></script>
 
 <script>
 const scores = {};
@@ -764,7 +765,7 @@ const userAnswers = {};
 // Chapter config — maps chapter ID to markdown file and quiz
 const chapterConfig = {
   ch1: { file: 'chapters/chapter-1.md', quiz: () => typeof quiz1 !== 'undefined' ? quiz1 : null, phase: 'pre' },
-  ch2: { file: null, quiz: () => null, phase: 'pre' },
+  ch2: { file: 'chapters/chapter-2.md', quiz: () => typeof quiz2 !== 'undefined' ? quiz2 : null, phase: 'pre' },
   ch3: { file: null, quiz: () => null, phase: 'pre' },
   ch4: { file: null, quiz: () => null, phase: 'pre' },
   ch5: { file: null, quiz: () => null, phase: 'pre' },
@@ -782,6 +783,20 @@ const chapterConfig = {
 
 // Outline data per chapter
 const chapterOutlines = {
+  ch2: [
+    { id: 'section-21', label: '2.1 What is Site Selection?' },
+    { id: 'section-22', label: '2.2 The Physical Assessment' },
+    { id: 'section-23', label: '2.3 Title & Legal Due Diligence' },
+    { id: 'section-24', label: '2.4 Environmental Due Diligence' },
+    { id: 'section-25', label: '2.5 Geotechnical & Servicing' },
+    { id: 'section-26', label: '2.6 Zoning & Planning' },
+    { id: 'section-27', label: '2.7 Financial Due Diligence' },
+    { id: 'section-28', label: '2.8 Key Terms Reference' },
+    { id: 'section-ae22', label: 'AE-2.2 Physical Assessment' },
+    { id: 'section-ae23', label: 'AE-2.3 Title Encumbrance' },
+    { id: 'section-ae24', label: 'AE-2.4 Phase 2 ESA Finding' },
+    { id: 'section-ae27', label: 'AE-2.7 Go/No-Go Decision' }
+  ],
   ch1: [
     { id: 'section-11', label: '1.1 What is Market Analysis?' },
     { id: 'section-12', label: '1.2 Supply & Demand Fundamentals' },
@@ -1035,8 +1050,9 @@ function buildPills() {
 
 buildPills();
 
-// Load Chapter 1 immediately in background
+// Load Chapter 1 and 2 immediately in background
 loadChapter('ch1');
+loadChapter('ch2');
 </script>
 </body>
 </html>
