@@ -1094,7 +1094,7 @@ function submitQuiz(qid) {
 function markComplete(qid) {
   const n = parseInt(qid.replace('ch',''));
   const el = document.getElementById('st' + n);
-  if (el) { el.textContent = '&#10003;'; el.classList.add('done'); }
+  if (el) { el.innerHTML = '&#10003;'; el.classList.add('done'); }
   document.querySelectorAll('[data-target="' + qid + '"]').forEach(i => i.classList.add('completed'));
 }
 
