@@ -742,7 +742,7 @@
       <div class="chapter-view" id="view-ch2"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch3"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch4"><div class="chapter-loading">Loading chapter...</div></div>
-      <div class="chapter-view" id="view-ch5"><div class="md-content coming-soon-view"><span class="phase-tag phase-pre">Pre-Construction</span><h1>Chapter 5: Project Team Assembly</h1><p>This chapter is coming soon.</p></div></div>
+      <div class="chapter-view" id="view-ch5"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch6"><div class="md-content coming-soon-view"><span class="phase-tag phase-pre">Pre-Construction</span><h1>Chapter 6: Design &amp; Architecture Process</h1><p>This chapter is coming soon.</p></div></div>
       <div class="chapter-view" id="view-ch7"><div class="md-content coming-soon-view"><span class="phase-tag phase-con">Construction</span><h1>Chapter 7: Procurement &amp; Contracting</h1><p>This chapter is coming soon.</p></div></div>
       <div class="chapter-view" id="view-ch8"><div class="md-content coming-soon-view"><span class="phase-tag phase-con">Construction</span><h1>Chapter 8: Construction Management</h1><p>This chapter is coming soon.</p></div></div>
@@ -771,6 +771,7 @@
 <script src="quizzes/quiz-2.js"></script>
 <script src="quizzes/quiz-3.js"></script>
 <script src="quizzes/quiz-4.js"></script>
+<script src="quizzes/quiz-5.js"></script>
 
 <script>
 const scores = {};
@@ -782,7 +783,7 @@ const chapterConfig = {
   ch2: { file: 'chapters/chapter-2.md', quiz: () => typeof quiz2 !== 'undefined' ? quiz2 : null, phase: 'pre' },
   ch3: { file: 'chapters/chapter-3.md', quiz: () => typeof quiz3 !== 'undefined' ? quiz3 : null, phase: 'pre' },
   ch4: { file: 'chapters/chapter-4.md', quiz: () => typeof quiz4 !== 'undefined' ? quiz4 : null, phase: 'pre' },
-  ch5: { file: null, quiz: () => null, phase: 'pre' },
+  ch5: { file: 'chapters/chapter-5.md', quiz: () => typeof quiz5 !== 'undefined' ? quiz5 : null, phase: 'pre' },
   ch6: { file: null, quiz: () => null, phase: 'pre' },
   ch7: { file: null, quiz: () => null, phase: 'con' },
   ch8: { file: null, quiz: () => null, phase: 'con' },
@@ -797,6 +798,23 @@ const chapterConfig = {
 
 // Outline data per chapter
 const chapterOutlines = {
+  ch5: [
+    { id: 'section-51', label: '5.1 Why Team Assembly Matters' },
+    { id: 'section-52', label: '5.2 The Developer Internal Team' },
+    { id: 'section-53', label: '5.3 The Construction Manager' },
+    { id: 'section-54', label: '5.4 Architect & Design Consultants' },
+    { id: 'section-55', label: '5.5 The Legal Team' },
+    { id: 'section-56', label: '5.6 Financial & Lending Team' },
+    { id: 'section-57', label: '5.7 Planning & Entitlement Team' },
+    { id: 'section-58', label: '5.8 Procurement' },
+    { id: 'section-59', label: '5.9 Contracts & Scope of Work' },
+    { id: 'section-510', label: '5.10 Key Terms Reference' },
+    { id: 'section-511', label: '5.11 HCRA & Tarion Licensing' },
+    { id: 'section-ae-intro5', label: 'Applied Exercises' },
+    { id: 'section-ae53', label: 'AE-5.3 CM Proposal Evaluation' },
+    { id: 'section-ae58', label: 'AE-5.8 Consultant RFP Process' },
+    { id: 'section-ae59', label: 'AE-5.9 CM Contract Scope' }
+  ],
   ch4: [
     { id: 'section-41', label: '4.1 What is the Entitlement Process?' },
     { id: 'section-42', label: '4.2 The Ontario Planning Framework' },
@@ -1133,6 +1151,7 @@ loadChapter('ch1');
 loadChapter('ch2');
 loadChapter('ch3');
 loadChapter('ch4');
+loadChapter('ch5');
 </script>
 </body>
 </html>
