@@ -349,7 +349,12 @@
     line-height: 1.55;
   }
 
-  .q-options { display: flex; flex-direction: column; gap: 8px; }
+  .q-options { display: flex; flex-direction: column; gap: 8px; position: relative; }
+
+  .q-opt-wrap {
+    display: flex;
+    flex-direction: column;
+  }
 
   .q-opt {
     display: flex;
@@ -362,6 +367,13 @@
     font-size: 13px;
     transition: background 0.12s, border-color 0.12s;
     line-height: 1.5;
+    user-select: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  .q-opt-text {
+    pointer-events: none;
   }
 
   .q-opt:hover { background: var(--bg-secondary); border-color: var(--border-mid); }
@@ -889,7 +901,14 @@ async function loadChapter(chapterId) {
     const quizData = config.quiz();
     if (quizData) {
       const quizSection = document.createElement('div');
-      quizSection.innerHTML = '<button class="quiz-btn" onclick="toggleQuiz(\'' + chapterId + '\')">&#9998; Take the Chapter Quiz</button><div id="quiz-' + chapterId + '"></div>';
+      const quizBtn = document.createElement('button');
+      quizBtn.className = 'quiz-btn';
+      quizBtn.innerHTML = '&#9998; Take the Chapter Quiz';
+      quizBtn.addEventListener('click', function() { toggleQuiz(chapterId); });
+      const quizContainer = document.createElement('div');
+      quizContainer.id = 'quiz-' + chapterId;
+      quizSection.appendChild(quizBtn);
+      quizSection.appendChild(quizContainer);
       container.querySelector('.md-content').appendChild(quizSection);
     }
 
@@ -929,12 +948,17 @@ function buildOutline(chapterId) {
   }
 
   outlineLabel.textContent = 'On this page';
-  outlineItems.innerHTML = items.map(item =>
-    '<div class="outline-item" id="ol-' + item.id + '" onclick="scrollToSection(\'' + item.id + '\')">'+item.label+'</div>'
+    outlineItems.innerHTML = items.map(item =>
+    '<div class="outline-item" id="ol-' + item.id + '" data-section="' + item.id + '">' + item.label + '</div>'
   ).join('');
+
+  outlineItems.querySelectorAll('.outline-item').forEach(function(el) {
+    el.addEventListener('click', function() { scrollToSection(el.dataset.section); });
+  });
 
   setupScrollSpy(chapterId);
 }
+
 
 function scrollToSection(sectionId) {
   const el = document.getElementById(sectionId);
@@ -986,23 +1010,41 @@ function toggleQuiz(chapterId) {
 
 function renderQuiz(qid, data, container) {
   const letters = ['A','B','C','D'];
-  let html = '<div class="quiz-panel"><h3>' + data.title + '</h3>';
+  let html = '<div class="quiz-panel" data-qid="' + qid + '"><h3>' + data.title + '</h3>';
   data.questions.forEach((q, qi) => {
     html += '<div class="q-block"><div class="q-text">' + (qi+1) + '. ' + q.q + '</div><div class="q-options">';
     q.opts.forEach((opt, oi) => {
       const optId = 'opt_' + qid + '_' + qi + '_' + oi;
       const expId = 'exp_' + qid + '_' + qi + '_' + oi;
-      html += '<div class="q-opt" id="' + optId + '" onclick="selectOpt(' + JSON.stringify(qid) + ',' + qi + ',' + oi + ')">';
-      html += '<span class="q-letter">' + letters[oi] + '</span>' + opt + '</div>';
+      html += '<div class="q-opt-wrap">';
+      html += '<div class="q-opt" id="' + optId + '" data-qid="' + qid + '" data-qi="' + qi + '" data-oi="' + oi + '">';
+      html += '<span class="q-letter">' + letters[oi] + '</span><span class="q-opt-text">' + opt + '</span></div>';
       if (q.exp && q.exp[oi]) {
         html += '<div class="q-explanation" id="' + expId + '">' + q.exp[oi] + '</div>';
       }
+      html += '</div>';
     });
     html += '</div></div>';
   });
-  html += '<button class="quiz-submit" onclick="submitQuiz(' + JSON.stringify(qid) + ')">Submit answers</button>';
+  html += '<button class="quiz-submit" data-qid="' + qid + '">Submit answers</button>';
   html += '<div id="result_' + qid + '"></div></div>';
   container.innerHTML = html;
+
+  // Attach event listeners directly after innerHTML is set — no inline onclick needed
+  const panel = container.querySelector('.quiz-panel');
+
+  panel.querySelectorAll('.q-opt').forEach(function(el) {
+    el.addEventListener('click', function() {
+      selectOpt(el.dataset.qid, parseInt(el.dataset.qi), parseInt(el.dataset.oi));
+    });
+  });
+
+  const submitBtn = panel.querySelector('.quiz-submit');
+  if (submitBtn) {
+    submitBtn.addEventListener('click', function() {
+      submitQuiz(submitBtn.dataset.qid);
+    });
+  }
 }
 
 function selectOpt(qid, qi, oi) {
