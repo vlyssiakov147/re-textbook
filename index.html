@@ -729,7 +729,7 @@
       <div class="chapter-view" id="view-ch1"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch2"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch3"><div class="chapter-loading">Loading chapter...</div></div>
-      <div class="chapter-view" id="view-ch4"><div class="md-content coming-soon-view"><span class="phase-tag phase-pre">Pre-Construction</span><h1>Chapter 4: Entitlements, Zoning &amp; Permits</h1><p>This chapter is coming soon.</p></div></div>
+      <div class="chapter-view" id="view-ch4"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch5"><div class="md-content coming-soon-view"><span class="phase-tag phase-pre">Pre-Construction</span><h1>Chapter 5: Project Team Assembly</h1><p>This chapter is coming soon.</p></div></div>
       <div class="chapter-view" id="view-ch6"><div class="md-content coming-soon-view"><span class="phase-tag phase-pre">Pre-Construction</span><h1>Chapter 6: Design &amp; Architecture Process</h1><p>This chapter is coming soon.</p></div></div>
       <div class="chapter-view" id="view-ch7"><div class="md-content coming-soon-view"><span class="phase-tag phase-con">Construction</span><h1>Chapter 7: Procurement &amp; Contracting</h1><p>This chapter is coming soon.</p></div></div>
@@ -758,6 +758,7 @@
 <script src="quizzes/quiz-1.js"></script>
 <script src="quizzes/quiz-2.js"></script>
 <script src="quizzes/quiz-3.js"></script>
+<script src="quizzes/quiz-4.js"></script>
 
 <script>
 const scores = {};
@@ -768,7 +769,7 @@ const chapterConfig = {
   ch1: { file: 'chapters/chapter-1.md', quiz: () => typeof quiz1 !== 'undefined' ? quiz1 : null, phase: 'pre' },
   ch2: { file: 'chapters/chapter-2.md', quiz: () => typeof quiz2 !== 'undefined' ? quiz2 : null, phase: 'pre' },
   ch3: { file: 'chapters/chapter-3.md', quiz: () => typeof quiz3 !== 'undefined' ? quiz3 : null, phase: 'pre' },
-  ch4: { file: null, quiz: () => null, phase: 'pre' },
+  ch4: { file: 'chapters/chapter-4.md', quiz: () => typeof quiz4 !== 'undefined' ? quiz4 : null, phase: 'pre' },
   ch5: { file: null, quiz: () => null, phase: 'pre' },
   ch6: { file: null, quiz: () => null, phase: 'pre' },
   ch7: { file: null, quiz: () => null, phase: 'con' },
@@ -784,6 +785,21 @@ const chapterConfig = {
 
 // Outline data per chapter
 const chapterOutlines = {
+  ch4: [
+    { id: 'section-41', label: '4.1 What is the Entitlement Process?' },
+    { id: 'section-42', label: '4.2 The Ontario Planning Framework' },
+    { id: 'section-43', label: '4.3 Official Plan Amendments (OPA)' },
+    { id: 'section-44', label: '4.4 Zoning Bylaw Amendments (ZBA)' },
+    { id: 'section-45', label: '4.5 Site Plan Approval (SPA)' },
+    { id: 'section-46', label: '4.6 The Application Package' },
+    { id: 'section-47', label: '4.7 The Approval Timeline' },
+    { id: 'section-48', label: '4.8 The Ontario Land Tribunal (OLT)' },
+    { id: 'section-49', label: '4.9 Conditions of Approval' },
+    { id: 'section-410', label: '4.10 Key Terms Reference' },
+    { id: 'section-ae44', label: 'AE-4.4 Mapping Approval Pathway' },
+    { id: 'section-ae46', label: 'AE-4.6 Pre-Consultation Prep' },
+    { id: 'section-ae47', label: 'AE-4.7 Entitlement Timeline' }
+  ],
   ch3: [
     { id: 'section-31', label: '3.1 Overview of Development Financing' },
     { id: 'section-32', label: '3.2 The Capital Stack' },
@@ -1070,6 +1086,7 @@ buildPills();
 loadChapter('ch1');
 loadChapter('ch2');
 loadChapter('ch3');
+loadChapter('ch4');
 </script>
 </body>
 </html>
