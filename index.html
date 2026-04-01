@@ -7,9 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <style>
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
     --bg-primary: #ffffff;
     --bg-secondary: #f5f4f0;
@@ -24,7 +22,6 @@
     --radius-md: 8px;
     --radius-lg: 12px;
   }
-
   @media (prefers-color-scheme: dark) {
     :root {
       --bg-primary: #1e1e1c;
@@ -38,632 +35,109 @@
       --border-strong: rgba(255,255,255,0.22);
     }
   }
-
-  html, body {
-    height: 100%;
-    overflow: hidden;
-  }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg-tertiary);
-    color: var(--text-primary);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* HEADER */
-  .header {
-    background: var(--bg-primary);
-    border-bottom: 0.5px solid var(--border-light);
-    padding: 1rem 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-
-  .header-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-  }
-
-  .header-subtitle {
-    font-size: 12px;
-    color: var(--text-secondary);
-    margin-top: 2px;
-  }
-
-  .progress-bar-wrap {
-    height: 3px;
-    background: var(--border-light);
-    width: 140px;
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .progress-bar-fill {
-    height: 100%;
-    background: var(--gold);
-    border-radius: 2px;
-    transition: width 0.4s ease;
-  }
-
-  .progress-label {
-    font-size: 11px;
-    color: var(--text-tertiary);
-    margin-top: 3px;
-    text-align: right;
-  }
-
-  /* LAYOUT */
-  .body {
-    display: flex;
-    flex: 1;
-    height: calc(100vh - 61px);
-    overflow: hidden;
-  }
-
-  /* SIDEBAR */
-  .sidebar {
-    width: 240px;
-    min-width: 240px;
-    height: 100%;
-    background: var(--bg-primary);
-    border-right: 0.5px solid var(--border-light);
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 1rem 0 2rem;
-    flex-shrink: 0;
-  }
-
-  .phase-label {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-tertiary);
-    padding: 1.2rem 1.1rem 0.4rem;
-  }
-
-  .chapter-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 0.5rem 1.1rem;
-    cursor: pointer;
-    border-left: 2px solid transparent;
-    transition: background 0.15s;
-    font-size: 13px;
-    color: var(--text-secondary);
-    line-height: 1.4;
-  }
-
-  .chapter-item:hover {
-    background: var(--bg-secondary);
-    color: var(--text-primary);
-  }
-
-  .chapter-item.active {
-    border-left-color: var(--gold);
-    background: var(--bg-secondary);
-    color: var(--text-primary);
-    font-weight: 500;
-  }
-
-  .ch-num {
-    font-size: 11px;
-    color: var(--text-tertiary);
-    min-width: 20px;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .ch-status {
-    margin-left: auto;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: var(--bg-secondary);
-    border: 0.5px solid var(--border-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 9px;
-    flex-shrink: 0;
-  }
-
-  .ch-status.done {
-    background: #3B6D11;
-    color: #C0DD97;
-    border: none;
-  }
-
-  /* MAIN WRAPPER */
-  .main-wrapper {
-    flex: 1;
-    height: 100%;
-    display: flex;
-    overflow: hidden;
-  }
-
-  /* MAIN */
-  .main {
-    flex: 1;
-    height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 2.5rem 2.5rem 4rem;
-    max-width: 860px;
-  }
-
-  /* OUTLINE PANEL */
-  .outline-panel {
-    width: 200px;
-    min-width: 200px;
-    height: 100%;
-    overflow-y: auto;
-    padding: 2.5rem 1rem 2rem 0.75rem;
-    border-left: 0.5px solid var(--border-light);
-    background: var(--bg-tertiary);
-    flex-shrink: 0;
-  }
-
-  .outline-label {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-tertiary);
-    margin-bottom: 0.75rem;
-    padding-left: 0.5rem;
-  }
-
-  .outline-item {
-    display: block;
-    font-size: 12px;
-    color: var(--text-tertiary);
-    padding: 0.35rem 0.5rem;
-    border-left: 2px solid transparent;
-    cursor: pointer;
-    line-height: 1.5;
-    transition: color 0.15s, border-color 0.15s;
-  }
-
-  .outline-item:hover {
-    color: var(--text-primary);
-    border-left-color: var(--border-mid);
-  }
-
-  .outline-item.active {
-    color: var(--gold);
-    border-left-color: var(--gold);
-    font-weight: 500;
-  }
-
-  .outline-empty {
-    font-size: 12px;
-    color: var(--text-tertiary);
-    padding-left: 0.5rem;
-    font-style: italic;
-    line-height: 1.6;
-  }
-
-  @media (max-width: 1100px) {
-    .outline-panel { display: none; }
-  }
-
+  html, body { height: 100%; overflow: hidden; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg-tertiary); color: var(--text-primary); height: 100%; display: flex; flex-direction: column; }
+  .header { background: var(--bg-primary); border-bottom: 0.5px solid var(--border-light); padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+  .header-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; letter-spacing: 0.01em; }
+  .header-subtitle { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+  .progress-bar-wrap { height: 3px; background: var(--border-light); width: 140px; border-radius: 2px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: var(--gold); border-radius: 2px; transition: width 0.4s ease; }
+  .progress-label { font-size: 11px; color: var(--text-tertiary); margin-top: 3px; text-align: right; }
+  .body { display: flex; flex: 1; height: calc(100vh - 61px); overflow: hidden; }
+  .sidebar { width: 240px; min-width: 240px; height: 100%; background: var(--bg-primary); border-right: 0.5px solid var(--border-light); overflow-y: auto; overflow-x: hidden; padding: 1rem 0 2rem; flex-shrink: 0; }
+  .phase-label { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); padding: 1.2rem 1.1rem 0.4rem; }
+  .chapter-item { display: flex; align-items: center; gap: 8px; padding: 0.5rem 1.1rem; cursor: pointer; border-left: 2px solid transparent; transition: background 0.15s; font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+  .chapter-item:hover { background: var(--bg-secondary); color: var(--text-primary); }
+  .chapter-item.active { border-left-color: var(--gold); background: var(--bg-secondary); color: var(--text-primary); font-weight: 500; }
+  .ch-num { font-size: 11px; color: var(--text-tertiary); min-width: 20px; font-variant-numeric: tabular-nums; }
+  .ch-status { margin-left: auto; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-secondary); border: 0.5px solid var(--border-light); display: flex; align-items: center; justify-content: center; font-size: 9px; flex-shrink: 0; }
+  .ch-status.done { background: #3B6D11; color: #C0DD97; border: none; }
+  .main-wrapper { flex: 1; height: 100%; display: flex; overflow: hidden; }
+  .main { flex: 1; height: 100%; overflow-y: auto; overflow-x: hidden; padding: 2.5rem 2.5rem 4rem; max-width: 860px; }
+  .outline-panel { width: 200px; min-width: 200px; height: 100%; overflow-y: auto; padding: 2.5rem 1rem 2rem 0.75rem; border-left: 0.5px solid var(--border-light); background: var(--bg-tertiary); flex-shrink: 0; }
+  .outline-label { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 0.75rem; padding-left: 0.5rem; }
+  .outline-item { display: block; font-size: 12px; color: var(--text-tertiary); padding: 0.35rem 0.5rem; border-left: 2px solid transparent; cursor: pointer; line-height: 1.5; transition: color 0.15s, border-color 0.15s; }
+  .outline-item:hover { color: var(--text-primary); border-left-color: var(--border-mid); }
+  .outline-item.active { color: var(--gold); border-left-color: var(--gold); font-weight: 500; }
+  .outline-empty { font-size: 12px; color: var(--text-tertiary); padding-left: 0.5rem; font-style: italic; line-height: 1.6; }
+  @media (max-width: 1100px) { .outline-panel { display: none; } }
   .chapter-view { display: none; }
   .chapter-view.active { display: block; }
-
-  /* PHASE TAGS */
-  .phase-tag {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 20px;
-    margin-bottom: 0.75rem;
-  }
+  .phase-tag { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; margin-bottom: 0.75rem; }
   .phase-pre  { background: #E6F1FB; color: #0C447C; }
   .phase-con  { background: #EAF3DE; color: #27500A; }
   .phase-post { background: #FAEEDA; color: #633806; }
-
-  .chapter-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    font-weight: 600;
-    line-height: 1.3;
-    margin-bottom: 0.6rem;
-  }
-
-  .chapter-intro {
-    font-size: 15px;
-    color: var(--text-secondary);
-    line-height: 1.75;
-    margin-bottom: 1.75rem;
-    padding-bottom: 1.75rem;
-    border-bottom: 0.5px solid var(--border-light);
-  }
-
-  /* COMING SOON */
-  .coming-soon {
-    background: var(--bg-secondary);
-    border: 0.5px dashed var(--border-mid);
-    border-radius: var(--radius-lg);
-    padding: 3rem;
-    text-align: center;
-    color: var(--text-tertiary);
-    font-size: 14px;
-  }
+  .chapter-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; line-height: 1.3; margin-bottom: 0.6rem; }
+  .chapter-intro { font-size: 15px; color: var(--text-secondary); line-height: 1.75; margin-bottom: 1.75rem; padding-bottom: 1.75rem; border-bottom: 0.5px solid var(--border-light); }
+  .coming-soon { background: var(--bg-secondary); border: 0.5px dashed var(--border-mid); border-radius: var(--radius-lg); padding: 3rem; text-align: center; color: var(--text-tertiary); font-size: 14px; }
   .coming-soon .cs-icon { font-size: 28px; margin-bottom: 0.75rem; color: var(--gold); display: block; }
   .coming-soon strong { display: block; font-size: 15px; color: var(--text-secondary); margin-bottom: 0.4rem; font-weight: 500; }
-
-  /* QUIZ BUTTON */
-  .quiz-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 1.75rem;
-    padding: 0.65rem 1.4rem;
-    background: var(--gold);
-    color: #fff;
-    border: none;
-    border-radius: var(--radius-md);
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    transition: opacity 0.15s;
-  }
+  .quiz-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 1.75rem; padding: 0.65rem 1.4rem; background: var(--gold); color: #fff; border: none; border-radius: var(--radius-md); font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: opacity 0.15s; }
   .quiz-btn:hover { opacity: 0.88; }
-
-  /* QUIZ PANEL */
-  .quiz-panel {
-    background: var(--bg-primary);
-    border: 0.5px solid var(--border-light);
-    border-radius: var(--radius-lg);
-    padding: 1.75rem;
-    margin-top: 1.5rem;
-  }
-
-  .quiz-panel h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 19px;
-    margin-bottom: 1.5rem;
-    font-weight: 600;
-  }
-
+  .quiz-panel { background: var(--bg-primary); border: 0.5px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.75rem; margin-top: 1.5rem; }
+  .quiz-panel h3 { font-family: 'Playfair Display', serif; font-size: 19px; margin-bottom: 1.5rem; font-weight: 600; }
   .q-block { margin-bottom: 1.75rem; }
-
-  .q-text {
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 0.75rem;
-    line-height: 1.55;
-  }
-
+  .q-text { font-size: 14px; font-weight: 500; margin-bottom: 0.75rem; line-height: 1.55; }
   .q-options { display: flex; flex-direction: column; gap: 8px; position: relative; }
-
-  .q-opt-wrap {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .q-opt {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 0.65rem 1rem;
-    border: 0.5px solid var(--border-light);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    font-size: 13px;
-    transition: background 0.12s, border-color 0.12s;
-    line-height: 1.5;
-    user-select: none;
-    position: relative;
-    z-index: 1;
-  }
-
-  .q-opt-text {
-    pointer-events: none;
-  }
-
+  .q-opt-wrap { display: flex; flex-direction: column; }
+  .q-opt { display: flex; align-items: flex-start; gap: 10px; padding: 0.65rem 1rem; border: 0.5px solid var(--border-light); border-radius: var(--radius-md); cursor: pointer; font-size: 13px; transition: background 0.12s, border-color 0.12s; line-height: 1.5; user-select: none; position: relative; z-index: 1; }
+  .q-opt-text { pointer-events: none; }
   .q-opt:hover { background: var(--bg-secondary); border-color: var(--border-mid); }
   .q-opt.selected { border-color: var(--gold); background: #FAEEDA; color: #633806; }
   .q-opt.correct  { border-color: #3B6D11; background: #EAF3DE; color: #27500A; }
   .q-opt.wrong    { border-color: #A32D2D; background: #FCEBEB; color: #791F1F; }
-
-  .q-explanation {
-    display: none;
-    margin-top: 10px;
-    padding: 0.75rem 1rem;
-    background: var(--bg-secondary);
-    border-left: 3px solid #B87333;
-    border-radius: 0 var(--radius-md) var(--radius-md) 0;
-    font-size: 13px;
-    line-height: 1.65;
-    color: var(--text-secondary);
-  }
-
+  .q-explanation { display: none; margin-top: 10px; padding: 0.75rem 1rem; background: var(--bg-secondary); border-left: 3px solid #B87333; border-radius: 0 var(--radius-md) var(--radius-md) 0; font-size: 13px; line-height: 1.65; color: var(--text-secondary); }
   .q-explanation.visible { display: block; }
   .q-explanation strong { color: var(--text-primary); font-weight: 500; }
-
-  .q-letter {
-    font-size: 11px;
-    font-weight: 500;
-    min-width: 18px;
-    margin-top: 1px;
-    color: var(--text-tertiary);
-  }
-
-  .quiz-submit {
-    padding: 0.6rem 1.4rem;
-    background: var(--bg-secondary);
-    border: 0.5px solid var(--border-mid);
-    border-radius: var(--radius-md);
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    color: var(--text-primary);
-    transition: background 0.12s;
-  }
+  .q-letter { font-size: 11px; font-weight: 500; min-width: 18px; margin-top: 1px; color: var(--text-tertiary); }
+  .quiz-submit { padding: 0.6rem 1.4rem; background: var(--bg-secondary); border: 0.5px solid var(--border-mid); border-radius: var(--radius-md); font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; color: var(--text-primary); transition: background 0.12s; }
   .quiz-submit:hover { background: var(--border-light); }
-
-  .quiz-result {
-    margin-top: 1rem;
-    padding: 0.8rem 1rem;
-    border-radius: var(--radius-md);
-    font-size: 14px;
-    font-weight: 500;
-  }
+  .quiz-result { margin-top: 1rem; padding: 0.8rem 1rem; border-radius: var(--radius-md); font-size: 14px; font-weight: 500; }
   .quiz-result.pass { background: #EAF3DE; color: #27500A; border: 0.5px solid #97C459; }
   .quiz-result.fail { background: #FAEEDA; color: #633806; border: 0.5px solid #FAC775; }
-
-  /* DASHBOARD */
-  .dashboard {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 2rem;
-  }
-
-  .stat-card {
-    background: var(--bg-secondary);
-    border-radius: var(--radius-md);
-    padding: 1rem 1.1rem;
-  }
+  .dashboard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 2rem; }
+  .stat-card { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 1rem 1.1rem; }
   .stat-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; }
   .stat-value { font-size: 24px; font-weight: 500; }
-
-  /* HOME */
-  .home-welcome {
-    font-family: 'Playfair Display', serif;
-    font-size: 30px;
-    font-weight: 600;
-    margin-bottom: 0.6rem;
-    line-height: 1.3;
-  }
-  .home-sub {
-    font-size: 15px;
-    color: var(--text-secondary);
-    line-height: 1.75;
-    margin-bottom: 2rem;
-  }
-
-  .phase-card {
-    background: var(--bg-primary);
-    border: 0.5px solid var(--border-light);
-    border-radius: var(--radius-lg);
-    padding: 1.25rem 1.4rem;
-    margin-bottom: 1rem;
-  }
-  .phase-card-title {
-    font-size: 13px;
-    font-weight: 500;
-    margin-bottom: 0.85rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+  .home-welcome { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 600; margin-bottom: 0.6rem; line-height: 1.3; }
+  .home-sub { font-size: 15px; color: var(--text-secondary); line-height: 1.75; margin-bottom: 2rem; }
+  .phase-card { background: var(--bg-primary); border: 0.5px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.4rem; margin-bottom: 1rem; }
+  .phase-card-title { font-size: 13px; font-weight: 500; margin-bottom: 0.85rem; display: flex; align-items: center; gap: 8px; }
   .phase-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
   .phase-chapters { display: flex; flex-wrap: wrap; gap: 6px; }
-  .phase-ch-pill {
-    font-size: 12px;
-    padding: 4px 12px;
-    border-radius: 20px;
-    border: 0.5px solid var(--border-light);
-    background: var(--bg-secondary);
-    cursor: pointer;
-    color: var(--text-secondary);
-    transition: background 0.12s;
-  }
+  .phase-ch-pill { font-size: 12px; padding: 4px 12px; border-radius: 20px; border: 0.5px solid var(--border-light); background: var(--bg-secondary); cursor: pointer; color: var(--text-secondary); transition: background 0.12s; }
   .phase-ch-pill:hover { background: var(--border-light); color: var(--text-primary); }
-
-  /* CHAPTER CONTENT STYLES */
-  .section {
-    margin-bottom: 2.25rem;
-  }
-
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 17px;
-    font-weight: 600;
-    margin-bottom: 0.85rem;
-    color: var(--text-primary);
-    padding-bottom: 0.5rem;
-    border-bottom: 0.5px solid var(--border-light);
-  }
-
-  .section-body p {
-    font-size: 15px;
-    line-height: 1.8;
-    color: var(--text-primary);
-    margin-bottom: 1rem;
-  }
-
-  .section-body p:last-child { margin-bottom: 0; }
-
-  .section-body strong { font-weight: 500; }
-
-  .callout {
-    border-radius: var(--radius-md);
-    padding: 1rem 1.1rem;
-    margin: 1.25rem 0;
-    font-size: 14px;
-    line-height: 1.7;
-  }
-
-  .callout-label {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-bottom: 0.4rem;
-  }
-
-  .callout-blue { background: #E6F1FB; color: #185FA5; border-left: 3px solid #185FA5; }
-  .callout-blue .callout-label { color: #0C447C; }
-  .callout-gold { background: #FAEEDA; color: #633806; border-left: 3px solid #B87333; }
-  .callout-gold .callout-label { color: #633806; }
-
-  .content-list { margin: 1rem 0; display: flex; flex-direction: column; gap: 10px; }
-
-  .content-list-item {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    font-size: 14px;
-    line-height: 1.65;
-    color: var(--text-primary);
-  }
-
-  .list-marker {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--gold);
-    min-width: 22px;
-    padding-top: 2px;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-top: 0.5rem;
-  }
-
-  .metric-card {
-    background: var(--bg-secondary);
-    border-radius: var(--radius-md);
-    padding: 0.85rem 1rem;
-    border: 0.5px solid var(--border-light);
-  }
-
-  .metric-name {
-    font-size: 13px;
-    font-weight: 500;
-    margin-bottom: 4px;
-    color: var(--text-primary);
-  }
-
-  .metric-def {
-    font-size: 12px;
-    color: var(--text-secondary);
-    line-height: 1.6;
-  }
-
-  .chapter-summary {
-    background: var(--bg-secondary);
-    border-radius: var(--radius-lg);
-    padding: 1.4rem 1.6rem;
-    margin: 2rem 0 1.5rem;
-    border-left: 3px solid var(--gold);
-  }
-
-  .summary-title {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.6rem;
-  }
-
-  .chapter-summary p {
-    font-size: 14px;
-    line-height: 1.75;
-    color: var(--text-secondary);
-  }
-
-  @media (max-width: 680px) {
-    .metrics-grid { grid-template-columns: 1fr 1fr; }
-  }
-
-  /* MOBILE */
-  .menu-toggle {
-    display: none;
-    background: none;
-    border: 0.5px solid var(--border-mid);
-    border-radius: var(--radius-md);
-    padding: 6px 10px;
-    cursor: pointer;
-    font-size: 14px;
-    color: var(--text-primary);
-    font-family: 'DM Sans', sans-serif;
-  }
-
+  .md-content h1 { font-family: "Playfair Display", serif; font-size: 28px; font-weight: 600; line-height: 1.3; margin-bottom: 0.6rem; }
+  .md-content h2 { font-family: "Playfair Display", serif; font-size: 20px; font-weight: 600; margin: 2rem 0 0.75rem; padding-bottom: 0.5rem; border-bottom: 0.5px solid var(--border-light); }
+  .md-content h3 { font-size: 16px; font-weight: 500; margin: 1.5rem 0 0.5rem; }
+  .md-content p { font-size: 15px; line-height: 1.8; margin-bottom: 1rem; color: var(--text-primary); }
+  .md-content strong { font-weight: 500; }
+  .md-content em { font-style: italic; }
+  .md-content hr { border: none; border-top: 0.5px solid var(--border-light); margin: 2rem 0; }
+  .md-content ol, .md-content ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .md-content li { font-size: 15px; line-height: 1.8; margin-bottom: 0.3rem; }
+  .md-content table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 14px; }
+  .md-content th { background: var(--bg-secondary); padding: 0.6rem 0.85rem; text-align: left; font-weight: 500; border-bottom: 0.5px solid var(--border-mid); }
+  .md-content td { padding: 0.55rem 0.85rem; border-bottom: 0.5px solid var(--border-light); }
+  .md-content tr:last-child td { border-bottom: none; }
+  .md-content blockquote { border-left: 3px solid var(--gold); margin: 1.25rem 0; padding: 0.85rem 1rem; background: var(--bg-secondary); border-radius: 0 var(--radius-md) var(--radius-md) 0; font-size: 14px; line-height: 1.7; color: var(--text-secondary); }
+  .md-content blockquote p { font-size: 14px; margin-bottom: 0.4rem; color: var(--text-secondary); }
+  .md-content blockquote p:last-child { margin-bottom: 0; }
+  .md-content blockquote strong { color: var(--text-primary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; display: block; margin-bottom: 0.35rem; }
+  .md-content code { font-family: monospace; font-size: 13px; background: var(--bg-secondary); padding: 2px 5px; border-radius: 3px; }
+  .chapter-loading { text-align: center; padding: 4rem 2rem; color: var(--text-tertiary); font-size: 15px; }
+  .chapter-error { padding: 2rem; color: #A32D2D; background: #FCEBEB; border-radius: var(--radius-md); font-size: 14px; }
+  .menu-toggle { display: none; background: none; border: 0.5px solid var(--border-mid); border-radius: var(--radius-md); padding: 6px 10px; cursor: pointer; font-size: 14px; color: var(--text-primary); font-family: 'DM Sans', sans-serif; }
   @media (max-width: 680px) {
     .body { flex-direction: column; height: auto; }
-    .sidebar {
-      width: 100%;
-      min-width: 0;
-      border-right: none;
-      border-bottom: 0.5px solid var(--border-light);
-      max-height: 0;
-      overflow: hidden;
-      padding: 0;
-      transition: max-height 0.3s ease;
-    }
+    .sidebar { width: 100%; min-width: 0; border-right: none; border-bottom: 0.5px solid var(--border-light); max-height: 0; overflow: hidden; padding: 0; transition: max-height 0.3s ease; }
     .sidebar.open { max-height: 600px; padding: 0.5rem 0 1rem; }
     .main { padding: 1.5rem 1.25rem 3rem; }
     .chapter-title { font-size: 22px; }
     .dashboard { grid-template-columns: 1fr 1fr; }
     .menu-toggle { display: block; }
+    .metrics-grid { grid-template-columns: 1fr 1fr; }
   }
-
-
-/* MARKDOWN RENDERED CONTENT STYLES */
-.md-content h1 { font-family: "Playfair Display", serif; font-size: 28px; font-weight: 600; line-height: 1.3; margin-bottom: 0.6rem; }
-.md-content h2 { font-family: "Playfair Display", serif; font-size: 20px; font-weight: 600; margin: 2rem 0 0.75rem; padding-bottom: 0.5rem; border-bottom: 0.5px solid var(--border-light); }
-.md-content h3 { font-size: 16px; font-weight: 500; margin: 1.5rem 0 0.5rem; }
-.md-content p { font-size: 15px; line-height: 1.8; margin-bottom: 1rem; color: var(--text-primary); }
-.md-content strong { font-weight: 500; }
-.md-content em { font-style: italic; }
-.md-content hr { border: none; border-top: 0.5px solid var(--border-light); margin: 2rem 0; }
-.md-content ol, .md-content ul { padding-left: 1.5rem; margin-bottom: 1rem; }
-.md-content li { font-size: 15px; line-height: 1.8; margin-bottom: 0.3rem; }
-.md-content table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 14px; }
-.md-content th { background: var(--bg-secondary); padding: 0.6rem 0.85rem; text-align: left; font-weight: 500; border-bottom: 0.5px solid var(--border-mid); }
-.md-content td { padding: 0.55rem 0.85rem; border-bottom: 0.5px solid var(--border-light); }
-.md-content tr:last-child td { border-bottom: none; }
-.md-content blockquote { border-left: 3px solid var(--gold); margin: 1.25rem 0; padding: 0.85rem 1rem; background: var(--bg-secondary); border-radius: 0 var(--radius-md) var(--radius-md) 0; font-size: 14px; line-height: 1.7; color: var(--text-secondary); }
-.md-content blockquote p { font-size: 14px; margin-bottom: 0.4rem; color: var(--text-secondary); }
-.md-content blockquote p:last-child { margin-bottom: 0; }
-.md-content blockquote strong { color: var(--text-primary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; display: block; margin-bottom: 0.35rem; }
-.md-content code { font-family: monospace; font-size: 13px; background: var(--bg-secondary); padding: 2px 5px; border-radius: 3px; }
-
-.chapter-loading { text-align: center; padding: 4rem 2rem; color: var(--text-tertiary); font-size: 15px; }
-.chapter-error { padding: 2rem; color: #A32D2D; background: #FCEBEB; border-radius: var(--radius-md); font-size: 14px; }
 </style>
 </head>
 <body>
@@ -679,42 +153,39 @@
       <div class="progress-bar-wrap"><div class="progress-bar-fill" id="globalProgress" style="width:0%"></div></div>
       <div class="progress-label" id="progressLabel">0 of 15 chapters</div>
     </div>
-    <button class="menu-toggle" onclick="toggleSidebar()">&#9776; Chapters</button>
+    <button class="menu-toggle" id="menuToggleBtn">&#9776; Chapters</button>
   </div>
 </div>
 
 <div class="body">
   <div class="sidebar" id="sidebar">
-    <div class="chapter-item active" data-target="home" onclick="showView('home',this)">
+    <div class="chapter-item active" data-target="home" id="nav-home">
       <span style="font-size:15px;">&#8962;</span><span>Home</span>
     </div>
-
     <div class="phase-label">Phase 1 — Pre-Construction</div>
-    <div class="chapter-item" data-target="ch1"  onclick="showView('ch1',this)"><span class="ch-num">01</span>Market Analysis & Feasibility<span class="ch-status" id="st1"></span></div>
-    <div class="chapter-item" data-target="ch2"  onclick="showView('ch2',this)"><span class="ch-num">02</span>Site Selection & Due Diligence<span class="ch-status" id="st2"></span></div>
-    <div class="chapter-item" data-target="ch3"  onclick="showView('ch3',this)"><span class="ch-num">03</span>Financing & Capital Stack<span class="ch-status" id="st3"></span></div>
-    <div class="chapter-item" data-target="ch4"  onclick="showView('ch4',this)"><span class="ch-num">04</span>Entitlements, Zoning & Permits<span class="ch-status" id="st4"></span></div>
-    <div class="chapter-item" data-target="ch5"  onclick="showView('ch5',this)"><span class="ch-num">05</span>Project Team Assembly<span class="ch-status" id="st5"></span></div>
-    <div class="chapter-item" data-target="ch6"  onclick="showView('ch6',this)"><span class="ch-num">06</span>Design & Architecture Process<span class="ch-status" id="st6"></span></div>
-
+    <div class="chapter-item" data-target="ch1"  id="nav-ch1"><span class="ch-num">01</span>Market Analysis &amp; Feasibility<span class="ch-status" id="st1"></span></div>
+    <div class="chapter-item" data-target="ch2"  id="nav-ch2"><span class="ch-num">02</span>Site Selection &amp; Due Diligence<span class="ch-status" id="st2"></span></div>
+    <div class="chapter-item" data-target="ch3"  id="nav-ch3"><span class="ch-num">03</span>Financing &amp; Capital Stack<span class="ch-status" id="st3"></span></div>
+    <div class="chapter-item" data-target="ch4"  id="nav-ch4"><span class="ch-num">04</span>Entitlements, Zoning &amp; Permits<span class="ch-status" id="st4"></span></div>
+    <div class="chapter-item" data-target="ch5"  id="nav-ch5"><span class="ch-num">05</span>Project Team Assembly<span class="ch-status" id="st5"></span></div>
+    <div class="chapter-item" data-target="ch6"  id="nav-ch6"><span class="ch-num">06</span>Design &amp; Architecture Process<span class="ch-status" id="st6"></span></div>
     <div class="phase-label">Phase 2 — Construction</div>
-    <div class="chapter-item" data-target="ch7"  onclick="showView('ch7',this)"><span class="ch-num">07</span>Procurement & Contracting<span class="ch-status" id="st7"></span></div>
-    <div class="chapter-item" data-target="ch8"  onclick="showView('ch8',this)"><span class="ch-num">08</span>Construction Management<span class="ch-status" id="st8"></span></div>
-    <div class="chapter-item" data-target="ch9"  onclick="showView('ch9',this)"><span class="ch-num">09</span>Budget Management & Cost Control<span class="ch-status" id="st9"></span></div>
-    <div class="chapter-item" data-target="ch10" onclick="showView('ch10',this)"><span class="ch-num">10</span>Quality Control & Inspections<span class="ch-status" id="st10"></span></div>
-    <div class="chapter-item" data-target="ch11" onclick="showView('ch11',this)"><span class="ch-num">11</span>Risk Management & Insurance<span class="ch-status" id="st11"></span></div>
-
+    <div class="chapter-item" data-target="ch7"  id="nav-ch7"><span class="ch-num">07</span>Procurement &amp; Contracting<span class="ch-status" id="st7"></span></div>
+    <div class="chapter-item" data-target="ch8"  id="nav-ch8"><span class="ch-num">08</span>Construction Management<span class="ch-status" id="st8"></span></div>
+    <div class="chapter-item" data-target="ch9"  id="nav-ch9"><span class="ch-num">09</span>Budget Management &amp; Cost Control<span class="ch-status" id="st9"></span></div>
+    <div class="chapter-item" data-target="ch10" id="nav-ch10"><span class="ch-num">10</span>Quality Control &amp; Inspections<span class="ch-status" id="st10"></span></div>
+    <div class="chapter-item" data-target="ch11" id="nav-ch11"><span class="ch-num">11</span>Risk Management &amp; Insurance<span class="ch-status" id="st11"></span></div>
     <div class="phase-label">Phase 3 — Post-Construction</div>
-    <div class="chapter-item" data-target="ch12" onclick="showView('ch12',this)"><span class="ch-num">12</span>Certificate of Occupancy & Closeout<span class="ch-status" id="st12"></span></div>
-    <div class="chapter-item" data-target="ch13" onclick="showView('ch13',this)"><span class="ch-num">13</span>Leasing, Sales & Marketing<span class="ch-status" id="st13"></span></div>
-    <div class="chapter-item" data-target="ch14" onclick="showView('ch14',this)"><span class="ch-num">14</span>Asset Management & Operations<span class="ch-status" id="st14"></span></div>
-    <div class="chapter-item" data-target="ch15" onclick="showView('ch15',this)"><span class="ch-num">15</span>Disposition & Exit Strategies<span class="ch-status" id="st15"></span></div>
+    <div class="chapter-item" data-target="ch12" id="nav-ch12"><span class="ch-num">12</span>Certificate of Occupancy &amp; Closeout<span class="ch-status" id="st12"></span></div>
+    <div class="chapter-item" data-target="ch13" id="nav-ch13"><span class="ch-num">13</span>Leasing, Sales &amp; Marketing<span class="ch-status" id="st13"></span></div>
+    <div class="chapter-item" data-target="ch14" id="nav-ch14"><span class="ch-num">14</span>Asset Management &amp; Operations<span class="ch-status" id="st14"></span></div>
+    <div class="chapter-item" data-target="ch15" id="nav-ch15"><span class="ch-num">15</span>Disposition &amp; Exit Strategies<span class="ch-status" id="st15"></span></div>
   </div>
 
   <div class="main-wrapper">
     <div class="main" id="mainContent">
 
-      <!-- HOME VIEW -->
+      <!-- HOME -->
       <div class="chapter-view active" id="view-home">
         <div class="home-welcome">Welcome to your Real Estate<br>Development Textbook.</div>
         <div class="home-sub">This interactive guide walks you through the full development cycle — from market analysis to exit strategy. Each chapter includes focused content and a practice quiz to test your knowledge. Work through it at your own pace.</div>
@@ -737,187 +208,198 @@
         </div>
       </div>
 
-      <!-- CHAPTER VIEWS (dynamically loaded) -->
+      <!-- CHAPTER VIEWS -->
       <div class="chapter-view" id="view-ch1"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch2"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch3"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch4"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch5"><div class="chapter-loading">Loading chapter...</div></div>
-      <div class="chapter-view" id="view-ch6"><div class="md-content coming-soon-view"><span class="phase-tag phase-pre">Pre-Construction</span><h1>Chapter 6: Design &amp; Architecture Process</h1><p>This chapter is coming soon.</p></div></div>
-      <div class="chapter-view" id="view-ch7"><div class="md-content coming-soon-view"><span class="phase-tag phase-con">Construction</span><h1>Chapter 7: Procurement &amp; Contracting</h1><p>This chapter is coming soon.</p></div></div>
-      <div class="chapter-view" id="view-ch8"><div class="md-content coming-soon-view"><span class="phase-tag phase-con">Construction</span><h1>Chapter 8: Construction Management</h1><p>This chapter is coming soon.</p></div></div>
-      <div class="chapter-view" id="view-ch9"><div class="md-content coming-soon-view"><span class="phase-tag phase-con">Construction</span><h1>Chapter 9: Budget Management &amp; Cost Control</h1><p>This chapter is coming soon.</p></div></div>
-      <div class="chapter-view" id="view-ch10"><div class="md-content coming-soon-view"><span class="phase-tag phase-con">Construction</span><h1>Chapter 10: Quality Control &amp; Inspections</h1><p>This chapter is coming soon.</p></div></div>
-      <div class="chapter-view" id="view-ch11"><div class="md-content coming-soon-view"><span class="phase-tag phase-con">Construction</span><h1>Chapter 11: Risk Management &amp; Insurance</h1><p>This chapter is coming soon.</p></div></div>
-      <div class="chapter-view" id="view-ch12"><div class="md-content coming-soon-view"><span class="phase-tag phase-post">Post-Construction</span><h1>Chapter 12: Certificate of Occupancy &amp; Closeout</h1><p>This chapter is coming soon.</p></div></div>
-      <div class="chapter-view" id="view-ch13"><div class="md-content coming-soon-view"><span class="phase-tag phase-post">Post-Construction</span><h1>Chapter 13: Leasing, Sales &amp; Marketing</h1><p>This chapter is coming soon.</p></div></div>
-      <div class="chapter-view" id="view-ch14"><div class="md-content coming-soon-view"><span class="phase-tag phase-post">Post-Construction</span><h1>Chapter 14: Asset Management &amp; Operations</h1><p>This chapter is coming soon.</p></div></div>
-      <div class="chapter-view" id="view-ch15"><div class="md-content coming-soon-view"><span class="phase-tag phase-post">Post-Construction</span><h1>Chapter 15: Disposition &amp; Exit Strategies</h1><p>This chapter is coming soon.</p></div></div>
+      <div class="chapter-view" id="view-ch6"><div class="chapter-loading">Loading chapter...</div></div>
+      <div class="chapter-view" id="view-ch7"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 7: Procurement &amp; Contracting</h1><p>This chapter is coming soon.</p></div></div>
+      <div class="chapter-view" id="view-ch8"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 8: Construction Management</h1><p>This chapter is coming soon.</p></div></div>
+      <div class="chapter-view" id="view-ch9"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 9: Budget Management &amp; Cost Control</h1><p>This chapter is coming soon.</p></div></div>
+      <div class="chapter-view" id="view-ch10"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 10: Quality Control &amp; Inspections</h1><p>This chapter is coming soon.</p></div></div>
+      <div class="chapter-view" id="view-ch11"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 11: Risk Management &amp; Insurance</h1><p>This chapter is coming soon.</p></div></div>
+      <div class="chapter-view" id="view-ch12"><div class="md-content"><span class="phase-tag phase-post">Post-Construction</span><h1>Chapter 12: Certificate of Occupancy &amp; Closeout</h1><p>This chapter is coming soon.</p></div></div>
+      <div class="chapter-view" id="view-ch13"><div class="md-content"><span class="phase-tag phase-post">Post-Construction</span><h1>Chapter 13: Leasing, Sales &amp; Marketing</h1><p>This chapter is coming soon.</p></div></div>
+      <div class="chapter-view" id="view-ch14"><div class="md-content"><span class="phase-tag phase-post">Post-Construction</span><h1>Chapter 14: Asset Management &amp; Operations</h1><p>This chapter is coming soon.</p></div></div>
+      <div class="chapter-view" id="view-ch15"><div class="md-content"><span class="phase-tag phase-post">Post-Construction</span><h1>Chapter 15: Disposition &amp; Exit Strategies</h1><p>This chapter is coming soon.</p></div></div>
 
     </div>
 
-    <!-- OUTLINE PANEL -->
     <div class="outline-panel" id="outlinePanel">
       <div class="outline-label" id="outlineLabel">On this page</div>
-      <div id="outlineItems">
-        <div class="outline-empty">Select a chapter to see its outline.</div>
-      </div>
+      <div id="outlineItems"><div class="outline-empty">Select a chapter to see its outline.</div></div>
     </div>
   </div>
 </div>
 
-<!-- Quiz data files -->
+<!-- Quiz data -->
 <script src="quizzes/quiz-1.js"></script>
 <script src="quizzes/quiz-2.js"></script>
 <script src="quizzes/quiz-3.js"></script>
 <script src="quizzes/quiz-4.js"></script>
 <script src="quizzes/quiz-5.js"></script>
+<script src="quizzes/quiz-6.js"></script>
 
 <script>
 const scores = {};
 const userAnswers = {};
 
-// Chapter config — maps chapter ID to markdown file and quiz
 const chapterConfig = {
-  ch1: { file: 'chapters/chapter-1.md', quiz: () => typeof quiz1 !== 'undefined' ? quiz1 : null, phase: 'pre' },
-  ch2: { file: 'chapters/chapter-2.md', quiz: () => typeof quiz2 !== 'undefined' ? quiz2 : null, phase: 'pre' },
-  ch3: { file: 'chapters/chapter-3.md', quiz: () => typeof quiz3 !== 'undefined' ? quiz3 : null, phase: 'pre' },
-  ch4: { file: 'chapters/chapter-4.md', quiz: () => typeof quiz4 !== 'undefined' ? quiz4 : null, phase: 'pre' },
-  ch5: { file: 'chapters/chapter-5.md', quiz: () => typeof quiz5 !== 'undefined' ? quiz5 : null, phase: 'pre' },
-  ch6: { file: null, quiz: () => null, phase: 'pre' },
-  ch7: { file: null, quiz: () => null, phase: 'con' },
-  ch8: { file: null, quiz: () => null, phase: 'con' },
-  ch9: { file: null, quiz: () => null, phase: 'con' },
-  ch10: { file: null, quiz: () => null, phase: 'con' },
-  ch11: { file: null, quiz: () => null, phase: 'con' },
-  ch12: { file: null, quiz: () => null, phase: 'post' },
-  ch13: { file: null, quiz: () => null, phase: 'post' },
-  ch14: { file: null, quiz: () => null, phase: 'post' },
-  ch15: { file: null, quiz: () => null, phase: 'post' }
+  ch1:  { file: 'chapters/chapter-1.md',  quizKey: 'QUIZ_DATA_1',  phase: 'pre' },
+  ch2:  { file: 'chapters/chapter-2.md',  quizKey: 'QUIZ_DATA_2',  phase: 'pre' },
+  ch3:  { file: 'chapters/chapter-3.md',  quizKey: 'QUIZ_DATA_3',  phase: 'pre' },
+  ch4:  { file: 'chapters/chapter-4.md',  quizKey: 'QUIZ_DATA_4',  phase: 'pre' },
+  ch5:  { file: 'chapters/chapter-5.md',  quizKey: 'QUIZ_DATA_5',  phase: 'pre' },
+  ch6:  { file: 'chapters/chapter-6.md',  quizKey: 'QUIZ_DATA_6',  phase: 'pre' },
+  ch7:  { file: null, quizKey: null, phase: 'con' },
+  ch8:  { file: null, quizKey: null, phase: 'con' },
+  ch9:  { file: null, quizKey: null, phase: 'con' },
+  ch10: { file: null, quizKey: null, phase: 'con' },
+  ch11: { file: null, quizKey: null, phase: 'con' },
+  ch12: { file: null, quizKey: null, phase: 'post' },
+  ch13: { file: null, quizKey: null, phase: 'post' },
+  ch14: { file: null, quizKey: null, phase: 'post' },
+  ch15: { file: null, quizKey: null, phase: 'post' }
 };
 
-// Outline data per chapter
+function getQuizData(chapterId) {
+  const key = chapterConfig[chapterId] && chapterConfig[chapterId].quizKey;
+  return key ? window[key] || null : null;
+}
+
 const chapterOutlines = {
-  ch5: [
-    { id: 'section-51', label: '5.1 Why Team Assembly Matters' },
-    { id: 'section-52', label: '5.2 The Developer Internal Team' },
-    { id: 'section-53', label: '5.3 The Construction Manager' },
-    { id: 'section-54', label: '5.4 Architect & Design Consultants' },
-    { id: 'section-55', label: '5.5 The Legal Team' },
-    { id: 'section-56', label: '5.6 Financial & Lending Team' },
-    { id: 'section-57', label: '5.7 Planning & Entitlement Team' },
-    { id: 'section-58', label: '5.8 Procurement' },
-    { id: 'section-59', label: '5.9 Contracts & Scope of Work' },
-    { id: 'section-510', label: '5.10 Key Terms Reference' },
-    { id: 'section-511', label: '5.11 HCRA & Tarion Licensing' },
-    { id: 'section-ae-intro5', label: 'Applied Exercises' },
-    { id: 'section-ae53', label: 'AE-5.3 CM Proposal Evaluation' },
-    { id: 'section-ae58', label: 'AE-5.8 Consultant RFP Process' }
-  ],
-  ch4: [
-    { id: 'section-41', label: '4.1 What is the Entitlement Process?' },
-    { id: 'section-42', label: '4.2 The Ontario Planning Framework' },
-    { id: 'section-43', label: '4.3 Official Plan Amendments (OPA)' },
-    { id: 'section-44', label: '4.4 Zoning Bylaw Amendments (ZBA)' },
-    { id: 'section-45', label: '4.5 Site Plan Approval (SPA)' },
-    { id: 'section-46', label: '4.6 The Application Package' },
-    { id: 'section-47', label: '4.7 The Approval Timeline' },
-    { id: 'section-48', label: '4.8 The Ontario Land Tribunal (OLT)' },
-    { id: 'section-49', label: '4.9 Conditions of Approval' },
-    { id: 'section-410', label: '4.10 Key Terms Reference' },
-    { id: 'section-ae-intro4', label: 'Applied Exercises' },
-    { id: 'section-ae44', label: 'AE-4.4 Mapping Approval Pathway' },
-    { id: 'section-ae46', label: 'AE-4.6 Pre-Consultation Prep' },
-    { id: 'section-ae47', label: 'AE-4.7 Entitlement Timeline' }
-  ],
-  ch3: [
-    { id: 'section-31', label: '3.1 Overview of Development Financing' },
-    { id: 'section-32', label: '3.2 The Capital Stack' },
-    { id: 'section-33', label: '3.3 Equity — Types & Sources' },
-    { id: 'section-34', label: '3.4 Construction Debt' },
-    { id: 'section-35', label: '3.5 CMHC Financing Programs' },
-    { id: 'section-36', label: '3.6 Mezzanine & Preferred Equity' },
-    { id: 'section-37', label: '3.7 The Draw Process' },
-    { id: 'section-38', label: '3.8 Investor Reporting' },
-    { id: 'section-39', label: '3.9 Key Terms Reference' },
-    { id: 'section-ae-intro3', label: 'Applied Exercises' },
-    { id: 'section-ae32', label: 'AE-3.2 Capital Stack Analysis' },
-    { id: 'section-ae34', label: 'AE-3.4 Draw Schedule & Interest' },
-    { id: 'section-ae37', label: 'AE-3.7 Draw Package' },
-    { id: 'section-ae38', label: 'AE-3.8 Investor Report Variance' }
+  ch1: [
+    { id: 'section-11',       label: '1.1 What is Market Analysis?' },
+    { id: 'section-12',       label: '1.2 Supply & Demand Fundamentals' },
+    { id: 'section-13',       label: '1.3 Comparable Property Analysis' },
+    { id: 'section-14',       label: '1.4 Absorption & Lease-Up' },
+    { id: 'section-15',       label: '1.5 Highest & Best Use' },
+    { id: 'section-16',       label: '1.6 The Feasibility Study' },
+    { id: 'section-17',       label: '1.7 NOI, Cap Rates & DCF' },
+    { id: 'section-18',       label: '1.8 Bank Prime & CORRA' },
+    { id: 'section-19',       label: '1.9 Key Metrics Reference' },
+    { id: 'section-ae-intro1',label: 'Applied Exercises' },
+    { id: 'section-ae12',     label: 'AE-1.2 Demand vs. Supply' },
+    { id: 'section-ae13',     label: 'AE-1.3 Full Cost Stack' },
+    { id: 'section-ae14',     label: 'AE-1.4 Lease-Up Modeling' },
+    { id: 'section-ae15',     label: 'AE-1.5 HBU Analysis' }
   ],
   ch2: [
-    { id: 'section-21', label: '2.1 What is Site Selection?' },
-    { id: 'section-22', label: '2.2 The Physical Assessment' },
-    { id: 'section-23', label: '2.3 Title & Legal Due Diligence' },
-    { id: 'section-24', label: '2.4 Environmental Due Diligence' },
-    { id: 'section-25', label: '2.5 Geotechnical & Servicing' },
-    { id: 'section-26', label: '2.6 Zoning & Planning' },
-    { id: 'section-27', label: '2.7 Financial Due Diligence' },
-    { id: 'section-28', label: '2.8 Key Terms Reference' },
-    { id: 'section-ae-intro2', label: 'Applied Exercises' },
-    { id: 'section-ae22', label: 'AE-2.2 Physical Assessment' },
-    { id: 'section-ae23', label: 'AE-2.3 Title Encumbrance' },
-    { id: 'section-ae24', label: 'AE-2.4 Phase 2 ESA Finding' },
-    { id: 'section-ae27', label: 'AE-2.7 Go/No-Go Decision' }
+    { id: 'section-21',       label: '2.1 What is Site Selection?' },
+    { id: 'section-22',       label: '2.2 The Physical Assessment' },
+    { id: 'section-23',       label: '2.3 Title & Legal Due Diligence' },
+    { id: 'section-24',       label: '2.4 Environmental Due Diligence' },
+    { id: 'section-25',       label: '2.5 Geotechnical & Servicing' },
+    { id: 'section-26',       label: '2.6 Zoning & Planning' },
+    { id: 'section-27',       label: '2.7 Financial Due Diligence' },
+    { id: 'section-28',       label: '2.8 Key Terms Reference' },
+    { id: 'section-ae-intro2',label: 'Applied Exercises' },
+    { id: 'section-ae22',     label: 'AE-2.2 Physical Assessment' },
+    { id: 'section-ae23',     label: 'AE-2.3 Title Encumbrance' },
+    { id: 'section-ae24',     label: 'AE-2.4 Phase 2 ESA Finding' },
+    { id: 'section-ae27',     label: 'AE-2.7 Go/No-Go Decision' }
   ],
-  ch1: [
-    { id: 'section-11', label: '1.1 What is Market Analysis?' },
-    { id: 'section-12', label: '1.2 Supply & Demand Fundamentals' },
-    { id: 'section-13', label: '1.3 Comparable Property Analysis' },
-    { id: 'section-14', label: '1.4 Absorption & Lease-Up' },
-    { id: 'section-15', label: '1.5 Highest & Best Use' },
-    { id: 'section-16', label: '1.6 The Feasibility Study' },
-    { id: 'section-17', label: '1.7 NOI, Cap Rates & DCF' },
-    { id: 'section-18', label: '1.8 Bank Prime & CORRA' },
-    { id: 'section-19', label: '1.9 Key Metrics Reference' },
-    { id: 'section-ae-intro1', label: 'Applied Exercises' },
-    { id: 'section-ae12', label: 'AE-1.2 Demand vs. Supply' },
-    { id: 'section-ae13', label: 'AE-1.3 Full Cost Stack' },
-    { id: 'section-ae14', label: 'AE-1.4 Lease-Up Modeling' },
-    { id: 'section-ae15', label: 'AE-1.5 HBU Analysis' }
+  ch3: [
+    { id: 'section-31',       label: '3.1 Overview of Development Financing' },
+    { id: 'section-32',       label: '3.2 The Capital Stack' },
+    { id: 'section-33',       label: '3.3 Equity — Types & Sources' },
+    { id: 'section-34',       label: '3.4 Construction Debt' },
+    { id: 'section-35',       label: '3.5 CMHC Financing Programs' },
+    { id: 'section-36',       label: '3.6 Mezzanine & Preferred Equity' },
+    { id: 'section-37',       label: '3.7 The Draw Process' },
+    { id: 'section-38',       label: '3.8 Investor Reporting' },
+    { id: 'section-39',       label: '3.9 Key Terms Reference' },
+    { id: 'section-ae-intro3',label: 'Applied Exercises' },
+    { id: 'section-ae32',     label: 'AE-3.2 Capital Stack Analysis' },
+    { id: 'section-ae34',     label: 'AE-3.4 Draw Schedule & Interest' },
+    { id: 'section-ae37',     label: 'AE-3.7 Draw Package' },
+    { id: 'section-ae38',     label: 'AE-3.8 Investor Report Variance' }
+  ],
+  ch4: [
+    { id: 'section-41',       label: '4.1 What is the Entitlement Process?' },
+    { id: 'section-42',       label: '4.2 The Ontario Planning Framework' },
+    { id: 'section-43',       label: '4.3 Official Plan Amendments (OPA)' },
+    { id: 'section-44',       label: '4.4 Zoning Bylaw Amendments (ZBA)' },
+    { id: 'section-45',       label: '4.5 Site Plan Approval (SPA)' },
+    { id: 'section-46',       label: '4.6 The Application Package' },
+    { id: 'section-47',       label: '4.7 The Approval Timeline' },
+    { id: 'section-48',       label: '4.8 The Ontario Land Tribunal (OLT)' },
+    { id: 'section-49',       label: '4.9 Conditions of Approval' },
+    { id: 'section-410',      label: '4.10 Key Terms Reference' },
+    { id: 'section-ae-intro4',label: 'Applied Exercises' },
+    { id: 'section-ae44',     label: 'AE-4.4 Mapping Approval Pathway' },
+    { id: 'section-ae46',     label: 'AE-4.6 Pre-Consultation Prep' },
+    { id: 'section-ae47',     label: 'AE-4.7 Entitlement Timeline' }
+  ],
+  ch5: [
+    { id: 'section-51',       label: '5.1 Why Team Assembly Matters' },
+    { id: 'section-52',       label: '5.2 The Developer Internal Team' },
+    { id: 'section-53',       label: '5.3 The Construction Manager' },
+    { id: 'section-54',       label: '5.4 Architect & Design Consultants' },
+    { id: 'section-55',       label: '5.5 The Legal Team' },
+    { id: 'section-56',       label: '5.6 Financial & Lending Team' },
+    { id: 'section-57',       label: '5.7 Planning & Entitlement Team' },
+    { id: 'section-58',       label: '5.8 Procurement' },
+    { id: 'section-59',       label: '5.9 Contracts & Scope of Work' },
+    { id: 'section-510',      label: '5.10 Key Terms Reference' },
+    { id: 'section-511',      label: '5.11 HCRA & Tarion Licensing' },
+    { id: 'section-ae-intro5',label: 'Applied Exercises' },
+    { id: 'section-ae53',     label: 'AE-5.3 CM Proposal Evaluation' },
+    { id: 'section-ae58',     label: 'AE-5.8 Consultant RFP Process' }
+  ],
+  ch6: [
+    { id: 'section-61',       label: '6.1 Role of Design in Development' },
+    { id: 'section-62',       label: '6.2 The Design Team' },
+    { id: 'section-63',       label: '6.3 The Architect\'s Scope' },
+    { id: 'section-64',       label: '6.4 Design Stages' },
+    { id: 'section-65',       label: '6.5 Zoning Compliance & Constraints' },
+    { id: 'section-66',       label: '6.6 Building Code & Accessibility' },
+    { id: 'section-67',       label: '6.7 Sustainability & LEED' },
+    { id: 'section-68',       label: '6.8 Value Engineering' },
+    { id: 'section-69',       label: '6.9 Design Reviews & Coordination' },
+    { id: 'section-610',      label: '6.10 Key Metrics Reference' },
+    { id: 'section-ae-intro6',label: 'Applied Exercises' },
+    { id: 'section-ae64',     label: 'AE-6.4 Design Stage Deliverables' },
+    { id: 'section-ae68',     label: 'AE-6.8 Value Engineering Proposals' },
+    { id: 'section-ae69',     label: 'AE-6.9 Design Review Conflict' }
   ]
 };
 
-// Cache loaded chapters
 const chapterCache = {};
 
-function toggleSidebar() {
+document.getElementById('menuToggleBtn').addEventListener('click', function() {
   document.getElementById('sidebar').classList.toggle('open');
-}
+});
+
+document.querySelectorAll('.chapter-item').forEach(function(el) {
+  el.addEventListener('click', function() {
+    showView(el.dataset.target, el);
+  });
+});
 
 async function loadChapter(chapterId) {
   const config = chapterConfig[chapterId];
   if (!config || !config.file) return;
-  if (chapterCache[chapterId]) return; // already loaded
-
+  if (chapterCache[chapterId]) return;
   const container = document.getElementById('view-' + chapterId);
   container.innerHTML = '<div class="chapter-loading">Loading chapter...</div>';
-
   try {
     const res = await fetch(config.file);
     if (!res.ok) throw new Error('File not found');
     const md = await res.text();
     const html = marked.parse(md);
-
-    // Inject phase tag before h1
     const phaseLabels = { pre: 'Pre-Construction', con: 'Construction', post: 'Post-Construction' };
     const phaseClasses = { pre: 'phase-pre', con: 'phase-con', post: 'phase-post' };
     const phaseTag = '<span class="phase-tag ' + phaseClasses[config.phase] + '">' + phaseLabels[config.phase] + '</span>';
-
     container.innerHTML = '<div class="md-content">' + phaseTag + html + '</div>';
-
-    // Add section IDs to h2 headings for outline scrollspy
     const headings = container.querySelectorAll('h2');
-    headings.forEach((h, i) => {
-      const outline = chapterOutlines[chapterId];
-      if (outline && outline[i]) {
-        h.id = outline[i].id;
-      }
+    const outline = chapterOutlines[chapterId] || [];
+    headings.forEach(function(h, i) {
+      if (outline[i]) h.id = outline[i].id;
     });
-
-    // Add quiz button and container at the end
-    const quizData = config.quiz();
+    const quizData = getQuizData(chapterId);
     if (quizData) {
       const quizSection = document.createElement('div');
       const quizBtn = document.createElement('button');
@@ -930,98 +412,79 @@ async function loadChapter(chapterId) {
       quizSection.appendChild(quizContainer);
       container.querySelector('.md-content').appendChild(quizSection);
     }
-
     chapterCache[chapterId] = true;
-  } catch (err) {
+  } catch(err) {
     container.innerHTML = '<div class="chapter-error">Could not load chapter content. Make sure the file exists in the chapters/ folder.</div>';
   }
 }
 
 function showView(id, el) {
-  document.querySelectorAll('.chapter-view').forEach(v => v.classList.remove('active'));
-  document.querySelectorAll('.chapter-item').forEach(i => i.classList.remove('active'));
+  document.querySelectorAll('.chapter-view').forEach(function(v) { v.classList.remove('active'); });
+  document.querySelectorAll('.chapter-item').forEach(function(i) { i.classList.remove('active'); });
   document.getElementById('view-' + id).classList.add('active');
   if (el) el.classList.add('active');
-  if (window.innerWidth <= 680) {
-    document.getElementById('sidebar').classList.remove('open');
-  }
+  if (window.innerWidth <= 680) document.getElementById('sidebar').classList.remove('open');
   buildOutline(id);
-  const mainContent = document.getElementById('mainContent');
-  if (mainContent) mainContent.scrollTo({ top: 0 });
-
-  // Load chapter markdown if needed
-  if (id !== 'home' && chapterConfig[id] && chapterConfig[id].file) {
-    loadChapter(id);
-  }
+  const mc = document.getElementById('mainContent');
+  if (mc) mc.scrollTo({ top: 0 });
+  if (id !== 'home' && chapterConfig[id] && chapterConfig[id].file) loadChapter(id);
 }
 
 function buildOutline(chapterId) {
   const outlineItems = document.getElementById('outlineItems');
   const outlineLabel = document.getElementById('outlineLabel');
   const items = chapterOutlines[chapterId] || [];
-
-  if (items.length === 0) {
-    outlineLabel.textContent = 'On this page';
+  outlineLabel.textContent = 'On this page';
+  if (!items.length) {
     outlineItems.innerHTML = '<div class="outline-empty">Content outline will appear here once this chapter is built out.</div>';
     return;
   }
-
-  outlineLabel.textContent = 'On this page';
-    outlineItems.innerHTML = items.map(item =>
-    '<div class="outline-item" id="ol-' + item.id + '" data-section="' + item.id + '">' + item.label + '</div>'
-  ).join('');
-
+  outlineItems.innerHTML = items.map(function(item) {
+    return '<div class="outline-item" id="ol-' + item.id + '" data-section="' + item.id + '">' + item.label + '</div>';
+  }).join('');
   outlineItems.querySelectorAll('.outline-item').forEach(function(el) {
     el.addEventListener('click', function() { scrollToSection(el.dataset.section); });
   });
-
   setupScrollSpy(chapterId);
 }
 
-
 function scrollToSection(sectionId) {
   const el = document.getElementById(sectionId);
-  const mainContent = document.getElementById('mainContent');
-  if (el && mainContent) {
-    const offset = el.getBoundingClientRect().top - mainContent.getBoundingClientRect().top + mainContent.scrollTop - 20;
-    mainContent.scrollTo({ top: offset, behavior: 'smooth' });
+  const mc = document.getElementById('mainContent');
+  if (el && mc) {
+    const offset = el.getBoundingClientRect().top - mc.getBoundingClientRect().top + mc.scrollTop - 20;
+    mc.scrollTo({ top: offset, behavior: 'smooth' });
   }
 }
 
 function setupScrollSpy(chapterId) {
-  const mainContent = document.getElementById('mainContent');
+  const mc = document.getElementById('mainContent');
   const items = chapterOutlines[chapterId] || [];
   if (!items.length) return;
-
-  mainContent.onscroll = function() {
-    const containerTop = mainContent.getBoundingClientRect().top;
+  mc.onscroll = function() {
+    const containerTop = mc.getBoundingClientRect().top;
     let activeId = items[0].id;
-    items.forEach(item => {
+    items.forEach(function(item) {
       const el = document.getElementById(item.id);
-      if (el) {
-        const top = el.getBoundingClientRect().top - containerTop;
-        if (top <= 60) activeId = item.id;
-      }
+      if (el && el.getBoundingClientRect().top - containerTop <= 60) activeId = item.id;
     });
-    document.querySelectorAll('.outline-item').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.outline-item').forEach(function(el) { el.classList.remove('active'); });
     const activeEl = document.getElementById('ol-' + activeId);
     if (activeEl) activeEl.classList.add('active');
   };
 }
 
 function toggleQuiz(chapterId) {
-  const containerId = 'quiz-' + chapterId;
-  const container = document.getElementById(containerId);
+  const container = document.getElementById('quiz-' + chapterId);
   if (!container) return;
   if (container.innerHTML && container.style.display !== 'none') {
     container.style.display = 'none';
     return;
   }
   container.style.display = 'block';
-  const config = chapterConfig[chapterId];
-  const data = config ? config.quiz() : null;
+  const data = getQuizData(chapterId);
   if (!data) {
-    container.innerHTML = '<div class="quiz-panel"><p style="font-size:14px;color:var(--text-secondary);">Quiz for this chapter will be added when the chapter content is built out.</p></div>';
+    container.innerHTML = '<div class="quiz-panel"><p style="font-size:14px;color:var(--text-secondary);">Quiz coming soon.</p></div>';
     return;
   }
   renderQuiz(chapterId, data, container);
@@ -1029,10 +492,10 @@ function toggleQuiz(chapterId) {
 
 function renderQuiz(qid, data, container) {
   const letters = ['A','B','C','D'];
-  let html = '<div class="quiz-panel" data-qid="' + qid + '"><h3>' + data.title + '</h3>';
-  data.questions.forEach((q, qi) => {
+  let html = '<div class="quiz-panel" data-qid="' + qid + '"><h3>Chapter Quiz</h3>';
+  data.questions.forEach(function(q, qi) {
     html += '<div class="q-block"><div class="q-text">' + (qi+1) + '. ' + q.q + '</div><div class="q-options">';
-    q.opts.forEach((opt, oi) => {
+    q.opts.forEach(function(opt, oi) {
       const optId = 'opt_' + qid + '_' + qi + '_' + oi;
       const expId = 'exp_' + qid + '_' + qi + '_' + oi;
       html += '<div class="q-opt-wrap">';
@@ -1048,21 +511,15 @@ function renderQuiz(qid, data, container) {
   html += '<button class="quiz-submit" data-qid="' + qid + '">Submit answers</button>';
   html += '<div id="result_' + qid + '"></div></div>';
   container.innerHTML = html;
-
-  // Attach event listeners directly after innerHTML is set — no inline onclick needed
   const panel = container.querySelector('.quiz-panel');
-
   panel.querySelectorAll('.q-opt').forEach(function(el) {
     el.addEventListener('click', function() {
       selectOpt(el.dataset.qid, parseInt(el.dataset.qi), parseInt(el.dataset.oi));
     });
   });
-
   const submitBtn = panel.querySelector('.quiz-submit');
   if (submitBtn) {
-    submitBtn.addEventListener('click', function() {
-      submitQuiz(submitBtn.dataset.qid);
-    });
+    submitBtn.addEventListener('click', function() { submitQuiz(submitBtn.dataset.qid); });
   }
 }
 
@@ -1070,35 +527,34 @@ function selectOpt(qid, qi, oi) {
   const key = qid + '_' + qi;
   const prev = userAnswers[key];
   if (prev !== undefined) {
-    const prevEl = document.getElementById('opt_'+qid+'_'+qi+'_'+prev);
+    const prevEl = document.getElementById('opt_' + qid + '_' + qi + '_' + prev);
     if (prevEl) prevEl.classList.remove('selected');
   }
   userAnswers[key] = oi;
-  const el = document.getElementById('opt_'+qid+'_'+qi+'_'+oi);
+  const el = document.getElementById('opt_' + qid + '_' + qi + '_' + oi);
   if (el) el.classList.add('selected');
 }
 
 function submitQuiz(qid) {
-  const config = chapterConfig[qid];
-  const data = config ? config.quiz() : null;
+  const data = getQuizData(qid);
   if (!data) return;
   let correct = 0;
-  data.questions.forEach((q, qi) => {
+  data.questions.forEach(function(q, qi) {
     const key = qid + '_' + qi;
     const chosen = userAnswers[key];
-    q.opts.forEach((_, oi) => {
-      const el = document.getElementById('opt_'+qid+'_'+qi+'_'+oi);
+    q.opts.forEach(function(_, oi) {
+      const el = document.getElementById('opt_' + qid + '_' + qi + '_' + oi);
       if (!el) return;
       el.classList.remove('selected','correct','wrong');
-      if (oi === q.ans) el.classList.add('correct');
-      else if (oi === chosen && chosen !== q.ans) el.classList.add('wrong');
-      const expEl = document.getElementById('exp_'+qid+'_'+qi+'_'+oi);
+      if (oi === q.answer) el.classList.add('correct');
+      else if (oi === chosen && chosen !== q.answer) el.classList.add('wrong');
+      const expEl = document.getElementById('exp_' + qid + '_' + qi + '_' + oi);
       if (expEl) {
         expEl.classList.remove('visible');
-        if (oi === chosen || oi === q.ans) expEl.classList.add('visible');
+        if (oi === chosen || oi === q.answer) expEl.classList.add('visible');
       }
     });
-    if (chosen === q.ans) correct++;
+    if (chosen === q.answer) correct++;
   });
   const pct = Math.round((correct / data.questions.length) * 100);
   scores[qid] = pct;
@@ -1114,13 +570,12 @@ function markComplete(qid) {
   const n = parseInt(qid.replace('ch',''));
   const el = document.getElementById('st' + n);
   if (el) { el.innerHTML = '&#10003;'; el.classList.add('done'); }
-  document.querySelectorAll('[data-target="' + qid + '"]').forEach(i => i.classList.add('completed'));
 }
 
 function updateDashboard() {
   const total = Object.keys(scores).length;
-  const passed = Object.values(scores).filter(s => s >= 70).length;
-  const avg = total > 0 ? Math.round(Object.values(scores).reduce((a,b) => a+b,0) / total) : null;
+  const passed = Object.values(scores).filter(function(s) { return s >= 70; }).length;
+  const avg = total > 0 ? Math.round(Object.values(scores).reduce(function(a,b){return a+b;},0) / total) : null;
   document.getElementById('dashComplete').textContent = passed + ' / 15';
   document.getElementById('dashQuizzes').textContent = total;
   document.getElementById('dashAvg').textContent = avg !== null ? avg + '%' : '—';
@@ -1133,26 +588,30 @@ function buildPills() {
   const p1 = [[1,'Market Analysis & Feasibility'],[2,'Site Selection & Due Diligence'],[3,'Financing & Capital Stack'],[4,'Entitlements, Zoning & Permits'],[5,'Project Team Assembly'],[6,'Design & Architecture Process']];
   const p2 = [[7,'Procurement & Contracting'],[8,'Construction Management'],[9,'Budget & Cost Control'],[10,'Quality Control'],[11,'Risk Management & Insurance']];
   const p3 = [[12,'CO & Closeout'],[13,'Leasing, Sales & Marketing'],[14,'Asset Management'],[15,'Disposition & Exit']];
-  [[p1,'pills1'],[p2,'pills2'],[p3,'pills3']].forEach(([list, cid]) => {
+  [[p1,'pills1'],[p2,'pills2'],[p3,'pills3']].forEach(function(pair) {
+    const list = pair[0], cid = pair[1];
     const c = document.getElementById(cid);
-    list.forEach(([n, title]) => {
+    list.forEach(function(item) {
+      const n = item[0], title = item[1];
       const pill = document.createElement('div');
       pill.className = 'phase-ch-pill';
       pill.textContent = 'Ch.' + n + ' ' + title;
-      pill.onclick = () => { const item = document.querySelector('[data-target="ch'+n+'"]'); showView('ch'+n, item); };
+      pill.addEventListener('click', function() {
+        const navEl = document.getElementById('nav-ch' + n);
+        showView('ch' + n, navEl);
+      });
       c.appendChild(pill);
     });
   });
 }
 
 buildPills();
-
-// Preload chapters in background
 loadChapter('ch1');
 loadChapter('ch2');
 loadChapter('ch3');
 loadChapter('ch4');
 loadChapter('ch5');
+loadChapter('ch6');
 </script>
 </body>
 </html>
