@@ -241,6 +241,7 @@
 <script src="quizzes/quiz-4.js"></script>
 <script src="quizzes/quiz-5.js"></script>
 <script src="quizzes/quiz-6.js"></script>
+<script src="quizzes/quiz6.js"></script>
 
 <script>
 const scores = {};
@@ -252,7 +253,7 @@ const chapterConfig = {
   ch3:  { file: 'chapters/chapter-3.md',  quizKey: 'QUIZ_DATA_3',  phase: 'pre' },
   ch4:  { file: 'chapters/chapter-4.md',  quizKey: 'QUIZ_DATA_4',  phase: 'pre' },
   ch5:  { file: 'chapters/chapter-5.md',  quizKey: 'QUIZ_DATA_5',  phase: 'pre' },
-  ch6:  { file: 'chapters/chapter-6.md',  quizKey: 'QUIZ_DATA_6',  phase: 'pre' },
+  ch6:  { file: 'chapters/chapter-6.md',  quizKey: 'quiz6',  phase: 'pre' },
   ch7:  { file: null, quizKey: null, phase: 'con' },
   ch8:  { file: null, quizKey: null, phase: 'con' },
   ch9:  { file: null, quizKey: null, phase: 'con' },
@@ -266,7 +267,16 @@ const chapterConfig = {
 
 function getQuizData(chapterId) {
   const key = chapterConfig[chapterId] && chapterConfig[chapterId].quizKey;
-  return key ? window[key] || null : null;
+  if (!key) return null;
+  const data = window[key] || null;
+  if (!data) return null;
+  // Normalise answer key — support both 'answer' and 'ans'
+  if (data.questions) {
+    data.questions.forEach(function(q) {
+      if (q.ans !== undefined && q.answer === undefined) q.answer = q.ans;
+    });
+  }
+  return data;
 }
 
 const chapterOutlines = {
