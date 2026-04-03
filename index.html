@@ -241,7 +241,6 @@
 <script src="quizzes/quiz-4.js"></script>
 <script src="quizzes/quiz-5.js"></script>
 <script src="quizzes/quiz-6.js"></script>
-<script src="quizzes/quiz6.js"></script>
 
 <script>
 const scores = {};
@@ -490,8 +489,8 @@ function setupScrollSpy(chapterId) {
 function toggleQuiz(chapterId) {
   const container = document.getElementById('quiz-' + chapterId);
   if (!container) return;
-  if (container.innerHTML && container.style.display !== 'none') {
-    container.style.display = 'none';
+  if (container.dataset.rendered === 'true') {
+    container.style.display = container.style.display === 'none' ? 'block' : 'none';
     return;
   }
   container.style.display = 'block';
@@ -501,6 +500,7 @@ function toggleQuiz(chapterId) {
     return;
   }
   renderQuiz(chapterId, data, container);
+  container.dataset.rendered = 'true';
 }
 
 function renderQuiz(qid, data, container) {
