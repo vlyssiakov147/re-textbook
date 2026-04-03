@@ -7,13 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-<!-- External quiz files — add more as you build them -->
-<script src="quizzes/quiz-1.js"></script>
-<script src="quizzes/quiz-2.js"></script>
-<script src="quizzes/quiz-3.js"></script>
-<script src="quizzes/quiz-4.js"></script>
-<script src="quizzes/quiz-5.js"></script>
-<script src="quizzes/quiz-6.js"></script>
+<!-- Quiz files loaded dynamically at runtime to avoid 404 blocking -->
 
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -582,7 +576,10 @@ function showView(chId) {
   document.querySelectorAll('.view').forEach(function(v) { v.classList.remove('active'); });
   document.querySelectorAll('.ch-item').forEach(function(i) { i.classList.remove('active'); });
 
-  document.getElementById('view-' + chId).classList.add('active');
+  var viewEl = document.getElementById('view-' + chId);
+  if (!viewEl) return;
+  viewEl.classList.add('active');
+
   var navEl = document.getElementById('nav-' + chId);
   if (navEl) navEl.classList.add('active');
 
@@ -607,12 +604,14 @@ function showView(chId) {
     return;
   }
 
-  // Load MD if not cached
-  if (mdCache[chId]) {
+  // If already rendered (has real content beyond just a loading div), just rebuild outline
+  if (mdCache[chId] && viewEl.querySelector('.md-content')) {
     buildOutline(chId);
-  } else {
-    loadChapter(chId);
+    return;
   }
+
+  // Otherwise fetch and render
+  loadChapter(chId);
 }
 
 // ── Load markdown ──────────────────────────────────────────────
@@ -623,7 +622,7 @@ function loadChapter(chId) {
 
   fetch(cfg.mdFile)
     .then(function(res) {
-      if (!res.ok) throw new Error('HTTP ' + res.status);
+      if (!res.ok) throw new Error('HTTP ' + res.status + ' — file not found at ' + cfg.mdFile);
       return res.text();
     })
     .then(function(md) {
@@ -635,10 +634,13 @@ function loadChapter(chId) {
     .catch(function(err) {
       container.innerHTML =
         '<div class="chapter-error">' +
-        '<strong>Could not load chapter content.</strong><br>' +
-        'Make sure <code>' + cfg.mdFile + '</code> exists in the same directory as this HTML file.<br>' +
+        '<strong>Could not load chapter content.</strong><br><br>' +
+        'Expected file: <code>' + cfg.mdFile + '</code><br>' +
+        'Make sure this file exists in your GitHub repo at that exact path.<br><br>' +
         '<small style="opacity:0.7;">Error: ' + err.message + '</small>' +
         '</div>';
+      // Still show the outline panel update
+      buildOutline(null);
     });
 }
 
@@ -984,15 +986,34 @@ document.getElementById('menuToggleBtn').addEventListener('click', function() {
   document.getElementById('sidebar').classList.toggle('open');
 });
 
+// ── Dynamically load quiz JS files (non-blocking) ─────────────
+// This avoids a 404 on a <script> tag killing the whole page
+function loadQuizScript(path) {
+  return new Promise(function(resolve) {
+    var s = document.createElement('script');
+    s.src = path;
+    s.onload  = function() { resolve(true); };
+    s.onerror = function() { resolve(false); }; // 404 = silently skip
+    document.head.appendChild(s);
+  });
+}
+
 // ── Init ───────────────────────────────────────────────────────
 buildPills();
 
-// Pre-load the chapters that have MD files so they're ready quickly
-['ch1','ch2','ch3','ch4','ch5','ch6'].forEach(function(chId) {
-  fetch(CHAPTERS[chId].mdFile)
-    .then(function(res) { if (!res.ok) throw new Error('skip'); return res.text(); })
-    .then(function(md) { mdCache[chId] = marked.parse(md); })
-    .catch(function() { /* silently skip if file not found */ });
+// Load all quiz scripts, then show the default home view
+var quizScripts = [
+  'quizzes/quiz-1.js',
+  'quizzes/quiz-2.js',
+  'quizzes/quiz-3.js',
+  'quizzes/quiz-4.js',
+  'quizzes/quiz-5.js',
+  'quizzes/quiz-6.js'
+];
+
+Promise.all(quizScripts.map(loadQuizScript)).then(function() {
+  // Quiz scripts are loaded (or silently skipped). Ready.
+  console.log('Quiz scripts loaded. window.quiz1 =', window.quiz1);
 });
 </script>
 </body>
