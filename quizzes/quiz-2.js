@@ -155,7 +155,7 @@ const quiz2 = {
       ],
       ans: 2,
       exp: [
-        'Incorrect. While location quality is a legitimate qualitative factor, accepting below-threshold returns because a deal is "close" without a structured analytical justification is not rigorous — it is rationalization. The question is whether 16.5% is genuinely acceptable given all risk factors, not whether it feels close enough.',
+        'Incorrect. While location quality is a legitimate qualitative factor, accepting below-threshold returns because a deal is close without a structured analytical justification is not rigorous — it is rationalization. The question is whether 16.5% is genuinely acceptable given all risk factors, not whether it feels close enough.',
         'Incorrect. While investment discipline around return thresholds is important, a mechanical walk-away without first determining whether the gap can be closed through additional negotiation or value creation is also not rigorous. The right answer is to know exactly what is needed before deciding whether to walk.',
         'Correct. The gap between 16.5% and 18% is approximately 1.5 percentage points. The developer should calculate exactly how much additional price reduction, or what other concessions (vendor take-back financing, extended closing, assumption of remediation risk by vendor) would bridge that gap. Then assess whether those concessions are realistic to obtain within the remaining conditional period. This produces a clear decision: if the gap can be closed, negotiate for it; if it cannot, walk away with full information rather than accepting below-threshold returns or walking away prematurely.',
         'Incorrect. Requesting an extension may be tactically useful in some circumstances, but it does not resolve the analytical question of whether the project is viable at the current offer. An extension without a clear plan for how the additional time will be used to improve the economics is not a strategy — it is a delay.'
@@ -210,7 +210,7 @@ const quiz2 = {
       ]
     },
     {
-      q: 'A developer's initial feasibility model for a proposed high-rise residential project in Toronto does not include Development Charges, Community Benefits Charges, or cash-in-lieu of parkland. The project was modeled based on hard and soft construction costs plus land. What is the risk of this omission?',
+      q: 'A feasibility model for a proposed high-rise residential project in Toronto does not include Development Charges, Community Benefits Charges, or cash-in-lieu of parkland. The project was modeled based on hard and soft construction costs plus land. What is the risk of this omission?',
       opts: [
         'Minimal — DCs and CBCs are negotiable with the municipality and can be reduced or waived for residential projects',
         'The omission could understate total project cost by several million dollars, making the land price appear supportable when it is not',
@@ -219,14 +219,14 @@ const quiz2 = {
       ],
       ans: 1,
       exp: [
-        'Incorrect. Development Charges and Community Benefits Charges in Ontario are statutory levies set by municipal by-law — they are not negotiable in ordinary circumstances. DCs in Toronto for high-density residential can exceed $50,000–$100,000 per unit. A 300-unit project could carry $15M–$30M in combined municipal levies.',
+        'Incorrect. Development Charges and Community Benefits Charges in Ontario are statutory levies set by municipal by-law — they are not negotiable in ordinary circumstances. DCs in Toronto for high-density residential can exceed $50,000-$100,000 per unit. A 300-unit project could carry $15M-$30M in combined municipal levies.',
         'Correct. Omitting Development Charges, CBCs, and parkland cash-in-lieu from a feasibility model can understate total project cost by tens of millions of dollars on a large high-rise project. If the land price was set based on a feasibility that excluded these costs, the project will fail to meet return thresholds once they are properly included. This is one of the most common errors in early-stage feasibility modeling and one of the most consequential — the mistake is embedded in the land acquisition, which cannot be undone after closing.',
         'Incorrect. While higher pricing could theoretically absorb cost increases, the market sets pricing — not the developer. Levies increase cost without a corresponding increase in what buyers will pay. Their impact flows directly through to reduced project margin.',
         'Incorrect. Deferring the inclusion of DCs and CBCs to the building permit stage means they will not be factored into the land price negotiation, which happens years earlier. By the time a building permit is submitted, the developer has already committed to a land price that did not account for them. These costs must be modeled accurately before any land offer is made.'
       ]
     },
     {
-      q: 'Before beginning a site search for a 400-unit purpose-built rental tower, a developer\'s team argues that market validation is unnecessary because rental demand in the GTA is "obviously strong." What is the most significant risk of proceeding on this basis?',
+      q: 'Before beginning a site search for a 400-unit purpose-built rental tower, a team argues that market validation is unnecessary because rental demand in the GTA is "obviously strong." What is the most significant risk of proceeding on this basis?',
       opts: [
         'The developer may select a site in a location the municipality will not support for rental housing',
         'The development program may be sized or priced based on a broad market assumption rather than the specific submarket absorption, competitive supply, and pricing reality the project will actually face',
