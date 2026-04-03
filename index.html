@@ -412,6 +412,7 @@ async function loadChapter(chapterId) {
       if (outline[i]) h.id = outline[i].id;
     });
     const quizData = getQuizData(chapterId);
+    console.log('DEBUG', chapterId, 'quizKey:', chapterConfig[chapterId].quizKey, 'window value:', window[chapterConfig[chapterId].quizKey], 'quizData:', quizData);
     if (quizData) {
       const quizSection = document.createElement('div');
       const quizBtn = document.createElement('button');
@@ -423,6 +424,8 @@ async function loadChapter(chapterId) {
       quizSection.appendChild(quizBtn);
       quizSection.appendChild(quizContainer);
       container.querySelector('.md-content').appendChild(quizSection);
+    } else {
+      console.log('DEBUG — no quiz data found for', chapterId, '— button will not render');
     }
     chapterCache[chapterId] = true;
   } catch(err) {
