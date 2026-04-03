@@ -644,23 +644,29 @@ function loadChapter(chId) {
     });
 }
 
-// ── Render chapter (MD html + quiz section) ────────────────────
+// ── Render chapter (MD html + quiz button shell) ──────────────
+// Quiz questions are built LAZILY when the button is first clicked,
+// so quiz JS files don't need to be loaded before this runs.
 function renderChapter(chId, mdHtml) {
   var cfg = CHAPTERS[chId];
   var container = document.getElementById('view-' + chId);
 
   var phaseTag = '<span class="phase-tag ' + PHASE_CLASSES[cfg.phase] + '">' + PHASE_LABELS[cfg.phase] + '</span>';
-  var quizData = getQuizData(chId);
-  var quizSection = buildQuizSection(chId, quizData);
+
+  // Always render the quiz shell — questions injected on first click
+  var quizShell =
+    '<hr class="quiz-divider">' +
+    '<div class="quiz-intro">' +
+    '<div class="quiz-intro-label">Chapter Quiz</div>' +
+    '<div class="quiz-intro-title">Test Your Knowledge</div>' +
+    '<p class="quiz-intro-sub">Answer all questions and submit to see your score. A score of <strong>' + PASS_PCT + '% or higher</strong> marks this chapter as complete.</p>' +
+    '</div>' +
+    '<button class="quiz-btn" id="qbtn-' + chId + '" onclick="toggleQuizPanel(\'' + chId + '\')">&#9998;&nbsp; Take the Chapter Quiz</button>' +
+    '<div class="quiz-panel" id="qpanel-' + chId + '"></div>';
 
   container.innerHTML =
     '<div class="md-content">' + phaseTag + mdHtml + '</div>' +
-    quizSection;
-
-  // Attach quiz event listeners
-  if (quizData) {
-    attachQuizListeners(chId, quizData);
-  }
+    quizShell;
 }
 
 // ── Coming soon ────────────────────────────────────────────────
@@ -678,29 +684,38 @@ function renderComingSoon(chId, cfg) {
   container.dataset.rendered = 'true';
 }
 
-// ── Build quiz HTML string ─────────────────────────────────────
-function buildQuizSection(chId, quizData) {
-  var html = '<hr class="quiz-divider">';
-  html += '<div class="quiz-intro">';
-  html += '<div class="quiz-intro-label">Chapter Quiz</div>';
-  html += '<div class="quiz-intro-title">Test Your Knowledge</div>';
+// ── Toggle quiz panel — builds questions lazily on first open ──
+function toggleQuizPanel(chId) {
+  var panel = document.getElementById('qpanel-' + chId);
+  var btn   = document.getElementById('qbtn-' + chId);
+  if (!panel) return;
 
-  if (!quizData) {
-    html += '<p class="quiz-intro-sub" style="color:var(--text-tertiary);font-style:italic;">No quiz available for this chapter yet.</p>';
-    html += '</div>';
-    return html;
+  var isOpen = panel.classList.contains('open');
+
+  // First time opening: build the questions now (quiz JS is loaded by this point)
+  if (!isOpen && !panel.dataset.rendered) {
+    var quizData = getQuizData(chId);
+    if (!quizData) {
+      panel.innerHTML = '<p style="font-size:14px;color:var(--text-tertiary);padding:0.75rem 0;font-style:italic;">No quiz available for this chapter yet.</p>';
+    } else {
+      if (!quizState[chId]) quizState[chId] = { answers: {}, submitted: false };
+      panel.innerHTML = buildQuizQuestionsHTML(chId, quizData);
+    }
+    panel.dataset.rendered = 'true';
   }
 
-  html += '<p class="quiz-intro-sub">Answer all questions and submit to see your score. A score of <strong>' + PASS_PCT + '% or higher</strong> marks this chapter as complete.</p>';
-  html += '</div>';
+  panel.classList.toggle('open', !isOpen);
+  btn.innerHTML = isOpen
+    ? '&#9998;&nbsp; Take the Chapter Quiz'
+    : '&#10005;&nbsp; Hide Quiz';
+}
 
-  html += '<button class="quiz-btn" id="qbtn-' + chId + '" onclick="toggleQuizPanel(\'' + chId + '\')">&#9998;&nbsp; Take the Chapter Quiz</button>';
-
-  html += '<div class="quiz-panel" id="qpanel-' + chId + '">';
+// ── Build quiz questions HTML (called lazily) ──────────────────
+function buildQuizQuestionsHTML(chId, quizData) {
+  var html = '';
   html += '<div class="quiz-panel-title">' + (quizData.title || 'Chapter Quiz') + '</div>';
   html += '<div class="quiz-panel-meta">' + quizData.questions.length + ' questions &middot; Pass mark: ' + PASS_PCT + '%</div>';
 
-  // Questions
   quizData.questions.forEach(function(q, qi) {
     html += '<div class="q-block" id="qb-' + chId + '-' + qi + '">';
     html += '<div class="q-text">' + (qi + 1) + '. ' + q.q + '</div>';
@@ -719,42 +734,13 @@ function buildQuizSection(chId, quizData) {
     html += '</div></div>';
   });
 
-  // Footer
   html += '<div class="quiz-footer">';
   html += '<button class="quiz-submit" id="qsub-' + chId + '" disabled onclick="submitQuiz(\'' + chId + '\')">Submit answers</button>';
   html += '<span class="quiz-answered-count" id="qacount-' + chId + '">0 of ' + quizData.questions.length + ' answered</span>';
   html += '</div>';
   html += '<div class="quiz-result" id="qresult-' + chId + '"></div>';
   html += '<span class="quiz-retake" id="qretake-' + chId + '" onclick="retakeQuiz(\'' + chId + '\')">Retake quiz</span>';
-  html += '</div>'; // /quiz-panel
-
   return html;
-}
-
-// ── Attach listeners (none needed — all use inline onclick) ────
-function attachQuizListeners(chId, quizData) {
-  // Initialise state for this chapter if not already set
-  if (!quizState[chId]) {
-    quizState[chId] = { answers: {}, submitted: false };
-  }
-}
-
-// ── Toggle quiz panel ──────────────────────────────────────────
-function toggleQuizPanel(chId) {
-  var panel = document.getElementById('qpanel-' + chId);
-  var btn   = document.getElementById('qbtn-' + chId);
-  if (!panel) return;
-
-  // Init state
-  if (!quizState[chId]) {
-    quizState[chId] = { answers: {}, submitted: false };
-  }
-
-  var isOpen = panel.classList.contains('open');
-  panel.classList.toggle('open', !isOpen);
-  btn.innerHTML = isOpen
-    ? '&#9998;&nbsp; Take the Chapter Quiz'
-    : '&#10005;&nbsp; Hide Quiz';
 }
 
 // ── Select option ──────────────────────────────────────────────
