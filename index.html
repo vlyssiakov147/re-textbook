@@ -6,193 +6,481 @@
 <title>Real Estate Development — A Complete Textbook</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<!-- External quiz files — add more as you build them -->
+<script src="quizzes/quiz-1.js"></script>
+<script src="quizzes/quiz-2.js"></script>
+<script src="quizzes/quiz-3.js"></script>
+<script src="quizzes/quiz-4.js"></script>
+<script src="quizzes/quiz-5.js"></script>
+<script src="quizzes/quiz-6.js"></script>
+
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
   :root {
-    --bg-primary: #ffffff;
-    --bg-secondary: #f5f4f0;
-    --bg-tertiary: #efede8;
-    --text-primary: #1a1a18;
-    --text-secondary: #5a5a56;
+    --bg-primary:    #ffffff;
+    --bg-secondary:  #f5f4f0;
+    --bg-tertiary:   #efede8;
+    --text-primary:  #1a1a18;
+    --text-secondary:#5a5a56;
     --text-tertiary: #9a9990;
-    --border-light: rgba(0,0,0,0.10);
-    --border-mid: rgba(0,0,0,0.18);
-    --border-strong: rgba(0,0,0,0.28);
-    --gold: #B87333;
-    --radius-md: 8px;
-    --radius-lg: 12px;
+    --border-light:  rgba(0,0,0,0.10);
+    --border-mid:    rgba(0,0,0,0.18);
+    --gold:          #B87333;
+    --gold-light:    #FAEEDA;
+    --gold-border:   #FAC775;
+    --green-bg:      #EAF3DE;
+    --green-text:    #27500A;
+    --green-border:  #97C459;
+    --red-bg:        #FCEBEB;
+    --red-text:      #791F1F;
+    --red-border:    #E8A0A0;
+    --radius-md:     8px;
+    --radius-lg:     12px;
   }
+
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg-primary: #1e1e1c;
-      --bg-secondary: #282825;
-      --bg-tertiary: #141412;
-      --text-primary: #f0ede6;
-      --text-secondary: #a0a09a;
+      --bg-primary:    #1e1e1c;
+      --bg-secondary:  #282825;
+      --bg-tertiary:   #141412;
+      --text-primary:  #f0ede6;
+      --text-secondary:#a0a09a;
       --text-tertiary: #66665f;
-      --border-light: rgba(255,255,255,0.08);
-      --border-mid: rgba(255,255,255,0.14);
-      --border-strong: rgba(255,255,255,0.22);
+      --border-light:  rgba(255,255,255,0.08);
+      --border-mid:    rgba(255,255,255,0.14);
+      --gold-light:    #3a2a18;
+      --green-bg:      #1a2e0a;
+      --green-text:    #a8d878;
+      --red-bg:        #2e0a0a;
+      --red-text:      #e8a0a0;
     }
   }
+
   html, body { height: 100%; overflow: hidden; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--bg-tertiary); color: var(--text-primary); height: 100%; display: flex; flex-direction: column; }
-  .header { background: var(--bg-primary); border-bottom: 0.5px solid var(--border-light); padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
-  .header-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; letter-spacing: 0.01em; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--bg-primary);
+    border-bottom: 0.5px solid var(--border-light);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    z-index: 100;
+  }
+  .header-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; }
   .header-subtitle { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
-  .progress-bar-wrap { height: 3px; background: var(--border-light); width: 140px; border-radius: 2px; overflow: hidden; }
-  .progress-bar-fill { height: 100%; background: var(--gold); border-radius: 2px; transition: width 0.4s ease; }
-  .progress-label { font-size: 11px; color: var(--text-tertiary); margin-top: 3px; text-align: right; }
-  .body { display: flex; flex: 1; height: calc(100vh - 61px); overflow: hidden; }
-  .sidebar { width: 240px; min-width: 240px; height: 100%; background: var(--bg-primary); border-right: 0.5px solid var(--border-light); overflow-y: auto; overflow-x: hidden; padding: 1rem 0 2rem; flex-shrink: 0; }
-  .phase-label { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); padding: 1.2rem 1.1rem 0.4rem; }
-  .chapter-item { display: flex; align-items: center; gap: 8px; padding: 0.5rem 1.1rem; cursor: pointer; border-left: 2px solid transparent; transition: background 0.15s; font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
-  .chapter-item:hover { background: var(--bg-secondary); color: var(--text-primary); }
-  .chapter-item.active { border-left-color: var(--gold); background: var(--bg-secondary); color: var(--text-primary); font-weight: 500; }
+  .header-right { display: flex; align-items: center; gap: 1rem; }
+  .progress-wrap { text-align: right; }
+  .progress-bar-outer { height: 3px; background: var(--border-light); width: 140px; border-radius: 2px; overflow: hidden; }
+  .progress-bar-inner { height: 100%; background: var(--gold); border-radius: 2px; transition: width 0.5s ease; width: 0%; }
+  .progress-label { font-size: 11px; color: var(--text-tertiary); margin-top: 3px; }
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: 0.5px solid var(--border-mid);
+    border-radius: var(--radius-md);
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* ── BODY LAYOUT ── */
+  .body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    height: calc(100vh - 61px);
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: 240px;
+    min-width: 240px;
+    background: var(--bg-primary);
+    border-right: 0.5px solid var(--border-light);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1rem 0 2rem;
+    flex-shrink: 0;
+  }
+  .phase-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    padding: 1.2rem 1.1rem 0.4rem;
+  }
+  .ch-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.5rem 1.1rem;
+    cursor: pointer;
+    border-left: 2px solid transparent;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    transition: background 0.15s;
+    user-select: none;
+  }
+  .ch-item:hover { background: var(--bg-secondary); color: var(--text-primary); }
+  .ch-item.active { border-left-color: var(--gold); background: var(--bg-secondary); color: var(--text-primary); font-weight: 500; }
   .ch-num { font-size: 11px; color: var(--text-tertiary); min-width: 20px; font-variant-numeric: tabular-nums; }
-  .ch-status { margin-left: auto; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-secondary); border: 0.5px solid var(--border-light); display: flex; align-items: center; justify-content: center; font-size: 9px; flex-shrink: 0; }
-  .ch-status.done { background: #3B6D11; color: #C0DD97; border: none; }
-  .main-wrapper { flex: 1; height: 100%; display: flex; overflow: hidden; }
-  .main { flex: 1; height: 100%; overflow-y: auto; overflow-x: hidden; padding: 2.5rem 2.5rem 4rem; max-width: 860px; }
-  .outline-panel { width: 200px; min-width: 200px; height: 100%; overflow-y: auto; padding: 2.5rem 1rem 2rem 0.75rem; border-left: 0.5px solid var(--border-light); background: var(--bg-tertiary); flex-shrink: 0; }
-  .outline-label { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 0.75rem; padding-left: 0.5rem; }
-  .outline-item { display: block; font-size: 12px; color: var(--text-tertiary); padding: 0.35rem 0.5rem; border-left: 2px solid transparent; cursor: pointer; line-height: 1.5; transition: color 0.15s, border-color 0.15s; }
+  .ch-check {
+    margin-left: auto;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    border: 0.5px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .ch-check.done { background: #3B6D11; color: #C0DD97; border: none; }
+
+  /* ── MAIN WRAPPER ── */
+  .main-wrapper { display: flex; flex: 1; overflow: hidden; }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    flex: 1;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 2.5rem 2.5rem 5rem;
+    max-width: 860px;
+  }
+
+  /* ── OUTLINE PANEL ── */
+  .outline-panel {
+    width: 200px;
+    min-width: 200px;
+    height: 100%;
+    overflow-y: auto;
+    padding: 2.5rem 1rem 2rem 0.75rem;
+    border-left: 0.5px solid var(--border-light);
+    background: var(--bg-tertiary);
+    flex-shrink: 0;
+  }
+  .outline-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 0.75rem;
+    padding-left: 0.5rem;
+  }
+  .outline-item {
+    display: block;
+    font-size: 12px;
+    color: var(--text-tertiary);
+    padding: 0.35rem 0.5rem;
+    border-left: 2px solid transparent;
+    cursor: pointer;
+    line-height: 1.5;
+    transition: color 0.15s, border-color 0.15s;
+  }
   .outline-item:hover { color: var(--text-primary); border-left-color: var(--border-mid); }
   .outline-item.active { color: var(--gold); border-left-color: var(--gold); font-weight: 500; }
   .outline-empty { font-size: 12px; color: var(--text-tertiary); padding-left: 0.5rem; font-style: italic; line-height: 1.6; }
+
   @media (max-width: 1100px) { .outline-panel { display: none; } }
-  .chapter-view { display: none; }
-  .chapter-view.active { display: block; }
-  .phase-tag { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; margin-bottom: 0.75rem; }
-  .phase-pre  { background: #E6F1FB; color: #0C447C; }
-  .phase-con  { background: #EAF3DE; color: #27500A; }
-  .phase-post { background: #FAEEDA; color: #633806; }
-  .chapter-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; line-height: 1.3; margin-bottom: 0.6rem; }
-  .chapter-intro { font-size: 15px; color: var(--text-secondary); line-height: 1.75; margin-bottom: 1.75rem; padding-bottom: 1.75rem; border-bottom: 0.5px solid var(--border-light); }
-  .coming-soon { background: var(--bg-secondary); border: 0.5px dashed var(--border-mid); border-radius: var(--radius-lg); padding: 3rem; text-align: center; color: var(--text-tertiary); font-size: 14px; }
-  .coming-soon .cs-icon { font-size: 28px; margin-bottom: 0.75rem; color: var(--gold); display: block; }
-  .coming-soon strong { display: block; font-size: 15px; color: var(--text-secondary); margin-bottom: 0.4rem; font-weight: 500; }
-  .quiz-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 1.75rem; padding: 0.65rem 1.4rem; background: var(--gold); color: #fff; border: none; border-radius: var(--radius-md); font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: opacity 0.15s; }
-  .quiz-btn:hover { opacity: 0.88; }
-  .quiz-panel { background: var(--bg-primary); border: 0.5px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.75rem; margin-top: 1.5rem; }
-  .quiz-panel h3 { font-family: 'Playfair Display', serif; font-size: 19px; margin-bottom: 1.5rem; font-weight: 600; }
-  .q-block { margin-bottom: 1.75rem; }
-  .q-text { font-size: 14px; font-weight: 500; margin-bottom: 0.75rem; line-height: 1.55; }
-  .q-options { display: flex; flex-direction: column; gap: 8px; position: relative; }
-  .q-opt-wrap { display: flex; flex-direction: column; }
-  .q-opt { display: flex; align-items: flex-start; gap: 10px; padding: 0.65rem 1rem; border: 0.5px solid var(--border-light); border-radius: var(--radius-md); cursor: pointer; font-size: 13px; transition: background 0.12s, border-color 0.12s; line-height: 1.5; user-select: none; position: relative; z-index: 1; }
-  .q-opt-text { pointer-events: none; }
-  .q-opt:hover { background: var(--bg-secondary); border-color: var(--border-mid); }
-  .q-opt.selected { border-color: var(--gold); background: #FAEEDA; color: #633806; }
-  .q-opt.correct  { border-color: #3B6D11; background: #EAF3DE; color: #27500A; }
-  .q-opt.wrong    { border-color: #A32D2D; background: #FCEBEB; color: #791F1F; }
-  .q-explanation { display: none; margin-top: 10px; padding: 0.75rem 1rem; background: var(--bg-secondary); border-left: 3px solid #B87333; border-radius: 0 var(--radius-md) var(--radius-md) 0; font-size: 13px; line-height: 1.65; color: var(--text-secondary); }
-  .q-explanation.visible { display: block; }
-  .q-explanation strong { color: var(--text-primary); font-weight: 500; }
-  .q-letter { font-size: 11px; font-weight: 500; min-width: 18px; margin-top: 1px; color: var(--text-tertiary); }
-  .quiz-submit { padding: 0.6rem 1.4rem; background: var(--bg-secondary); border: 0.5px solid var(--border-mid); border-radius: var(--radius-md); font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; color: var(--text-primary); transition: background 0.12s; }
-  .quiz-submit:hover { background: var(--border-light); }
-  .quiz-result { margin-top: 1rem; padding: 0.8rem 1rem; border-radius: var(--radius-md); font-size: 14px; font-weight: 500; }
-  .quiz-result.pass { background: #EAF3DE; color: #27500A; border: 0.5px solid #97C459; }
-  .quiz-result.fail { background: #FAEEDA; color: #633806; border: 0.5px solid #FAC775; }
-  .dashboard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 2rem; }
-  .stat-card { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 1rem 1.1rem; }
-  .stat-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; }
-  .stat-value { font-size: 24px; font-weight: 500; }
+
+  /* ── VIEWS ── */
+  .view { display: none; }
+  .view.active { display: block; }
+
+  /* ── HOME ── */
   .home-welcome { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 600; margin-bottom: 0.6rem; line-height: 1.3; }
   .home-sub { font-size: 15px; color: var(--text-secondary); line-height: 1.75; margin-bottom: 2rem; }
+  .dashboard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 2rem; }
+  .stat-card { background: var(--bg-primary); border: 0.5px solid var(--border-light); border-radius: var(--radius-md); padding: 1rem 1.1rem; }
+  .stat-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; }
+  .stat-value { font-size: 24px; font-weight: 500; }
   .phase-card { background: var(--bg-primary); border: 0.5px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.4rem; margin-bottom: 1rem; }
   .phase-card-title { font-size: 13px; font-weight: 500; margin-bottom: 0.85rem; display: flex; align-items: center; gap: 8px; }
   .phase-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
   .phase-chapters { display: flex; flex-wrap: wrap; gap: 6px; }
-  .phase-ch-pill { font-size: 12px; padding: 4px 12px; border-radius: 20px; border: 0.5px solid var(--border-light); background: var(--bg-secondary); cursor: pointer; color: var(--text-secondary); transition: background 0.12s; }
-  .phase-ch-pill:hover { background: var(--border-light); color: var(--text-primary); }
-  .md-content h1 { font-family: "Playfair Display", serif; font-size: 28px; font-weight: 600; line-height: 1.3; margin-bottom: 0.6rem; }
-  .md-content h2 { font-family: "Playfair Display", serif; font-size: 20px; font-weight: 600; margin: 2rem 0 0.75rem; padding-bottom: 0.5rem; border-bottom: 0.5px solid var(--border-light); }
+  .phase-pill {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 0.5px solid var(--border-light);
+    background: var(--bg-secondary);
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: background 0.12s;
+  }
+  .phase-pill:hover { background: var(--border-light); color: var(--text-primary); }
+
+  /* ── CHAPTER CONTENT (markdown rendered) ── */
+  .phase-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 0.75rem;
+  }
+  .phase-pre  { background: #E6F1FB; color: #0C447C; }
+  .phase-con  { background: #EAF3DE; color: #27500A; }
+  .phase-post { background: #FAEEDA; color: #633806; }
+
+  .md-content h1 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; line-height: 1.3; margin-bottom: 0.6rem; }
+  .md-content h2 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; margin: 2rem 0 0.75rem; padding-bottom: 0.5rem; border-bottom: 0.5px solid var(--border-light); }
   .md-content h3 { font-size: 16px; font-weight: 500; margin: 1.5rem 0 0.5rem; }
-  .md-content p { font-size: 15px; line-height: 1.8; margin-bottom: 1rem; color: var(--text-primary); }
+  .md-content p { font-size: 15px; line-height: 1.8; margin-bottom: 1rem; }
   .md-content strong { font-weight: 500; }
   .md-content em { font-style: italic; }
   .md-content hr { border: none; border-top: 0.5px solid var(--border-light); margin: 2rem 0; }
-  .md-content ol, .md-content ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .md-content ul, .md-content ol { padding-left: 1.5rem; margin-bottom: 1rem; }
   .md-content li { font-size: 15px; line-height: 1.8; margin-bottom: 0.3rem; }
   .md-content table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 14px; }
   .md-content th { background: var(--bg-secondary); padding: 0.6rem 0.85rem; text-align: left; font-weight: 500; border-bottom: 0.5px solid var(--border-mid); }
   .md-content td { padding: 0.55rem 0.85rem; border-bottom: 0.5px solid var(--border-light); }
   .md-content tr:last-child td { border-bottom: none; }
-  .md-content blockquote { border-left: 3px solid var(--gold); margin: 1.25rem 0; padding: 0.85rem 1rem; background: var(--bg-secondary); border-radius: 0 var(--radius-md) var(--radius-md) 0; font-size: 14px; line-height: 1.7; color: var(--text-secondary); }
-  .md-content blockquote p { font-size: 14px; margin-bottom: 0.4rem; color: var(--text-secondary); }
-  .md-content blockquote p:last-child { margin-bottom: 0; }
-  .md-content blockquote strong { color: var(--text-primary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; display: block; margin-bottom: 0.35rem; }
+  .md-content blockquote {
+    border-left: 3px solid var(--gold);
+    margin: 1.25rem 0;
+    padding: 0.85rem 1rem;
+    background: var(--bg-secondary);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+  .md-content blockquote p { font-size: 14px; margin-bottom: 0; color: var(--text-secondary); }
   .md-content code { font-family: monospace; font-size: 13px; background: var(--bg-secondary); padding: 2px 5px; border-radius: 3px; }
+
   .chapter-loading { text-align: center; padding: 4rem 2rem; color: var(--text-tertiary); font-size: 15px; }
-  .chapter-error { padding: 2rem; color: #A32D2D; background: #FCEBEB; border-radius: var(--radius-md); font-size: 14px; }
-  .menu-toggle { display: none; background: none; border: 0.5px solid var(--border-mid); border-radius: var(--radius-md); padding: 6px 10px; cursor: pointer; font-size: 14px; color: var(--text-primary); font-family: 'DM Sans', sans-serif; }
+  .chapter-error { padding: 1.5rem; color: var(--red-text); background: var(--red-bg); border-radius: var(--radius-md); font-size: 14px; border: 0.5px solid var(--red-border); }
+  .coming-soon {
+    background: var(--bg-secondary);
+    border: 0.5px dashed var(--border-mid);
+    border-radius: var(--radius-lg);
+    padding: 3rem;
+    text-align: center;
+    color: var(--text-tertiary);
+    font-size: 14px;
+    margin-top: 1.5rem;
+  }
+  .coming-soon .cs-icon { font-size: 28px; margin-bottom: 0.75rem; color: var(--gold); display: block; }
+  .coming-soon strong { display: block; font-size: 15px; color: var(--text-secondary); margin-bottom: 0.4rem; font-weight: 500; }
+
+  /* ── QUIZ SECTION ── */
+  .quiz-divider { border: none; border-top: 0.5px solid var(--border-light); margin: 2.5rem 0 2rem; }
+
+  .quiz-intro { margin-bottom: 1.25rem; }
+  .quiz-intro-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 0.4rem;
+  }
+  .quiz-intro-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; margin-bottom: 0.35rem; }
+  .quiz-intro-sub { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+  .quiz-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.7rem 1.5rem;
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: opacity 0.15s;
+    margin-top: 0.25rem;
+  }
+  .quiz-btn:hover { opacity: 0.88; }
+
+  .quiz-panel {
+    display: none;
+    background: var(--bg-primary);
+    border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    margin-top: 1.25rem;
+  }
+  .quiz-panel.open { display: block; }
+  .quiz-panel-title { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 600; margin-bottom: 0.3rem; }
+  .quiz-panel-meta { font-size: 13px; color: var(--text-secondary); margin-bottom: 1.75rem; }
+
+  .q-block { margin-bottom: 2rem; }
+  .q-text { font-size: 14px; font-weight: 500; margin-bottom: 0.75rem; line-height: 1.6; }
+  .q-options { display: flex; flex-direction: column; gap: 8px; }
+  .q-opt-wrap { display: flex; flex-direction: column; }
+  .q-opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 0.65rem 1rem;
+    border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1.5;
+    user-select: none;
+    transition: background 0.12s, border-color 0.12s;
+  }
+  .q-opt:hover { background: var(--bg-secondary); border-color: var(--border-mid); }
+  .q-opt.selected  { border-color: var(--gold); background: var(--gold-light); color: #633806; }
+  .q-opt.correct   { border-color: var(--green-border); background: var(--green-bg); color: var(--green-text); }
+  .q-opt.wrong     { border-color: var(--red-border); background: var(--red-bg); color: var(--red-text); }
+  .q-letter { font-size: 11px; font-weight: 500; min-width: 18px; margin-top: 1px; color: var(--text-tertiary); flex-shrink: 0; }
+
+  .q-explanation {
+    display: none;
+    margin-top: 8px;
+    padding: 0.65rem 1rem;
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+  }
+  .q-explanation.visible { display: block; }
+
+  .quiz-footer { display: flex; align-items: center; gap: 1rem; margin-top: 0.5rem; flex-wrap: wrap; }
+  .quiz-submit {
+    padding: 0.65rem 1.5rem;
+    background: var(--bg-secondary);
+    border: 0.5px solid var(--border-mid);
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text-primary);
+    transition: background 0.12s;
+  }
+  .quiz-submit:hover:not(:disabled) { background: var(--border-light); }
+  .quiz-submit:disabled { opacity: 0.45; cursor: not-allowed; }
+  .quiz-answered-count { font-size: 13px; color: var(--text-tertiary); }
+
+  .quiz-result {
+    display: none;
+    margin-top: 1rem;
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .quiz-result.pass { display: block; background: var(--green-bg); color: var(--green-text); border: 0.5px solid var(--green-border); }
+  .quiz-result.fail { display: block; background: var(--gold-light); color: #633806; border: 0.5px solid var(--gold-border); }
+  .quiz-retake {
+    display: none;
+    margin-top: 0.6rem;
+    font-size: 13px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  .quiz-retake.visible { display: inline-block; }
+
+  /* ── MOBILE ── */
   @media (max-width: 680px) {
-    .body { flex-direction: column; height: auto; }
+    html, body { height: auto; overflow: auto; }
+    .body { flex-direction: column; height: auto; overflow: visible; }
     .sidebar { width: 100%; min-width: 0; border-right: none; border-bottom: 0.5px solid var(--border-light); max-height: 0; overflow: hidden; padding: 0; transition: max-height 0.3s ease; }
-    .sidebar.open { max-height: 600px; padding: 0.5rem 0 1rem; }
-    .main { padding: 1.5rem 1.25rem 3rem; }
-    .chapter-title { font-size: 22px; }
+    .sidebar.open { max-height: 700px; padding: 0.5rem 0 1rem; }
+    .main-wrapper { flex-direction: column; }
+    .main { padding: 1.5rem 1.25rem 3rem; max-width: 100%; height: auto; overflow: visible; }
     .dashboard { grid-template-columns: 1fr 1fr; }
     .menu-toggle { display: block; }
-    .metrics-grid { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <div class="header">
   <div>
     <div class="header-title">Real Estate Development</div>
     <div class="header-subtitle">A Complete Textbook</div>
   </div>
-  <div style="display:flex;align-items:center;gap:1rem;">
-    <div style="text-align:right;">
+  <div class="header-right">
+    <div class="progress-wrap">
       <div style="font-size:11px;color:var(--text-tertiary);margin-bottom:4px;">Overall Progress</div>
-      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="globalProgress" style="width:0%"></div></div>
+      <div class="progress-bar-outer"><div class="progress-bar-inner" id="globalProgress"></div></div>
       <div class="progress-label" id="progressLabel">0 of 15 chapters</div>
     </div>
     <button class="menu-toggle" id="menuToggleBtn">&#9776; Chapters</button>
   </div>
 </div>
 
+<!-- BODY -->
 <div class="body">
+
+  <!-- SIDEBAR -->
   <div class="sidebar" id="sidebar">
-    <div class="chapter-item active" data-target="home" id="nav-home">
+    <div class="ch-item" data-ch="home" id="nav-home">
       <span style="font-size:15px;">&#8962;</span><span>Home</span>
     </div>
+
     <div class="phase-label">Phase 1 — Pre-Construction</div>
-    <div class="chapter-item" data-target="ch1"  id="nav-ch1"><span class="ch-num">01</span>Market Analysis &amp; Feasibility<span class="ch-status" id="st1"></span></div>
-    <div class="chapter-item" data-target="ch2"  id="nav-ch2"><span class="ch-num">02</span>Site Selection &amp; Due Diligence<span class="ch-status" id="st2"></span></div>
-    <div class="chapter-item" data-target="ch3"  id="nav-ch3"><span class="ch-num">03</span>Financing &amp; Capital Stack<span class="ch-status" id="st3"></span></div>
-    <div class="chapter-item" data-target="ch4"  id="nav-ch4"><span class="ch-num">04</span>Entitlements, Zoning &amp; Permits<span class="ch-status" id="st4"></span></div>
-    <div class="chapter-item" data-target="ch5"  id="nav-ch5"><span class="ch-num">05</span>Project Team Assembly<span class="ch-status" id="st5"></span></div>
-    <div class="chapter-item" data-target="ch6"  id="nav-ch6"><span class="ch-num">06</span>Design &amp; Architecture Process<span class="ch-status" id="st6"></span></div>
+    <div class="ch-item" data-ch="ch1"  id="nav-ch1"><span class="ch-num">01</span>Market Analysis &amp; Feasibility<span class="ch-check" id="chk1"></span></div>
+    <div class="ch-item" data-ch="ch2"  id="nav-ch2"><span class="ch-num">02</span>Site Selection &amp; Due Diligence<span class="ch-check" id="chk2"></span></div>
+    <div class="ch-item" data-ch="ch3"  id="nav-ch3"><span class="ch-num">03</span>Financing &amp; Capital Stack<span class="ch-check" id="chk3"></span></div>
+    <div class="ch-item" data-ch="ch4"  id="nav-ch4"><span class="ch-num">04</span>Entitlements, Zoning &amp; Permits<span class="ch-check" id="chk4"></span></div>
+    <div class="ch-item" data-ch="ch5"  id="nav-ch5"><span class="ch-num">05</span>Project Team Assembly<span class="ch-check" id="chk5"></span></div>
+    <div class="ch-item" data-ch="ch6"  id="nav-ch6"><span class="ch-num">06</span>Design &amp; Architecture Process<span class="ch-check" id="chk6"></span></div>
+
     <div class="phase-label">Phase 2 — Construction</div>
-    <div class="chapter-item" data-target="ch7"  id="nav-ch7"><span class="ch-num">07</span>Procurement &amp; Contracting<span class="ch-status" id="st7"></span></div>
-    <div class="chapter-item" data-target="ch8"  id="nav-ch8"><span class="ch-num">08</span>Construction Management<span class="ch-status" id="st8"></span></div>
-    <div class="chapter-item" data-target="ch9"  id="nav-ch9"><span class="ch-num">09</span>Budget Management &amp; Cost Control<span class="ch-status" id="st9"></span></div>
-    <div class="chapter-item" data-target="ch10" id="nav-ch10"><span class="ch-num">10</span>Quality Control &amp; Inspections<span class="ch-status" id="st10"></span></div>
-    <div class="chapter-item" data-target="ch11" id="nav-ch11"><span class="ch-num">11</span>Risk Management &amp; Insurance<span class="ch-status" id="st11"></span></div>
+    <div class="ch-item" data-ch="ch7"  id="nav-ch7"><span class="ch-num">07</span>Procurement &amp; Contracting<span class="ch-check" id="chk7"></span></div>
+    <div class="ch-item" data-ch="ch8"  id="nav-ch8"><span class="ch-num">08</span>Construction Management<span class="ch-check" id="chk8"></span></div>
+    <div class="ch-item" data-ch="ch9"  id="nav-ch9"><span class="ch-num">09</span>Budget Management &amp; Cost Control<span class="ch-check" id="chk9"></span></div>
+    <div class="ch-item" data-ch="ch10" id="nav-ch10"><span class="ch-num">10</span>Quality Control &amp; Inspections<span class="ch-check" id="chk10"></span></div>
+    <div class="ch-item" data-ch="ch11" id="nav-ch11"><span class="ch-num">11</span>Risk Management &amp; Insurance<span class="ch-check" id="chk11"></span></div>
+
     <div class="phase-label">Phase 3 — Post-Construction</div>
-    <div class="chapter-item" data-target="ch12" id="nav-ch12"><span class="ch-num">12</span>Certificate of Occupancy &amp; Closeout<span class="ch-status" id="st12"></span></div>
-    <div class="chapter-item" data-target="ch13" id="nav-ch13"><span class="ch-num">13</span>Leasing, Sales &amp; Marketing<span class="ch-status" id="st13"></span></div>
-    <div class="chapter-item" data-target="ch14" id="nav-ch14"><span class="ch-num">14</span>Asset Management &amp; Operations<span class="ch-status" id="st14"></span></div>
-    <div class="chapter-item" data-target="ch15" id="nav-ch15"><span class="ch-num">15</span>Disposition &amp; Exit Strategies<span class="ch-status" id="st15"></span></div>
+    <div class="ch-item" data-ch="ch12" id="nav-ch12"><span class="ch-num">12</span>Certificate of Occupancy &amp; Closeout<span class="ch-check" id="chk12"></span></div>
+    <div class="ch-item" data-ch="ch13" id="nav-ch13"><span class="ch-num">13</span>Leasing, Sales &amp; Marketing<span class="ch-check" id="chk13"></span></div>
+    <div class="ch-item" data-ch="ch14" id="nav-ch14"><span class="ch-num">14</span>Asset Management &amp; Operations<span class="ch-check" id="chk14"></span></div>
+    <div class="ch-item" data-ch="ch15" id="nav-ch15"><span class="ch-num">15</span>Disposition &amp; Exit Strategies<span class="ch-check" id="chk15"></span></div>
   </div>
 
+  <!-- MAIN WRAPPER -->
   <div class="main-wrapper">
     <div class="main" id="mainContent">
 
-      <!-- HOME -->
-      <div class="chapter-view active" id="view-home">
+      <!-- ── HOME VIEW ── -->
+      <div class="view active" id="view-home">
         <div class="home-welcome">Welcome to your Real Estate<br>Development Textbook.</div>
-        <div class="home-sub">This interactive guide walks you through the full development cycle — from market analysis to exit strategy. Each chapter includes focused content and a practice quiz to test your knowledge. Work through it at your own pace.</div>
+        <div class="home-sub">This interactive guide walks you through the full development cycle — from market analysis to exit strategy. Each chapter loads its content from a Markdown file and includes a practice quiz. Work through it at your own pace.</div>
         <div class="dashboard">
-          <div class="stat-card"><div class="stat-label">Chapters complete</div><div class="stat-value" id="dashComplete">0 / 15</div></div>
-          <div class="stat-card"><div class="stat-label">Quizzes taken</div><div class="stat-value" id="dashQuizzes">0</div></div>
-          <div class="stat-card"><div class="stat-label">Avg. quiz score</div><div class="stat-value" id="dashAvg">—</div></div>
+          <div class="stat-card"><div class="stat-label">Chapters complete</div><div class="stat-value" id="statComplete">0 / 15</div></div>
+          <div class="stat-card"><div class="stat-label">Quizzes taken</div><div class="stat-value" id="statQuizzes">0</div></div>
+          <div class="stat-card"><div class="stat-label">Avg. quiz score</div><div class="stat-value" id="statAvg">—</div></div>
         </div>
         <div class="phase-card">
           <div class="phase-card-title"><span class="phase-dot" style="background:#185FA5"></span>Phase 1 — Pre-Construction (Ch. 1–6)</div>
@@ -208,68 +496,79 @@
         </div>
       </div>
 
-      <!-- CHAPTER VIEWS -->
-      <div class="chapter-view" id="view-ch1"><div class="chapter-loading">Loading chapter...</div></div>
-      <div class="chapter-view" id="view-ch2"><div class="chapter-loading">Loading chapter...</div></div>
-      <div class="chapter-view" id="view-ch3"><div class="chapter-loading">Loading chapter...</div></div>
-      <div class="chapter-view" id="view-ch4"><div class="chapter-loading">Loading chapter...</div></div>
-      <div class="chapter-view" id="view-ch5"><div class="chapter-loading">Loading chapter...</div></div>
-      <div class="chapter-view" id="view-ch6"><div class="chapter-loading">Loading chapter...</div></div>
-      <div class="chapter-view" id="view-ch7"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 7: Procurement &amp; Contracting</h1><p>This chapter is coming soon.</p></div></div>
-      <div class="chapter-view" id="view-ch8"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 8: Construction Management</h1><p>This chapter is coming soon.</p></div></div>
-      <div class="chapter-view" id="view-ch9"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 9: Budget Management &amp; Cost Control</h1><p>This chapter is coming soon.</p></div></div>
-      <div class="chapter-view" id="view-ch10"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 10: Quality Control &amp; Inspections</h1><p>This chapter is coming soon.</p></div></div>
-      <div class="chapter-view" id="view-ch11"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 11: Risk Management &amp; Insurance</h1><p>This chapter is coming soon.</p></div></div>
-      <div class="chapter-view" id="view-ch12"><div class="md-content"><span class="phase-tag phase-post">Post-Construction</span><h1>Chapter 12: Certificate of Occupancy &amp; Closeout</h1><p>This chapter is coming soon.</p></div></div>
-      <div class="chapter-view" id="view-ch13"><div class="md-content"><span class="phase-tag phase-post">Post-Construction</span><h1>Chapter 13: Leasing, Sales &amp; Marketing</h1><p>This chapter is coming soon.</p></div></div>
-      <div class="chapter-view" id="view-ch14"><div class="md-content"><span class="phase-tag phase-post">Post-Construction</span><h1>Chapter 14: Asset Management &amp; Operations</h1><p>This chapter is coming soon.</p></div></div>
-      <div class="chapter-view" id="view-ch15"><div class="md-content"><span class="phase-tag phase-post">Post-Construction</span><h1>Chapter 15: Disposition &amp; Exit Strategies</h1><p>This chapter is coming soon.</p></div></div>
+      <!-- ── CHAPTER VIEWS (ch1–ch15) — content injected by JS ── -->
+      <div class="view" id="view-ch1"></div>
+      <div class="view" id="view-ch2"></div>
+      <div class="view" id="view-ch3"></div>
+      <div class="view" id="view-ch4"></div>
+      <div class="view" id="view-ch5"></div>
+      <div class="view" id="view-ch6"></div>
+      <div class="view" id="view-ch7"></div>
+      <div class="view" id="view-ch8"></div>
+      <div class="view" id="view-ch9"></div>
+      <div class="view" id="view-ch10"></div>
+      <div class="view" id="view-ch11"></div>
+      <div class="view" id="view-ch12"></div>
+      <div class="view" id="view-ch13"></div>
+      <div class="view" id="view-ch14"></div>
+      <div class="view" id="view-ch15"></div>
 
-    </div>
+    </div><!-- /main -->
 
+    <!-- OUTLINE PANEL -->
     <div class="outline-panel" id="outlinePanel">
-      <div class="outline-label" id="outlineLabel">On this page</div>
+      <div class="outline-label">On this page</div>
       <div id="outlineItems"><div class="outline-empty">Select a chapter to see its outline.</div></div>
     </div>
-  </div>
-</div>
+  </div><!-- /main-wrapper -->
 
-<!-- Quiz data -->
-<script src="quizzes/quiz-1.js"></script>
-<script src="quizzes/quiz-2.js"></script>
-<script src="quizzes/quiz-3.js"></script>
-<script src="quizzes/quiz-4.js"></script>
-<script src="quizzes/quiz-5.js"></script>
-<script src="quizzes/quiz-6.js"></script>
+</div><!-- /body -->
 
 <script>
-const scores = {};
-const userAnswers = {};
-
-const chapterConfig = {
-  ch1:  { file: 'chapters/chapter-1.md',  quizKey: 'quiz1',  phase: 'pre' },
-  ch2:  { file: 'chapters/chapter-2.md',  quizKey: 'quiz2',  phase: 'pre' },
-  ch3:  { file: 'chapters/chapter-3.md',  quizKey: 'quiz3',  phase: 'pre' },
-  ch4:  { file: 'chapters/chapter-4.md',  quizKey: 'quiz4',  phase: 'pre' },
-  ch5:  { file: 'chapters/chapter-5.md',  quizKey: 'quiz5',  phase: 'pre' },
-  ch6:  { file: 'chapters/chapter-6.md',  quizKey: 'quiz6',  phase: 'pre' },
-  ch7:  { file: null, quizKey: null, phase: 'con' },
-  ch8:  { file: null, quizKey: null, phase: 'con' },
-  ch9:  { file: null, quizKey: null, phase: 'con' },
-  ch10: { file: null, quizKey: null, phase: 'con' },
-  ch11: { file: null, quizKey: null, phase: 'con' },
-  ch12: { file: null, quizKey: null, phase: 'post' },
-  ch13: { file: null, quizKey: null, phase: 'post' },
-  ch14: { file: null, quizKey: null, phase: 'post' },
-  ch15: { file: null, quizKey: null, phase: 'post' }
+// ══════════════════════════════════════════════════════════════
+// CHAPTER CONFIG
+// mdFile: path to the markdown file
+// quizVar: the window-level variable name set by the quiz JS file
+// phase: 'pre' | 'con' | 'post'
+// comingSoon: true = no MD file yet, show placeholder
+// ══════════════════════════════════════════════════════════════
+var CHAPTERS = {
+  ch1:  { num:1,  title:'Market Analysis & Feasibility',        mdFile:'chapters/chapter-1.md', quizVar:'quiz1', phase:'pre'  },
+  ch2:  { num:2,  title:'Site Selection & Due Diligence',       mdFile:'chapters/chapter-2.md', quizVar:'quiz2', phase:'pre'  },
+  ch3:  { num:3,  title:'Financing & Capital Stack',            mdFile:'chapters/chapter-3.md', quizVar:'quiz3', phase:'pre'  },
+  ch4:  { num:4,  title:'Entitlements, Zoning & Permits',       mdFile:'chapters/chapter-4.md', quizVar:'quiz4', phase:'pre'  },
+  ch5:  { num:5,  title:'Project Team Assembly',                mdFile:'chapters/chapter-5.md', quizVar:'quiz5', phase:'pre'  },
+  ch6:  { num:6,  title:'Design & Architecture Process',        mdFile:'chapters/chapter-6.md', quizVar:'quiz6', phase:'pre'  },
+  ch7:  { num:7,  title:'Procurement & Contracting',            mdFile:null, quizVar:null, phase:'con',  comingSoon:true },
+  ch8:  { num:8,  title:'Construction Management',              mdFile:null, quizVar:null, phase:'con',  comingSoon:true },
+  ch9:  { num:9,  title:'Budget Management & Cost Control',     mdFile:null, quizVar:null, phase:'con',  comingSoon:true },
+  ch10: { num:10, title:'Quality Control & Inspections',        mdFile:null, quizVar:null, phase:'con',  comingSoon:true },
+  ch11: { num:11, title:'Risk Management & Insurance',          mdFile:null, quizVar:null, phase:'con',  comingSoon:true },
+  ch12: { num:12, title:'Certificate of Occupancy & Closeout',  mdFile:null, quizVar:null, phase:'post', comingSoon:true },
+  ch13: { num:13, title:'Leasing, Sales & Marketing',           mdFile:null, quizVar:null, phase:'post', comingSoon:true },
+  ch14: { num:14, title:'Asset Management & Operations',        mdFile:null, quizVar:null, phase:'post', comingSoon:true },
+  ch15: { num:15, title:'Disposition & Exit Strategies',        mdFile:null, quizVar:null, phase:'post', comingSoon:true }
 };
 
-function getQuizData(chapterId) {
-  const key = chapterConfig[chapterId] && chapterConfig[chapterId].quizKey;
-  if (!key) return null;
-  const data = window[key] || null;
+var PHASE_LABELS = { pre:'Pre-Construction', con:'Construction', post:'Post-Construction' };
+var PHASE_CLASSES = { pre:'phase-pre', con:'phase-con', post:'phase-post' };
+var LETTERS = ['A','B','C','D','E'];
+var PASS_PCT = 70;
+
+// ── State ──────────────────────────────────────────────────────
+var mdCache      = {};   // chId → rendered HTML string
+var quizState    = {};   // chId → { answers:{}, submitted:bool, score:int|null }
+var scores       = {};   // chId → score (only passing scores mark complete)
+var quizzesTaken = 0;
+var allScores    = [];
+
+// ── Helpers ────────────────────────────────────────────────────
+function getQuizData(chId) {
+  var cfg = CHAPTERS[chId];
+  if (!cfg || !cfg.quizVar) return null;
+  var data = window[cfg.quizVar] || null;
   if (!data) return null;
-  // Normalise answer key — support both 'answer' and 'ans'
+  // Normalise ans/answer key
   if (data.questions) {
     data.questions.forEach(function(q) {
       if (q.ans !== undefined && q.answer === undefined) q.answer = q.ans;
@@ -278,356 +577,423 @@ function getQuizData(chapterId) {
   return data;
 }
 
-const chapterOutlines = {
-  ch1: [
-    { id: 'section-11',       label: '1.1 What is Market Analysis?' },
-    { id: 'section-12',       label: '1.2 Supply & Demand Fundamentals' },
-    { id: 'section-13',       label: '1.3 Comparable Property Analysis' },
-    { id: 'section-14',       label: '1.4 Absorption & Lease-Up' },
-    { id: 'section-15',       label: '1.5 Highest & Best Use' },
-    { id: 'section-16',       label: '1.6 The Feasibility Study' },
-    { id: 'section-17',       label: '1.7 NOI, Cap Rates & DCF' },
-    { id: 'section-18',       label: '1.8 Bank Prime & CORRA' },
-    { id: 'section-19',       label: '1.9 Key Metrics Reference' },
-    { id: 'section-ae-intro1',label: 'Applied Exercises' },
-    { id: 'section-ae12',     label: 'AE-1.2 Demand vs. Supply' },
-    { id: 'section-ae13',     label: 'AE-1.3 Full Cost Stack' },
-    { id: 'section-ae14',     label: 'AE-1.4 Lease-Up Modeling' },
-    { id: 'section-ae15',     label: 'AE-1.5 HBU Analysis' }
-  ],
-  ch2: [
-    { id: 'section-20',       label: '2.0 Market Validation' },
-    { id: 'section-21',       label: '2.1 What is Site Selection?' },
-    { id: 'section-22',       label: '2.2 The Physical Assessment' },
-    { id: 'section-23',       label: '2.3 Title & Legal Due Diligence' },
-    { id: 'section-24',       label: '2.4 Environmental Due Diligence' },
-    { id: 'section-24b',      label: '2.4b Natural Heritage & Archaeological' },
-    { id: 'section-25',       label: '2.5 Geotechnical & Servicing' },
-    { id: 'section-26',       label: '2.6 Zoning & Planning' },
-    { id: 'section-27',       label: '2.7 Financial Due Diligence' },
-    { id: 'section-28',       label: '2.8 Key Terms Reference' },
-    { id: 'section-ae-intro2',label: 'Applied Exercises' },
-    { id: 'section-ae22',     label: 'AE-2.2 Physical Assessment' },
-    { id: 'section-ae23',     label: 'AE-2.3 Title Encumbrance' },
-    { id: 'section-ae24',     label: 'AE-2.4 Phase 2 ESA Finding' },
-    { id: 'section-ae27',     label: 'AE-2.7 Go/No-Go Decision' }
-  ],
-  ch3: [
-    { id: 'section-31',       label: '3.1 Overview of Development Financing' },
-    { id: 'section-32',       label: '3.2 The Capital Stack' },
-    { id: 'section-33',       label: '3.3 Equity — Types & Sources' },
-    { id: 'section-34',       label: '3.4 Construction Debt' },
-    { id: 'section-35',       label: '3.5 CMHC Financing Programs' },
-    { id: 'section-36',       label: '3.6 Mezzanine & Preferred Equity' },
-    { id: 'section-37',       label: '3.7 The Draw Process' },
-    { id: 'section-38',       label: '3.8 Investor Reporting' },
-    { id: 'section-39',       label: '3.9 Key Terms Reference' },
-    { id: 'section-ae-intro3',label: 'Applied Exercises' },
-    { id: 'section-ae32',     label: 'AE-3.2 Capital Stack Analysis' },
-    { id: 'section-ae34',     label: 'AE-3.4 Draw Schedule & Interest' },
-    { id: 'section-ae37',     label: 'AE-3.7 Draw Package' },
-    { id: 'section-ae38',     label: 'AE-3.8 Investor Report Variance' }
-  ],
-  ch4: [
-    { id: 'section-41',       label: '4.1 What is the Entitlement Process?' },
-    { id: 'section-42',       label: '4.2 The Ontario Planning Framework' },
-    { id: 'section-43',       label: '4.3 Official Plan Amendments (OPA)' },
-    { id: 'section-44',       label: '4.4 Zoning Bylaw Amendments (ZBA)' },
-    { id: 'section-45',       label: '4.5 Site Plan Approval (SPA)' },
-    { id: 'section-46',       label: '4.6 The Application Package' },
-    { id: 'section-47',       label: '4.7 The Approval Timeline' },
-    { id: 'section-48',       label: '4.8 The Ontario Land Tribunal (OLT)' },
-    { id: 'section-49',       label: '4.9 Conditions of Approval' },
-    { id: 'section-410',      label: '4.10 Key Terms Reference' },
-    { id: 'section-ae-intro4',label: 'Applied Exercises' },
-    { id: 'section-ae44',     label: 'AE-4.4 Mapping Approval Pathway' },
-    { id: 'section-ae46',     label: 'AE-4.6 Pre-Consultation Prep' },
-    { id: 'section-ae47',     label: 'AE-4.7 Entitlement Timeline' }
-  ],
-  ch5: [
-    { id: 'section-51',       label: '5.1 Why Team Assembly Matters' },
-    { id: 'section-52',       label: '5.2 The Developer Internal Team' },
-    { id: 'section-53',       label: '5.3 The Construction Manager' },
-    { id: 'section-54',       label: '5.4 Architect & Design Consultants' },
-    { id: 'section-55',       label: '5.5 The Legal Team' },
-    { id: 'section-56',       label: '5.6 Financial & Lending Team' },
-    { id: 'section-57',       label: '5.7 Planning & Entitlement Team' },
-    { id: 'section-58',       label: '5.8 Procurement' },
-    { id: 'section-59',       label: '5.9 Contracts & Scope of Work' },
-    { id: 'section-510',      label: '5.10 Key Terms Reference' },
-    { id: 'section-511',      label: '5.11 HCRA & Tarion Licensing' },
-    { id: 'section-ae-intro5',label: 'Applied Exercises' },
-    { id: 'section-ae53',     label: 'AE-5.3 CM Proposal Evaluation' },
-    { id: 'section-ae53-sol', label: 'AE-5.3 Solution' },
-    { id: 'section-ae58',     label: 'AE-5.8 Consultant RFP Process' }
-  ],
-  ch6: [
-    { id: 'section-61',       label: '6.1 Role of Design in Development' },
-    { id: 'section-62',       label: '6.2 The Design Team' },
-    { id: 'section-63',       label: '6.3 The Architect\'s Scope' },
-    { id: 'section-64',       label: '6.4 Design Stages' },
-    { id: 'section-65',       label: '6.5 Zoning Compliance & Constraints' },
-    { id: 'section-66',       label: '6.6 Building Code & Accessibility' },
-    { id: 'section-67',       label: '6.7 Sustainability & LEED' },
-    { id: 'section-68',       label: '6.8 Value Engineering' },
-    { id: 'section-69',       label: '6.9 Design Reviews & Coordination' },
-    { id: 'section-610',      label: '6.10 Key Metrics Reference' },
-    { id: 'section-ae-intro6',label: 'Applied Exercises' },
-    { id: 'section-ae64',     label: 'AE-6.4 Design Stage Deliverables' },
-    { id: 'section-ae68',     label: 'AE-6.8 Value Engineering Proposals' },
-    { id: 'section-ae69',     label: 'AE-6.9 Design Review Conflict' }
-  ]
-};
+// ── Navigation ─────────────────────────────────────────────────
+function showView(chId) {
+  document.querySelectorAll('.view').forEach(function(v) { v.classList.remove('active'); });
+  document.querySelectorAll('.ch-item').forEach(function(i) { i.classList.remove('active'); });
 
-const chapterCache = {};
+  document.getElementById('view-' + chId).classList.add('active');
+  var navEl = document.getElementById('nav-' + chId);
+  if (navEl) navEl.classList.add('active');
 
-document.getElementById('menuToggleBtn').addEventListener('click', function() {
-  document.getElementById('sidebar').classList.toggle('open');
-});
+  // Close mobile sidebar
+  document.getElementById('sidebar').classList.remove('open');
 
-document.querySelectorAll('.chapter-item').forEach(function(el) {
-  el.addEventListener('click', function() {
-    showView(el.dataset.target, el);
-  });
-});
-
-async function loadChapter(chapterId) {
-  const config = chapterConfig[chapterId];
-  if (!config || !config.file) return;
-  if (chapterCache[chapterId]) return;
-  const container = document.getElementById('view-' + chapterId);
-  container.innerHTML = '<div class="chapter-loading">Loading chapter...</div>';
-  try {
-    const res = await fetch(config.file);
-    if (!res.ok) throw new Error('File not found');
-    const md = await res.text();
-    const html = marked.parse(md);
-    const phaseLabels = { pre: 'Pre-Construction', con: 'Construction', post: 'Post-Construction' };
-    const phaseClasses = { pre: 'phase-pre', con: 'phase-con', post: 'phase-post' };
-    const phaseTag = '<span class="phase-tag ' + phaseClasses[config.phase] + '">' + phaseLabels[config.phase] + '</span>';
-    container.innerHTML = '<div class="md-content">' + phaseTag + html + '</div>';
-    const headings = container.querySelectorAll('h2');
-    const outline = chapterOutlines[chapterId] || [];
-    headings.forEach(function(h, i) {
-      if (outline[i]) h.id = outline[i].id;
-    });
-    const quizData = getQuizData(chapterId);
-    console.log('DEBUG', chapterId, 'quizKey:', chapterConfig[chapterId].quizKey, 'window value:', window[chapterConfig[chapterId].quizKey], 'quizData:', quizData);
-    if (quizData) {
-      const quizSection = document.createElement('div');
-      const quizBtn = document.createElement('button');
-      quizBtn.className = 'quiz-btn';
-      quizBtn.innerHTML = '&#9998; Take the Chapter Quiz';
-      quizBtn.addEventListener('click', function() { toggleQuiz(chapterId); });
-      const quizContainer = document.createElement('div');
-      quizContainer.id = 'quiz-' + chapterId;
-      quizSection.appendChild(quizBtn);
-      quizSection.appendChild(quizContainer);
-      container.querySelector('.md-content').appendChild(quizSection);
-    } else {
-      console.log('DEBUG — no quiz data found for', chapterId, '— button will not render');
-    }
-    chapterCache[chapterId] = true;
-  } catch(err) {
-    container.innerHTML = '<div class="chapter-error">Could not load chapter content. Make sure the file exists in the chapters/ folder.</div>';
-  }
-}
-
-function showView(id, el) {
-  document.querySelectorAll('.chapter-view').forEach(function(v) { v.classList.remove('active'); });
-  document.querySelectorAll('.chapter-item').forEach(function(i) { i.classList.remove('active'); });
-  document.getElementById('view-' + id).classList.add('active');
-  if (el) el.classList.add('active');
-  if (window.innerWidth <= 680) document.getElementById('sidebar').classList.remove('open');
-  buildOutline(id);
-  const mc = document.getElementById('mainContent');
+  // Scroll to top
+  var mc = document.getElementById('mainContent');
   if (mc) mc.scrollTo({ top: 0 });
-  if (id !== 'home' && chapterConfig[id] && chapterConfig[id].file) loadChapter(id);
-}
 
-function buildOutline(chapterId) {
-  const outlineItems = document.getElementById('outlineItems');
-  const outlineLabel = document.getElementById('outlineLabel');
-  const items = chapterOutlines[chapterId] || [];
-  outlineLabel.textContent = 'On this page';
-  if (!items.length) {
-    outlineItems.innerHTML = '<div class="outline-empty">Content outline will appear here once this chapter is built out.</div>';
+  if (chId === 'home') {
+    buildOutline(null);
     return;
   }
-  outlineItems.innerHTML = items.map(function(item) {
-    return '<div class="outline-item" id="ol-' + item.id + '" data-section="' + item.id + '">' + item.label + '</div>';
-  }).join('');
-  outlineItems.querySelectorAll('.outline-item').forEach(function(el) {
-    el.addEventListener('click', function() { scrollToSection(el.dataset.section); });
-  });
-  setupScrollSpy(chapterId);
-}
 
-function scrollToSection(sectionId) {
-  const el = document.getElementById(sectionId);
-  const mc = document.getElementById('mainContent');
-  if (el && mc) {
-    const offset = el.getBoundingClientRect().top - mc.getBoundingClientRect().top + mc.scrollTop - 20;
-    mc.scrollTo({ top: offset, behavior: 'smooth' });
+  var cfg = CHAPTERS[chId];
+  if (!cfg) return;
+
+  if (cfg.comingSoon) {
+    renderComingSoon(chId, cfg);
+    buildOutline(null);
+    return;
+  }
+
+  // Load MD if not cached
+  if (mdCache[chId]) {
+    buildOutline(chId);
+  } else {
+    loadChapter(chId);
   }
 }
 
-function setupScrollSpy(chapterId) {
-  const mc = document.getElementById('mainContent');
-  const items = chapterOutlines[chapterId] || [];
-  if (!items.length) return;
-  mc.onscroll = function() {
-    const containerTop = mc.getBoundingClientRect().top;
-    let activeId = items[0].id;
-    items.forEach(function(item) {
-      const el = document.getElementById(item.id);
-      if (el && el.getBoundingClientRect().top - containerTop <= 60) activeId = item.id;
+// ── Load markdown ──────────────────────────────────────────────
+function loadChapter(chId) {
+  var cfg = CHAPTERS[chId];
+  var container = document.getElementById('view-' + chId);
+  container.innerHTML = '<div class="chapter-loading">Loading chapter content…</div>';
+
+  fetch(cfg.mdFile)
+    .then(function(res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.text();
+    })
+    .then(function(md) {
+      var html = marked.parse(md);
+      mdCache[chId] = html;
+      renderChapter(chId, html);
+      buildOutline(chId);
+    })
+    .catch(function(err) {
+      container.innerHTML =
+        '<div class="chapter-error">' +
+        '<strong>Could not load chapter content.</strong><br>' +
+        'Make sure <code>' + cfg.mdFile + '</code> exists in the same directory as this HTML file.<br>' +
+        '<small style="opacity:0.7;">Error: ' + err.message + '</small>' +
+        '</div>';
     });
-    document.querySelectorAll('.outline-item').forEach(function(el) { el.classList.remove('active'); });
-    const activeEl = document.getElementById('ol-' + activeId);
-    if (activeEl) activeEl.classList.add('active');
-  };
 }
 
-function toggleQuiz(chapterId) {
-  const container = document.getElementById('quiz-' + chapterId);
-  if (!container) return;
-  if (container.dataset.rendered === 'true') {
-    container.style.display = container.style.display === 'none' ? 'block' : 'none';
-    return;
+// ── Render chapter (MD html + quiz section) ────────────────────
+function renderChapter(chId, mdHtml) {
+  var cfg = CHAPTERS[chId];
+  var container = document.getElementById('view-' + chId);
+
+  var phaseTag = '<span class="phase-tag ' + PHASE_CLASSES[cfg.phase] + '">' + PHASE_LABELS[cfg.phase] + '</span>';
+  var quizData = getQuizData(chId);
+  var quizSection = buildQuizSection(chId, quizData);
+
+  container.innerHTML =
+    '<div class="md-content">' + phaseTag + mdHtml + '</div>' +
+    quizSection;
+
+  // Attach quiz event listeners
+  if (quizData) {
+    attachQuizListeners(chId, quizData);
   }
-  container.style.display = 'block';
-  const data = getQuizData(chapterId);
-  if (!data) {
-    container.innerHTML = '<div class="quiz-panel"><p style="font-size:14px;color:var(--text-secondary);">Quiz coming soon.</p></div>';
-    return;
-  }
-  renderQuiz(chapterId, data, container);
+}
+
+// ── Coming soon ────────────────────────────────────────────────
+function renderComingSoon(chId, cfg) {
+  var container = document.getElementById('view-' + chId);
+  if (container.dataset.rendered) return;
+  container.innerHTML =
+    '<span class="phase-tag ' + PHASE_CLASSES[cfg.phase] + '">' + PHASE_LABELS[cfg.phase] + '</span>' +
+    '<h1 style="font-family:\'Playfair Display\',serif;font-size:28px;font-weight:600;margin-bottom:1.5rem;">Chapter ' + cfg.num + ': ' + cfg.title + '</h1>' +
+    '<div class="coming-soon">' +
+    '<span class="cs-icon">&#9998;</span>' +
+    '<strong>Coming Soon</strong>' +
+    'This chapter is currently being written. Check back soon.' +
+    '</div>';
   container.dataset.rendered = 'true';
 }
 
-function renderQuiz(qid, data, container) {
-  const letters = ['A','B','C','D'];
-  let html = '<div class="quiz-panel" data-qid="' + qid + '"><h3>Chapter Quiz</h3>';
-  data.questions.forEach(function(q, qi) {
-    html += '<div class="q-block"><div class="q-text">' + (qi+1) + '. ' + q.q + '</div><div class="q-options">';
+// ── Build quiz HTML string ─────────────────────────────────────
+function buildQuizSection(chId, quizData) {
+  var html = '<hr class="quiz-divider">';
+  html += '<div class="quiz-intro">';
+  html += '<div class="quiz-intro-label">Chapter Quiz</div>';
+  html += '<div class="quiz-intro-title">Test Your Knowledge</div>';
+
+  if (!quizData) {
+    html += '<p class="quiz-intro-sub" style="color:var(--text-tertiary);font-style:italic;">No quiz available for this chapter yet.</p>';
+    html += '</div>';
+    return html;
+  }
+
+  html += '<p class="quiz-intro-sub">Answer all questions and submit to see your score. A score of <strong>' + PASS_PCT + '% or higher</strong> marks this chapter as complete.</p>';
+  html += '</div>';
+
+  html += '<button class="quiz-btn" id="qbtn-' + chId + '" onclick="toggleQuizPanel(\'' + chId + '\')">&#9998;&nbsp; Take the Chapter Quiz</button>';
+
+  html += '<div class="quiz-panel" id="qpanel-' + chId + '">';
+  html += '<div class="quiz-panel-title">' + (quizData.title || 'Chapter Quiz') + '</div>';
+  html += '<div class="quiz-panel-meta">' + quizData.questions.length + ' questions &middot; Pass mark: ' + PASS_PCT + '%</div>';
+
+  // Questions
+  quizData.questions.forEach(function(q, qi) {
+    html += '<div class="q-block" id="qb-' + chId + '-' + qi + '">';
+    html += '<div class="q-text">' + (qi + 1) + '. ' + q.q + '</div>';
+    html += '<div class="q-options">';
     q.opts.forEach(function(opt, oi) {
-      const optId = 'opt_' + qid + '_' + qi + '_' + oi;
-      const expId = 'exp_' + qid + '_' + qi + '_' + oi;
       html += '<div class="q-opt-wrap">';
-      html += '<div class="q-opt" id="' + optId + '" data-qid="' + qid + '" data-qi="' + qi + '" data-oi="' + oi + '">';
-      html += '<span class="q-letter">' + letters[oi] + '</span><span class="q-opt-text">' + opt + '</span></div>';
+      html += '<div class="q-opt" id="qopt-' + chId + '-' + qi + '-' + oi + '" onclick="selectOpt(\'' + chId + '\',' + qi + ',' + oi + ')">';
+      html += '<span class="q-letter">' + LETTERS[oi] + '</span>';
+      html += '<span>' + opt + '</span>';
+      html += '</div>';
       if (q.exp && q.exp[oi]) {
-        html += '<div class="q-explanation" id="' + expId + '">' + q.exp[oi] + '</div>';
+        html += '<div class="q-explanation" id="qexp-' + chId + '-' + qi + '-' + oi + '">' + q.exp[oi] + '</div>';
       }
       html += '</div>';
     });
     html += '</div></div>';
   });
-  html += '<button class="quiz-submit" data-qid="' + qid + '">Submit answers</button>';
-  html += '<div id="result_' + qid + '"></div></div>';
-  container.innerHTML = html;
-  const panel = container.querySelector('.quiz-panel');
-  panel.querySelectorAll('.q-opt').forEach(function(el) {
-    el.addEventListener('click', function() {
-      selectOpt(el.dataset.qid, parseInt(el.dataset.qi), parseInt(el.dataset.oi));
-    });
-  });
-  const submitBtn = panel.querySelector('.quiz-submit');
-  if (submitBtn) {
-    submitBtn.addEventListener('click', function() { submitQuiz(submitBtn.dataset.qid); });
+
+  // Footer
+  html += '<div class="quiz-footer">';
+  html += '<button class="quiz-submit" id="qsub-' + chId + '" disabled onclick="submitQuiz(\'' + chId + '\')">Submit answers</button>';
+  html += '<span class="quiz-answered-count" id="qacount-' + chId + '">0 of ' + quizData.questions.length + ' answered</span>';
+  html += '</div>';
+  html += '<div class="quiz-result" id="qresult-' + chId + '"></div>';
+  html += '<span class="quiz-retake" id="qretake-' + chId + '" onclick="retakeQuiz(\'' + chId + '\')">Retake quiz</span>';
+  html += '</div>'; // /quiz-panel
+
+  return html;
+}
+
+// ── Attach listeners (none needed — all use inline onclick) ────
+function attachQuizListeners(chId, quizData) {
+  // Initialise state for this chapter if not already set
+  if (!quizState[chId]) {
+    quizState[chId] = { answers: {}, submitted: false };
   }
 }
 
-function selectOpt(qid, qi, oi) {
-  const key = qid + '_' + qi;
-  const prev = userAnswers[key];
+// ── Toggle quiz panel ──────────────────────────────────────────
+function toggleQuizPanel(chId) {
+  var panel = document.getElementById('qpanel-' + chId);
+  var btn   = document.getElementById('qbtn-' + chId);
+  if (!panel) return;
+
+  // Init state
+  if (!quizState[chId]) {
+    quizState[chId] = { answers: {}, submitted: false };
+  }
+
+  var isOpen = panel.classList.contains('open');
+  panel.classList.toggle('open', !isOpen);
+  btn.innerHTML = isOpen
+    ? '&#9998;&nbsp; Take the Chapter Quiz'
+    : '&#10005;&nbsp; Hide Quiz';
+}
+
+// ── Select option ──────────────────────────────────────────────
+function selectOpt(chId, qi, oi) {
+  var state = quizState[chId];
+  if (!state || state.submitted) return;
+
+  var prev = state.answers[qi];
   if (prev !== undefined) {
-    const prevEl = document.getElementById('opt_' + qid + '_' + qi + '_' + prev);
+    var prevEl = document.getElementById('qopt-' + chId + '-' + qi + '-' + prev);
     if (prevEl) prevEl.classList.remove('selected');
   }
-  userAnswers[key] = oi;
-  const el = document.getElementById('opt_' + qid + '_' + qi + '_' + oi);
+
+  state.answers[qi] = oi;
+  var el = document.getElementById('qopt-' + chId + '-' + qi + '-' + oi);
   if (el) el.classList.add('selected');
+
+  updateAnsweredCount(chId);
 }
 
-function submitQuiz(qid) {
-  const data = getQuizData(qid);
-  if (!data) return;
-  let correct = 0;
-  data.questions.forEach(function(q, qi) {
-    const key = qid + '_' + qi;
-    const chosen = userAnswers[key];
+function updateAnsweredCount(chId) {
+  var state    = quizState[chId];
+  var quizData = getQuizData(chId);
+  if (!state || !quizData) return;
+  var total    = quizData.questions.length;
+  var answered = Object.keys(state.answers).length;
+  var countEl  = document.getElementById('qacount-' + chId);
+  var subBtn   = document.getElementById('qsub-' + chId);
+  if (countEl) countEl.textContent = answered + ' of ' + total + ' answered';
+  if (subBtn)  subBtn.disabled = answered < total;
+}
+
+// ── Submit quiz ────────────────────────────────────────────────
+function submitQuiz(chId) {
+  var state    = quizState[chId];
+  var quizData = getQuizData(chId);
+  if (!state || !quizData || state.submitted) return;
+  state.submitted = true;
+
+  var correct = 0;
+  quizData.questions.forEach(function(q, qi) {
+    var chosen = state.answers[qi];
     q.opts.forEach(function(_, oi) {
-      const el = document.getElementById('opt_' + qid + '_' + qi + '_' + oi);
+      var el = document.getElementById('qopt-' + chId + '-' + qi + '-' + oi);
       if (!el) return;
-      el.classList.remove('selected','correct','wrong');
-      if (oi === q.answer) el.classList.add('correct');
-      else if (oi === chosen && chosen !== q.answer) el.classList.add('wrong');
-      const expEl = document.getElementById('exp_' + qid + '_' + qi + '_' + oi);
-      if (expEl) {
-        expEl.classList.remove('visible');
-        if (oi === chosen || oi === q.answer) expEl.classList.add('visible');
+      el.classList.remove('selected');
+      if (oi === q.answer) {
+        el.classList.add('correct');
+      } else if (oi === chosen && chosen !== q.answer) {
+        el.classList.add('wrong');
+      }
+      // Show explanation for the chosen option and the correct option
+      var expEl = document.getElementById('qexp-' + chId + '-' + qi + '-' + oi);
+      if (expEl && (oi === chosen || oi === q.answer)) {
+        expEl.classList.add('visible');
       }
     });
     if (chosen === q.answer) correct++;
   });
-  const pct = Math.round((correct / data.questions.length) * 100);
-  scores[qid] = pct;
-  const pass = pct >= 70;
-  const result = document.getElementById('result_' + qid);
-  result.className = 'quiz-result ' + (pass ? 'pass' : 'fail');
-  result.innerHTML = (pass ? '&#10003; ' : '&#10007; ') + correct + ' of ' + data.questions.length + ' correct (' + pct + '%) — ' + (pass ? 'Great work! Explanations shown below each answer.' : 'Review the explanations below each question.');
-  if (pass) markComplete(qid);
+
+  var pct  = Math.round((correct / quizData.questions.length) * 100);
+  var pass = pct >= PASS_PCT;
+
+  // Result banner
+  var resultEl = document.getElementById('qresult-' + chId);
+  if (resultEl) {
+    resultEl.className = 'quiz-result ' + (pass ? 'pass' : 'fail');
+    resultEl.textContent =
+      (pass ? '✓ ' : '✗ ') + correct + ' of ' + quizData.questions.length +
+      ' correct (' + pct + '%) — ' +
+      (pass
+        ? 'Chapter complete! Great work.'
+        : 'Below pass mark (' + PASS_PCT + '%). Review the explanations and try again.');
+  }
+
+  // Disable submit
+  var subBtn = document.getElementById('qsub-' + chId);
+  if (subBtn) subBtn.disabled = true;
+
+  // Show retake on fail
+  var retakeEl = document.getElementById('qretake-' + chId);
+  if (retakeEl && !pass) retakeEl.classList.add('visible');
+
+  // Track stats
+  quizzesTaken++;
+  allScores.push(pct);
+  if (pass) {
+    scores[chId] = pct;
+    var chkEl = document.getElementById('chk' + CHAPTERS[chId].num);
+    if (chkEl) { chkEl.innerHTML = '&#10003;'; chkEl.classList.add('done'); }
+  }
+
   updateDashboard();
 }
 
-function markComplete(qid) {
-  const n = parseInt(qid.replace('ch',''));
-  const el = document.getElementById('st' + n);
-  if (el) { el.innerHTML = '&#10003;'; el.classList.add('done'); }
+// ── Retake quiz ────────────────────────────────────────────────
+function retakeQuiz(chId) {
+  quizState[chId] = { answers: {}, submitted: false };
+
+  var quizData = getQuizData(chId);
+  if (!quizData) return;
+
+  // Reset option styles
+  quizData.questions.forEach(function(q, qi) {
+    q.opts.forEach(function(_, oi) {
+      var el = document.getElementById('qopt-' + chId + '-' + qi + '-' + oi);
+      if (el) el.classList.remove('selected', 'correct', 'wrong');
+      var expEl = document.getElementById('qexp-' + chId + '-' + qi + '-' + oi);
+      if (expEl) expEl.classList.remove('visible');
+    });
+  });
+
+  var resultEl = document.getElementById('qresult-' + chId);
+  if (resultEl) { resultEl.className = 'quiz-result'; resultEl.textContent = ''; }
+
+  var retakeEl = document.getElementById('qretake-' + chId);
+  if (retakeEl) retakeEl.classList.remove('visible');
+
+  var subBtn = document.getElementById('qsub-' + chId);
+  if (subBtn) subBtn.disabled = true;
+
+  updateAnsweredCount(chId);
+
+  // Remove the quiz from quizzesTaken count (retake shouldn't inflate)
+  quizzesTaken = Math.max(0, quizzesTaken - 1);
+  if (allScores.length) allScores.pop();
+  updateDashboard();
 }
 
+// ── Dashboard ──────────────────────────────────────────────────
 function updateDashboard() {
-  const total = Object.keys(scores).length;
-  const passed = Object.values(scores).filter(function(s) { return s >= 70; }).length;
-  const avg = total > 0 ? Math.round(Object.values(scores).reduce(function(a,b){return a+b;},0) / total) : null;
-  document.getElementById('dashComplete').textContent = passed + ' / 15';
-  document.getElementById('dashQuizzes').textContent = total;
-  document.getElementById('dashAvg').textContent = avg !== null ? avg + '%' : '—';
-  const pct = Math.round((passed / 15) * 100);
+  var passed = Object.keys(scores).length;
+  var avg = allScores.length > 0
+    ? Math.round(allScores.reduce(function(a,b){return a+b;}, 0) / allScores.length)
+    : null;
+
+  document.getElementById('statComplete').textContent = passed + ' / 15';
+  document.getElementById('statQuizzes').textContent  = quizzesTaken;
+  document.getElementById('statAvg').textContent      = avg !== null ? avg + '%' : '—';
+
+  var pct = Math.round((passed / 15) * 100);
   document.getElementById('globalProgress').style.width = pct + '%';
-  document.getElementById('progressLabel').textContent = passed + ' of 15 chapters';
+  document.getElementById('progressLabel').textContent  = passed + ' of 15 chapters';
 }
 
+// ── Outline ────────────────────────────────────────────────────
+function buildOutline(chId) {
+  var items    = document.getElementById('outlineItems');
+  if (!chId) {
+    items.innerHTML = '<div class="outline-empty">Select a chapter to see its outline.</div>';
+    return;
+  }
+  // Build outline from the rendered h2 headings in the chapter view
+  var container = document.getElementById('view-' + chId);
+  var headings  = container ? container.querySelectorAll('h2') : [];
+  if (!headings.length) {
+    items.innerHTML = '<div class="outline-empty">Content outline will appear here once this chapter is loaded.</div>';
+    return;
+  }
+  var html = '';
+  headings.forEach(function(h, i) {
+    // Assign id if missing
+    if (!h.id) h.id = 'ols-' + chId + '-' + i;
+    html += '<div class="outline-item" data-id="' + h.id + '">' + h.textContent + '</div>';
+  });
+  items.innerHTML = html;
+
+  items.querySelectorAll('.outline-item').forEach(function(el) {
+    el.addEventListener('click', function() {
+      var target = document.getElementById(el.dataset.id);
+      var mc = document.getElementById('mainContent');
+      if (target && mc) {
+        var offset = target.getBoundingClientRect().top - mc.getBoundingClientRect().top + mc.scrollTop - 20;
+        mc.scrollTo({ top: offset, behavior: 'smooth' });
+      }
+    });
+  });
+
+  setupScrollSpy(chId);
+}
+
+function setupScrollSpy(chId) {
+  var mc = document.getElementById('mainContent');
+  mc.onscroll = function() {
+    var container = document.getElementById('view-' + chId);
+    if (!container) return;
+    var headings = container.querySelectorAll('h2');
+    if (!headings.length) return;
+    var containerTop = mc.getBoundingClientRect().top;
+    var activeId = headings[0].id;
+    headings.forEach(function(h) {
+      if (h.getBoundingClientRect().top - containerTop <= 70) activeId = h.id;
+    });
+    document.querySelectorAll('.outline-item').forEach(function(el) {
+      el.classList.toggle('active', el.dataset.id === activeId);
+    });
+  };
+}
+
+// ── Home pills ─────────────────────────────────────────────────
 function buildPills() {
-  const p1 = [[1,'Market Analysis & Feasibility'],[2,'Site Selection & Due Diligence'],[3,'Financing & Capital Stack'],[4,'Entitlements, Zoning & Permits'],[5,'Project Team Assembly'],[6,'Design & Architecture Process']];
-  const p2 = [[7,'Procurement & Contracting'],[8,'Construction Management'],[9,'Budget & Cost Control'],[10,'Quality Control'],[11,'Risk Management & Insurance']];
-  const p3 = [[12,'CO & Closeout'],[13,'Leasing, Sales & Marketing'],[14,'Asset Management'],[15,'Disposition & Exit']];
-  [[p1,'pills1'],[p2,'pills2'],[p3,'pills3']].forEach(function(pair) {
-    const list = pair[0], cid = pair[1];
-    const c = document.getElementById(cid);
-    list.forEach(function(item) {
-      const n = item[0], title = item[1];
-      const pill = document.createElement('div');
-      pill.className = 'phase-ch-pill';
-      pill.textContent = 'Ch.' + n + ' ' + title;
-      pill.addEventListener('click', function() {
-        const navEl = document.getElementById('nav-ch' + n);
-        showView('ch' + n, navEl);
-      });
-      c.appendChild(pill);
+  var groups = [
+    { ids:['ch1','ch2','ch3','ch4','ch5','ch6'], el:'pills1' },
+    { ids:['ch7','ch8','ch9','ch10','ch11'],     el:'pills2' },
+    { ids:['ch12','ch13','ch14','ch15'],         el:'pills3' }
+  ];
+  groups.forEach(function(g) {
+    var container = document.getElementById(g.el);
+    g.ids.forEach(function(chId) {
+      var cfg  = CHAPTERS[chId];
+      var pill = document.createElement('div');
+      pill.className = 'phase-pill';
+      pill.textContent = 'Ch.' + cfg.num + ' ' + cfg.title;
+      pill.addEventListener('click', function() { showView(chId); });
+      container.appendChild(pill);
     });
   });
 }
 
+// ── Wire up sidebar nav ────────────────────────────────────────
+document.querySelectorAll('.ch-item').forEach(function(el) {
+  el.addEventListener('click', function() {
+    showView(el.dataset.ch);
+  });
+});
+
+// ── Mobile menu toggle ─────────────────────────────────────────
+document.getElementById('menuToggleBtn').addEventListener('click', function() {
+  document.getElementById('sidebar').classList.toggle('open');
+});
+
+// ── Init ───────────────────────────────────────────────────────
 buildPills();
-loadChapter('ch1');
-loadChapter('ch2');
-loadChapter('ch3');
-loadChapter('ch4');
-loadChapter('ch5');
-loadChapter('ch6');
+
+// Pre-load the chapters that have MD files so they're ready quickly
+['ch1','ch2','ch3','ch4','ch5','ch6'].forEach(function(chId) {
+  fetch(CHAPTERS[chId].mdFile)
+    .then(function(res) { if (!res.ok) throw new Error('skip'); return res.text(); })
+    .then(function(md) { mdCache[chId] = marked.parse(md); })
+    .catch(function() { /* silently skip if file not found */ });
+});
 </script>
 </body>
 </html>
