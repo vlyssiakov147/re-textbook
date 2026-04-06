@@ -525,39 +525,6 @@ The full treatment of the Tarion warranty process, condominium registration unde
 
 ---
 
-## 5.12 U.S./Canada Terminology Equivalency Reference
-
-Both ULI textbooks that inform this curriculum — Peiser (4th ed., 2022) and Miles (5th ed., 2015) — are written from a U.S. perspective and use U.S.-specific terminology throughout. The table below provides direct equivalencies for the terms, institutions, contract forms, designations, and regulatory concepts most commonly encountered in those texts, mapped to their Ontario and Canadian equivalents. This is intended as a standing reference for situations where you are reading U.S. industry material and need to translate it into the Ontario context.
-
-| U.S. Concept (as used in ULI texts or U.S. practice) | Ontario / Canadian Equivalent | Notes |
-|---|---|---|
-| AIA B101 — Owner-Architect Agreement | RAIC Document Six | Published by the Royal Architectural Institute of Canada; governs architect-client relationships in Canada |
-| AIA A101 — Stipulated Sum Contract (Owner-Contractor) | CCDC 2 — Stipulated Price Contract | Standard fixed-price GC contract in Canada; published by the Canadian Construction Documents Committee |
-| AIA A201 — General Conditions of the Contract | CCDC 2 General Conditions | General conditions are incorporated into CCDC 2 rather than a separate document as in U.S. practice |
-| CM at Risk / GMP Contract | No direct CCDC equivalent; closest is a negotiated GMP addendum to CCDC 5A or 5B | GMP structures exist in Canadian practice but are less standardized than in the U.S. |
-| Mechanics Lien | Construction Lien (Ontario Construction Act) | Called "construction lien" in Ontario; governed by the Construction Act, 2017 (formerly the Construction Lien Act) |
-| Surety Bond (performance / payment) | Performance Bond / Labour and Material Payment Bond | Same instruments; bonding companies operating in Canada include Intact, Travelers, and Zurich Canada |
-| Title Insurance (Stewart Title, First American) | Title Insurance (FCT, Stewart Title Canada, Chicago Title Canada) | Same product; Canadian providers include FCT and Stewart Title Canada; required by construction lenders |
-| MAI (Member, Appraisal Institute) | AACI (Accredited Appraiser Canadian Institute) | Canadian designation granted by the Appraisal Institute of Canada; required by Canadian lenders for real estate appraisals |
-| FHA / HUD Multifamily Programs | CMHC MLI Select (purpose-built rental) | Federal programs serving analogous purposes; CMHC insured lending dominates purpose-built rental construction financing in Canada |
-| Fannie Mae / Freddie Mac (permanent lending) | CMHC permanent insured mortgage | CMHC provides the mortgage insurance that enables favorable permanent financing terms on qualifying rental properties |
-| Section 1031 Like-Kind Exchange | No direct Canadian equivalent | Canadian disposition tax treatment is governed by the Income Tax Act; different framework with no equivalent deferral mechanism |
-| Zoning Board of Appeals (ZBA) — minor variance | Committee of Adjustment (Ontario) | Hears minor variance and consent applications; decisions can be appealed to the Ontario Land Tribunal |
-| Zoning Board of Appeals (ZBA) — major rezoning or use variance | Ontario Land Tribunal (OLT) | Hears appeals of Official Plan Amendments, Zoning By-law Amendments, and Site Plan approvals |
-| Developer Exactions / Impact Fees | Development Charges (DCs) / Community Benefits Charge (CBC) | Development Charges are legislated under the Development Charges Act; CBC replaced Section 37 Density Bonusing for most new applications |
-| Section 37 Density Bonus (pre-2020 U.S. equivalent) | Section 37 (legacy) / CBC (current) | CBC introduced under Bill 197 (2020); capped at 4% of land value; Section 37 applies to pre-2020 approvals |
-| State Contractor Licensing | No province-wide general contractor licence in Ontario | Specific trades (electrical, plumbing, HVAC) require provincial licensing; general contractors do not require a provincial licence but must comply with OBC and OHSA |
-| State Architect Licensing | OAA (Ontario Association of Architects) | Architects must be licensed OAA members to practise in Ontario; OAA enforces the Architects Act |
-| PE (Professional Engineer) — state licensed | P.Eng. (Professional Engineer) licensed by PEO | Professional Engineers Ontario (PEO) licenses engineers in Ontario under the Professional Engineers Act |
-| RPP (Registered Professional Planner) | RPP — same designation in Canada | Granted by the Canadian Institute of Planners (CIP) and provincial associations including OPPI (Ontario Professional Planners Institute) |
-| Homebuilder Licensing (varies by state) | HCRA Builder and Vendor Licence (Ontario) | HCRA licenses builders and vendors of new homes under the New Home Construction Licensing Act, 2017; other provinces have different regimes |
-| New Home Warranty (varies by state) | Tarion Statutory Warranty — 1/2/7 structure | Tarion administers Ontario's mandatory warranty under the Ontario New Home Warranties Plan Act; 1 yr workmanship/materials, 2 yr systems, 7 yr structural |
-| MLS (Multiple Listing Service) | MLS (same in Canada) / Altus InSite / MSCI Real Capital Analytics | MLS operates in Canada through CREA and local boards; Altus and MSCI are primary commercial real estate data sources |
-| County Assessor (property valuation) | MPAC (Municipal Property Assessment Corporation) | MPAC assesses all property in Ontario for tax purposes; assessments can be appealed to the Assessment Review Board (ARB) |
-| CoStar (commercial real estate data) | Altus InSite / CBRE / Avison Young data platforms | No single dominant equivalent to CoStar; Altus InSite, MSCI, and major broker platforms are primary sources |
-
----
-
 ## Applied Exercises
 
 ## AE-5.3 — Evaluating a CM Proposal: Full Analysis
