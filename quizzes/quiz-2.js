@@ -210,7 +210,7 @@ const quiz2 = {
       ]
     },
     {
-      q: 'A developer's initial feasibility model for a proposed high-rise residential project in Toronto does not include Development Charges, Community Benefits Charges, or cash-in-lieu of parkland. The project was modeled based on hard and soft construction costs plus land. What is the risk of this omission?',
+      q: 'A developers initial feasibility model for a proposed high-rise residential project in Toronto does not include Development Charges, Community Benefits Charges, or cash-in-lieu of parkland. The project was modeled based on hard and soft construction costs plus land. What is the risk of this omission?',
       opts: [
         'Minimal — DCs and CBCs are negotiable with the municipality and can be reduced or waived for residential projects',
         'The omission could understate total project cost by several million dollars, making the land price appear supportable when it is not',
