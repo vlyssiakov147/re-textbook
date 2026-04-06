@@ -66,7 +66,7 @@ Manages project banking, processes payments from the project account, tracks HST
 
 ---
 
-## 5.3 The Construction Manager — Your Most Important External Relationship During Construction
+## 5.3 The Construction Manager
 
 On a Construction Management (CM) delivery model, the Construction Manager is the developer's primary field partner throughout the construction period. Understanding what the CM does, how they are paid, and how their performance affects the draw process is directly relevant to your daily work.
 
