@@ -53,7 +53,7 @@
   .ch-status { margin-left: auto; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-secondary); border: 0.5px solid var(--border-light); display: flex; align-items: center; justify-content: center; font-size: 9px; flex-shrink: 0; }
   .ch-status.done { background: #3B6D11; color: #C0DD97; border: none; }
   .main-wrapper { flex: 1; height: 100%; display: flex; overflow: hidden; }
-  .main { flex: 1; height: 100%; overflow-y: auto; overflow-x: hidden; padding: 2.5rem 2.5rem 5rem; max-width: 860px; }
+  .main { flex: 1; height: 100%; overflow-y: auto; overflow-x: hidden; padding: 2.5rem 2.5rem 4rem; max-width: 860px; }
   .outline-panel { width: 200px; min-width: 200px; height: 100%; overflow-y: auto; padding: 2.5rem 1rem 2rem 0.75rem; border-left: 0.5px solid var(--border-light); background: var(--bg-tertiary); flex-shrink: 0; }
   .outline-label { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 0.75rem; padding-left: 0.5rem; }
   .outline-item { display: block; font-size: 12px; color: var(--text-tertiary); padding: 0.35rem 0.5rem; border-left: 2px solid transparent; cursor: pointer; line-height: 1.5; transition: color 0.15s, border-color 0.15s; }
@@ -130,82 +130,10 @@
     .body { flex-direction: column; height: auto; }
     .sidebar { width: 100%; min-width: 0; border-right: none; border-bottom: 0.5px solid var(--border-light); max-height: 0; overflow: hidden; padding: 0; transition: max-height 0.3s ease; }
     .sidebar.open { max-height: 600px; padding: 0.5rem 0 1rem; }
-    .main { padding: 1.5rem 1.25rem 4rem; }
+    .main { padding: 1.5rem 1.25rem 3rem; }
     .chapter-title { font-size: 22px; }
     .dashboard { grid-template-columns: 1fr 1fr; }
     .menu-toggle { display: block; }
-  }
-
-  /* ── TTS PLAYER BAR ── */
-  #tts-bar {
-    position: fixed;
-    bottom: 1.25rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 200;
-    background: var(--bg-primary);
-    border: 0.5px solid var(--border-mid);
-    border-radius: 40px;
-    padding: 0.5rem 1rem 0.5rem 1.1rem;
-    display: none;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
-    font-family: 'DM Sans', sans-serif;
-    min-width: 320px;
-  }
-  #tts-bar.visible { display: flex; }
-  .tts-title {
-    font-size: 12px;
-    color: var(--text-secondary);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 140px;
-    flex-shrink: 1;
-  }
-  .tts-title span { color: var(--gold); font-weight: 500; }
-  .tts-divider { width: 0.5px; height: 18px; background: var(--border-mid); flex-shrink: 0; }
-  .tts-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--text-secondary);
-    font-size: 15px;
-    padding: 4px 6px;
-    border-radius: 6px;
-    transition: background 0.12s, color 0.12s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-  }
-  .tts-btn:hover { background: var(--bg-secondary); color: var(--text-primary); }
-  .tts-btn.primary {
-    background: var(--gold);
-    color: #fff;
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    font-size: 13px;
-  }
-  .tts-btn.primary:hover { opacity: 0.85; background: var(--gold); }
-  .tts-speed {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--text-tertiary);
-    background: var(--bg-secondary);
-    border: 0.5px solid var(--border-light);
-    border-radius: 20px;
-    padding: 3px 10px;
-    cursor: pointer;
-    transition: background 0.12s;
-    white-space: nowrap;
-  }
-  .tts-speed:hover { background: var(--border-light); color: var(--text-primary); }
-  @media (max-width: 680px) {
-    #tts-bar { bottom: 0.75rem; min-width: 0; width: calc(100% - 2rem); }
-    .tts-title { max-width: 90px; }
   }
 </style>
 </head>
@@ -303,17 +231,6 @@
   </div>
 </div>
 
-<!-- ── TTS PLAYER BAR ── -->
-<div id="tts-bar">
-  <div class="tts-title">&#128266; <span id="tts-chapter-label">Chapter</span></div>
-  <div class="tts-divider"></div>
-  <button class="tts-btn primary" id="tts-play-btn" onclick="ttsPlayPause()" title="Play / Pause">&#9654;</button>
-  <button class="tts-btn" onclick="ttsStop()" title="Stop">&#9632;</button>
-  <div class="tts-divider"></div>
-  <button class="tts-speed" id="tts-speed-btn" onclick="ttsCycleSpeed()" title="Change speed">1×</button>
-  <button class="tts-btn" onclick="ttsClose()" title="Close" style="margin-left:2px;font-size:13px;color:var(--text-tertiary);">&#10005;</button>
-</div>
-
 <script>
 // ─────────────────────────────────────────────
 // QUIZ REGISTRY — populated by loadQuizScript()
@@ -333,7 +250,7 @@ var chapterConfig = {
 };
 
 // ─────────────────────────────────────────────
-// OUTLINE DEFINITIONS
+// OUTLINE DEFINITIONS — exact h2 headings from each MD file
 // ─────────────────────────────────────────────
 var chapterOutlines = {
   ch1: [
@@ -446,7 +363,7 @@ var allScores = [];
 var chapterCache = {};
 
 // ─────────────────────────────────────────────
-// QUIZ SCRIPT LOADER
+// QUIZ SCRIPT LOADER — handles const/let/var
 // ─────────────────────────────────────────────
 function loadQuizScript(path, varName) {
   return fetch(path)
@@ -491,17 +408,7 @@ function showView(id, el) {
   buildOutline(id);
   var mc = document.getElementById('mainContent');
   if (mc) mc.scrollTo({ top: 0 });
-  if (id !== 'home' && chapterConfig[id] && chapterConfig[id].file) {
-    loadChapter(id);
-  }
-  // Stop TTS when switching chapters
-  ttsStop();
-  // Show TTS bar on chapters, hide on home
-  if (id !== 'home') {
-    ttsShowBar(id);
-  } else {
-    ttsHideBar();
-  }
+  if (id !== 'home' && chapterConfig[id] && chapterConfig[id].file) loadChapter(id);
 }
 
 // ─────────────────────────────────────────────
@@ -529,12 +436,14 @@ function loadChapter(chId) {
 
       container.innerHTML = '<div class="md-content">' + phaseTag + html + '</div>';
 
+      // Assign IDs to h2 headings from outline
       var headings = container.querySelectorAll('h2');
       var outline = chapterOutlines[chId] || [];
       headings.forEach(function(h, i) {
         if (outline[i]) h.id = outline[i].id;
       });
 
+      // Quiz button shell — questions built lazily on first click
       var quizSection = document.createElement('div');
       quizSection.style.marginTop = '2rem';
       quizSection.innerHTML =
@@ -556,7 +465,7 @@ function loadChapter(chId) {
 }
 
 // ─────────────────────────────────────────────
-// QUIZ TOGGLE
+// QUIZ TOGGLE — lazy render on first open
 // ─────────────────────────────────────────────
 function toggleQuiz(chId) {
   var panel = document.getElementById('qpanel-' + chId);
@@ -719,138 +628,7 @@ function buildPills() {
 }
 
 // ─────────────────────────────────────────────
-// TEXT-TO-SPEECH
-// ─────────────────────────────────────────────
-var tts = {
-  synth: window.speechSynthesis,
-  utterance: null,
-  playing: false,
-  currentChId: null,
-  speed: 1,
-  speeds: [0.75, 1, 1.25, 1.5, 1.75, 2],
-  speedIdx: 1
-};
-
-// Chapter short labels for the bar
-var chapterLabels = {
-  ch1: 'Ch.1 Market Analysis', ch2: 'Ch.2 Site Selection', ch3: 'Ch.3 Financing',
-  ch4: 'Ch.4 Entitlements', ch5: 'Ch.5 Project Team', ch6: 'Ch.6 Design & Architecture',
-  ch7: 'Ch.7 Procurement', ch8: 'Ch.8 Construction Mgmt', ch9: 'Ch.9 Budget Control',
-  ch10: 'Ch.10 Quality Control', ch11: 'Ch.11 Risk Management', ch12: 'Ch.12 CO & Closeout',
-  ch13: 'Ch.13 Leasing & Sales', ch14: 'Ch.14 Asset Management', ch15: 'Ch.15 Disposition'
-};
-
-function ttsShowBar(chId) {
-  var bar = document.getElementById('tts-bar');
-  var label = document.getElementById('tts-chapter-label');
-  tts.currentChId = chId;
-  label.textContent = chapterLabels[chId] || chId;
-  bar.classList.add('visible');
-  ttsSetPlayBtn(false);
-}
-
-function ttsHideBar() {
-  document.getElementById('tts-bar').classList.remove('visible');
-}
-
-function ttsClose() {
-  ttsStop();
-  ttsHideBar();
-}
-
-function ttsGetText(chId) {
-  var container = document.getElementById('view-' + chId);
-  if (!container) return '';
-  // Get text from md-content, skipping quiz section
-  var mdContent = container.querySelector('.md-content');
-  if (!mdContent) return container.innerText || '';
-  // Clone and remove quiz section to avoid reading quiz Q&A
-  var clone = mdContent.cloneNode(true);
-  var quizSection = clone.querySelector('.quiz-panel');
-  if (quizSection) quizSection.remove();
-  var quizBtn = clone.querySelector('.quiz-btn');
-  if (quizBtn) quizBtn.remove();
-  return clone.innerText || '';
-}
-
-function ttsPlayPause() {
-  if (!tts.synth) return;
-
-  if (tts.playing) {
-    // Pause
-    tts.synth.pause();
-    tts.playing = false;
-    ttsSetPlayBtn(false);
-    return;
-  }
-
-  if (tts.synth.paused) {
-    // Resume
-    tts.synth.resume();
-    tts.playing = true;
-    ttsSetPlayBtn(true);
-    return;
-  }
-
-  // Start fresh
-  tts.synth.cancel();
-  var text = ttsGetText(tts.currentChId);
-  if (!text) return;
-
-  tts.utterance = new SpeechSynthesisUtterance(text);
-  tts.utterance.rate = tts.speeds[tts.speedIdx];
-  tts.utterance.pitch = 1;
-
-  tts.utterance.onstart = function() {
-    tts.playing = true;
-    ttsSetPlayBtn(true);
-  };
-  tts.utterance.onend = function() {
-    tts.playing = false;
-    ttsSetPlayBtn(false);
-  };
-  tts.utterance.onerror = function() {
-    tts.playing = false;
-    ttsSetPlayBtn(false);
-  };
-  tts.utterance.onpause = function() {
-    tts.playing = false;
-  };
-  tts.utterance.onresume = function() {
-    tts.playing = true;
-    ttsSetPlayBtn(true);
-  };
-
-  tts.synth.speak(tts.utterance);
-}
-
-function ttsStop() {
-  if (tts.synth) tts.synth.cancel();
-  tts.playing = false;
-  tts.utterance = null;
-  ttsSetPlayBtn(false);
-}
-
-function ttsCycleSpeed() {
-  tts.speedIdx = (tts.speedIdx + 1) % tts.speeds.length;
-  tts.speed = tts.speeds[tts.speedIdx];
-  document.getElementById('tts-speed-btn').textContent = tts.speed + '\u00D7';
-  // If already playing, restart with new speed
-  if (tts.synth && (tts.playing || tts.synth.paused)) {
-    ttsStop();
-    ttsPlayPause();
-  }
-}
-
-function ttsSetPlayBtn(isPlaying) {
-  var btn = document.getElementById('tts-play-btn');
-  if (!btn) return;
-  btn.innerHTML = isPlaying ? '&#9646;&#9646;' : '&#9654;';
-  btn.title = isPlaying ? 'Pause' : 'Play';
-}
-
-// ─────────────────────────────────────────────
-// INIT
+// INIT — load quiz scripts then preload chapters
 // ─────────────────────────────────────────────
 buildPills();
 
