@@ -354,20 +354,26 @@ var chapterOutlines = {
     { id: 'ol-ch6-ae3', label: '↳ AE-6.9 Design Review Conflict' }
   ],
   // ── CHAPTER 7 OUTLINE ── ADDED
+  // The outline array must mirror every h2 in the markdown in order —
+  // including solution headings — so sequential ID assignment stays in sync.
+  // Entries with visible:false are assigned an ID but not shown in the panel.
   ch7: [
-    { id: 'ol-ch7-0',   label: '7.1 What is Procurement?' },
-    { id: 'ol-ch7-1',   label: '7.2 Delivery Models' },
-    { id: 'ol-ch7-2',   label: '7.3 The Tendering Process' },
-    { id: 'ol-ch7-3',   label: '7.4 Evaluating Bids' },
-    { id: 'ol-ch7-4',   label: '7.5 Contract Types & Provisions' },
-    { id: 'ol-ch7-5',   label: '7.6 Trade Procurement' },
-    { id: 'ol-ch7-6',   label: '7.7 Bonding, Insurance & Risk' },
-    { id: 'ol-ch7-7',   label: '7.8 Ontario Context' },
-    { id: 'ol-ch7-8',   label: '7.9 Key Metrics & Terms' },
-    { id: 'ol-ch7-9',   label: 'Applied Exercises' },
-    { id: 'ol-ch7-ae1', label: '↳ AE-7.3 Scope Gaps' },
-    { id: 'ol-ch7-ae2', label: '↳ AE-7.4 Bid Levelling' },
-    { id: 'ol-ch7-ae3', label: '↳ AE-7.5 Contract Clause Review' }
+    { id: 'ol-ch7-0',        label: '7.1 What is Procurement?' },
+    { id: 'ol-ch7-1',        label: '7.2 Delivery Models' },
+    { id: 'ol-ch7-2',        label: '7.3 The Tendering Process' },
+    { id: 'ol-ch7-3',        label: '7.4 Evaluating Bids' },
+    { id: 'ol-ch7-4',        label: '7.5 Contract Types & Provisions' },
+    { id: 'ol-ch7-5',        label: '7.6 Trade Procurement' },
+    { id: 'ol-ch7-6',        label: '7.7 Bonding, Insurance & Risk' },
+    { id: 'ol-ch7-7',        label: '7.8 Ontario Context' },
+    { id: 'ol-ch7-8',        label: '7.9 Key Metrics & Terms' },
+    { id: 'ol-ch7-9',        label: 'Applied Exercises' },
+    { id: 'ol-ch7-ae1',      label: '↳ AE-7.3 Scope Gaps' },
+    { id: 'ol-ch7-ae1-sol',  label: null },
+    { id: 'ol-ch7-ae2',      label: '↳ AE-7.4 Bid Levelling' },
+    { id: 'ol-ch7-ae2-sol',  label: null },
+    { id: 'ol-ch7-ae3',      label: '↳ AE-7.5 Contract Clause Review' },
+    { id: 'ol-ch7-ae3-sol',  label: null }
   ]
 };
 
@@ -592,7 +598,7 @@ function buildOutline(chId) {
     outlineItems.innerHTML = '<div class="outline-empty">Content outline will appear here once this chapter is loaded.</div>';
     return;
   }
-  outlineItems.innerHTML = items.map(function(item) {
+  outlineItems.innerHTML = items.filter(function(item) { return item.label !== null; }).map(function(item) {
     return '<div class="outline-item" id="ol-nav-' + item.id + '" data-section="' + item.id + '" onclick="scrollToSection(\'' + item.id + '\')">' + item.label + '</div>';
   }).join('');
   setupScrollSpy(chId);
@@ -619,7 +625,15 @@ function setupScrollSpy(chId) {
       if (el && el.getBoundingClientRect().top - containerTop <= 70) activeId = item.id;
     });
     document.querySelectorAll('.outline-item').forEach(function(el) { el.classList.remove('active'); });
-    var activeEl = document.getElementById('ol-nav-' + activeId);
+    // Walk back to find the nearest visible ancestor if activeId is a hidden entry
+    var visibleItems = items.filter(function(i) { return i.label !== null; });
+    var activeVisible = visibleItems[0] && visibleItems[0].id;
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].id === activeId) break;
+      if (items[i].label !== null) activeVisible = items[i].id;
+    }
+    if (items.find(function(i){ return i.id === activeId && i.label !== null; })) activeVisible = activeId;
+    var activeEl = document.getElementById('ol-nav-' + activeVisible);
     if (activeEl) activeEl.classList.add('active');
   };
 }
