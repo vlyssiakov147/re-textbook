@@ -212,7 +212,8 @@
       <div class="chapter-view" id="view-ch4"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch5"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch6"><div class="chapter-loading">Loading chapter...</div></div>
-      <div class="chapter-view" id="view-ch7"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 7: Procurement &amp; Contracting</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
+      <!-- ch7: now wired to chapters/chapter-7.md + quizzes/quiz-7.js -->
+      <div class="chapter-view" id="view-ch7"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch8"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 8: Construction Management</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
       <div class="chapter-view" id="view-ch9"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 9: Budget Management &amp; Cost Control</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
       <div class="chapter-view" id="view-ch10"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 10: Quality Control &amp; Inspections</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
@@ -246,11 +247,12 @@ var chapterConfig = {
   ch3: { file: 'chapters/chapter-3.md', quizVar: 'quiz3', phase: 'pre' },
   ch4: { file: 'chapters/chapter-4.md', quizVar: 'quiz4', phase: 'pre' },
   ch5: { file: 'chapters/chapter-5.md', quizVar: 'quiz5', phase: 'pre' },
-  ch6: { file: 'chapters/chapter-6.md', quizVar: 'quiz6', phase: 'pre' }
+  ch6: { file: 'chapters/chapter-6.md', quizVar: 'quiz6', phase: 'pre' },
+  ch7: { file: 'chapters/chapter-7.md', quizVar: 'quiz7', phase: 'con' }  // ← ADDED
 };
 
 // ─────────────────────────────────────────────
-// OUTLINE DEFINITIONS — exact h2 headings from each MD file
+// OUTLINE DEFINITIONS
 // ─────────────────────────────────────────────
 var chapterOutlines = {
   ch1: [
@@ -350,6 +352,22 @@ var chapterOutlines = {
     { id: 'ol-ch6-ae1', label: '↳ AE-6.4 Design Stage Deliverables' },
     { id: 'ol-ch6-ae2', label: '↳ AE-6.8 Value Engineering Proposals' },
     { id: 'ol-ch6-ae3', label: '↳ AE-6.9 Design Review Conflict' }
+  ],
+  // ── CHAPTER 7 OUTLINE ── ADDED
+  ch7: [
+    { id: 'ol-ch7-0',   label: '7.1 What is Procurement?' },
+    { id: 'ol-ch7-1',   label: '7.2 Delivery Models' },
+    { id: 'ol-ch7-2',   label: '7.3 The Tendering Process' },
+    { id: 'ol-ch7-3',   label: '7.4 Evaluating Bids' },
+    { id: 'ol-ch7-4',   label: '7.5 Contract Types & Provisions' },
+    { id: 'ol-ch7-5',   label: '7.6 Trade Procurement' },
+    { id: 'ol-ch7-6',   label: '7.7 Bonding, Insurance & Risk' },
+    { id: 'ol-ch7-7',   label: '7.8 Ontario Context' },
+    { id: 'ol-ch7-8',   label: '7.9 Key Metrics & Terms' },
+    { id: 'ol-ch7-9',   label: 'Applied Exercises' },
+    { id: 'ol-ch7-ae1', label: '↳ AE-7.3 Scope Gaps' },
+    { id: 'ol-ch7-ae2', label: '↳ AE-7.4 Bid Levelling' },
+    { id: 'ol-ch7-ae3', label: '↳ AE-7.5 Contract Clause Review' }
   ]
 };
 
@@ -638,7 +656,8 @@ var quizScriptMap = [
   { path: 'quizzes/quiz-3.js', varName: 'quiz3' },
   { path: 'quizzes/quiz-4.js', varName: 'quiz4' },
   { path: 'quizzes/quiz-5.js', varName: 'quiz5' },
-  { path: 'quizzes/quiz-6.js', varName: 'quiz6' }
+  { path: 'quizzes/quiz-6.js', varName: 'quiz6' },
+  { path: 'quizzes/quiz-7.js', varName: 'quiz7' }   // ← ADDED
 ];
 
 Promise.all(quizScriptMap.map(function(q) {
