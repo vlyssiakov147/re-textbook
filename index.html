@@ -212,9 +212,8 @@
       <div class="chapter-view" id="view-ch4"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch5"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch6"><div class="chapter-loading">Loading chapter...</div></div>
-      <!-- ch7: now wired to chapters/chapter-7.md + quizzes/quiz-7.js -->
       <div class="chapter-view" id="view-ch7"><div class="chapter-loading">Loading chapter...</div></div>
-      <div class="chapter-view" id="view-ch8"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 8: Construction Management</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
+      <div class="chapter-view" id="view-ch8"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch9"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 9: Budget Management &amp; Cost Control</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
       <div class="chapter-view" id="view-ch10"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 10: Quality Control &amp; Inspections</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
       <div class="chapter-view" id="view-ch11"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 11: Risk Management &amp; Insurance</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
@@ -234,7 +233,7 @@
 
 <script>
 // ─────────────────────────────────────────────
-// QUIZ REGISTRY — populated by loadQuizScript()
+// QUIZ REGISTRY
 // ─────────────────────────────────────────────
 var QUIZ_REGISTRY = {};
 
@@ -248,7 +247,8 @@ var chapterConfig = {
   ch4: { file: 'chapters/chapter-4.md', quizVar: 'quiz4', phase: 'pre' },
   ch5: { file: 'chapters/chapter-5.md', quizVar: 'quiz5', phase: 'pre' },
   ch6: { file: 'chapters/chapter-6.md', quizVar: 'quiz6', phase: 'pre' },
-  ch7: { file: 'chapters/chapter-7.md', quizVar: 'quiz7', phase: 'con' }  // ← ADDED
+  ch7: { file: 'chapters/chapter-7.md', quizVar: 'quiz7', phase: 'con' },
+  ch8: { file: 'chapters/chapter-8.md', quizVar: 'quiz8', phase: 'con' }
 };
 
 // ─────────────────────────────────────────────
@@ -256,124 +256,136 @@ var chapterConfig = {
 // ─────────────────────────────────────────────
 var chapterOutlines = {
   ch1: [
-    { id: 'ol-ch1-0',  label: '1.1 What is Market Analysis?' },
-    { id: 'ol-ch1-1',  label: '1.2 Supply & Demand Fundamentals' },
-    { id: 'ol-ch1-2',  label: '1.3 Comparable Property Analysis' },
-    { id: 'ol-ch1-3',  label: '1.4 Absorption Rate & Lease-Up' },
-    { id: 'ol-ch1-4',  label: '1.5 Highest and Best Use Analysis' },
-    { id: 'ol-ch1-5',  label: '1.6 The Feasibility Study' },
-    { id: 'ol-ch1-6',  label: '1.7 NOI, Cap Rates & DCF' },
-    { id: 'ol-ch1-7',  label: '1.8 Construction Loan Interest' },
-    { id: 'ol-ch1-8',  label: '1.9 Key Metrics Reference' },
-    { id: 'ol-ch1-9',  label: 'Applied Exercises' },
+    { id: 'ol-ch1-0',   label: '1.1 What is Market Analysis?' },
+    { id: 'ol-ch1-1',   label: '1.2 Supply & Demand Fundamentals' },
+    { id: 'ol-ch1-2',   label: '1.3 Comparable Property Analysis' },
+    { id: 'ol-ch1-3',   label: '1.4 Absorption Rate & Lease-Up' },
+    { id: 'ol-ch1-4',   label: '1.5 Highest and Best Use Analysis' },
+    { id: 'ol-ch1-5',   label: '1.6 The Feasibility Study' },
+    { id: 'ol-ch1-6',   label: '1.7 NOI, Cap Rates & DCF' },
+    { id: 'ol-ch1-7',   label: '1.8 Construction Loan Interest' },
+    { id: 'ol-ch1-8',   label: '1.9 Key Metrics Reference' },
+    { id: 'ol-ch1-9',   label: 'Applied Exercises' },
     { id: 'ol-ch1-ae1', label: '↳ AE-1.2 Demand vs. Supply' },
     { id: 'ol-ch1-ae2', label: '↳ AE-1.3 Full Cost Stack' },
     { id: 'ol-ch1-ae3', label: '↳ AE-1.4 Lease-Up Modeling' },
     { id: 'ol-ch1-ae4', label: '↳ AE-1.5 HBU Analysis' }
   ],
   ch2: [
-    { id: 'ol-ch2-0',  label: '2.0 Market Validation' },
-    { id: 'ol-ch2-1',  label: '2.1 What is Site Selection?' },
-    { id: 'ol-ch2-2',  label: '2.2 The Physical Assessment' },
-    { id: 'ol-ch2-3',  label: '2.3 Title, Ownership & Legal DD' },
-    { id: 'ol-ch2-4',  label: '2.4 Environmental Due Diligence' },
-    { id: 'ol-ch2-5',  label: '2.4b Natural Heritage & Archaeological' },
-    { id: 'ol-ch2-6',  label: '2.5 Geotechnical & Servicing' },
-    { id: 'ol-ch2-7',  label: '2.6 Zoning & Planning Confirmation' },
-    { id: 'ol-ch2-8',  label: '2.7 Financial Due Diligence' },
-    { id: 'ol-ch2-9',  label: '2.8 Key Metrics & Terms Reference' },
-    { id: 'ol-ch2-10', label: 'Applied Exercises' },
+    { id: 'ol-ch2-0',   label: '2.0 Market Validation' },
+    { id: 'ol-ch2-1',   label: '2.1 What is Site Selection?' },
+    { id: 'ol-ch2-2',   label: '2.2 The Physical Assessment' },
+    { id: 'ol-ch2-3',   label: '2.3 Title, Ownership & Legal DD' },
+    { id: 'ol-ch2-4',   label: '2.4 Environmental Due Diligence' },
+    { id: 'ol-ch2-5',   label: '2.4b Natural Heritage & Archaeological' },
+    { id: 'ol-ch2-6',   label: '2.5 Geotechnical & Servicing' },
+    { id: 'ol-ch2-7',   label: '2.6 Zoning & Planning Confirmation' },
+    { id: 'ol-ch2-8',   label: '2.7 Financial Due Diligence' },
+    { id: 'ol-ch2-9',   label: '2.8 Key Metrics & Terms Reference' },
+    { id: 'ol-ch2-10',  label: 'Applied Exercises' },
     { id: 'ol-ch2-ae1', label: '↳ AE-2.2 Physical Assessment' },
     { id: 'ol-ch2-ae2', label: '↳ AE-2.3 Title Encumbrance' },
     { id: 'ol-ch2-ae3', label: '↳ AE-2.4 Phase 2 ESA Finding' },
     { id: 'ol-ch2-ae4', label: '↳ AE-2.7 Go/No-Go Decision' }
   ],
   ch3: [
-    { id: 'ol-ch3-0',  label: '3.1 Overview of Development Financing' },
-    { id: 'ol-ch3-1',  label: '3.2 The Capital Stack' },
-    { id: 'ol-ch3-2',  label: '3.3 Equity — Types, Sources & Expectations' },
-    { id: 'ol-ch3-3',  label: '3.4 Construction Debt' },
-    { id: 'ol-ch3-4',  label: '3.5 CMHC Financing Programs' },
-    { id: 'ol-ch3-5',  label: '3.6 Mezzanine Financing & Preferred Equity' },
-    { id: 'ol-ch3-6',  label: '3.7 The Draw Process' },
-    { id: 'ol-ch3-7',  label: '3.8 Investor Reporting' },
-    { id: 'ol-ch3-8',  label: '3.9 Key Metrics & Terms Reference' },
-    { id: 'ol-ch3-9',  label: 'Applied Exercises' },
+    { id: 'ol-ch3-0',   label: '3.1 Overview of Development Financing' },
+    { id: 'ol-ch3-1',   label: '3.2 The Capital Stack' },
+    { id: 'ol-ch3-2',   label: '3.3 Equity — Types, Sources & Expectations' },
+    { id: 'ol-ch3-3',   label: '3.4 Construction Debt' },
+    { id: 'ol-ch3-4',   label: '3.5 CMHC Financing Programs' },
+    { id: 'ol-ch3-5',   label: '3.6 Mezzanine Financing & Preferred Equity' },
+    { id: 'ol-ch3-6',   label: '3.7 The Draw Process' },
+    { id: 'ol-ch3-7',   label: '3.8 Investor Reporting' },
+    { id: 'ol-ch3-8',   label: '3.9 Key Metrics & Terms Reference' },
+    { id: 'ol-ch3-9',   label: 'Applied Exercises' },
     { id: 'ol-ch3-ae1', label: '↳ AE-3.2 Capital Stack Analysis' },
     { id: 'ol-ch3-ae2', label: '↳ AE-3.4 Draw Schedule & Interest' },
     { id: 'ol-ch3-ae3', label: '↳ AE-3.7 Draw Package' },
     { id: 'ol-ch3-ae4', label: '↳ AE-3.8 Investor Report Variance' }
   ],
   ch4: [
-    { id: 'ol-ch4-0',  label: '4.1 What is the Entitlement Process?' },
-    { id: 'ol-ch4-1',  label: '4.2 The Ontario Planning Framework' },
-    { id: 'ol-ch4-2',  label: '4.3 Official Plan Amendments (OPA)' },
-    { id: 'ol-ch4-3',  label: '4.4 Zoning Bylaw Amendments (ZBA)' },
-    { id: 'ol-ch4-4',  label: '4.5 Site Plan Approval (SPA)' },
-    { id: 'ol-ch4-5',  label: '4.6 The Application Package' },
-    { id: 'ol-ch4-6',  label: '4.7 The Approval Timeline' },
-    { id: 'ol-ch4-7',  label: '4.8 The Ontario Land Tribunal (OLT)' },
-    { id: 'ol-ch4-8',  label: '4.9 Conditions of Approval & Fees' },
-    { id: 'ol-ch4-9',  label: '4.10 Key Metrics & Terms Reference' },
-    { id: 'ol-ch4-10', label: 'Applied Exercises' },
+    { id: 'ol-ch4-0',   label: '4.1 What is the Entitlement Process?' },
+    { id: 'ol-ch4-1',   label: '4.2 The Ontario Planning Framework' },
+    { id: 'ol-ch4-2',   label: '4.3 Official Plan Amendments (OPA)' },
+    { id: 'ol-ch4-3',   label: '4.4 Zoning Bylaw Amendments (ZBA)' },
+    { id: 'ol-ch4-4',   label: '4.5 Site Plan Approval (SPA)' },
+    { id: 'ol-ch4-5',   label: '4.6 The Application Package' },
+    { id: 'ol-ch4-6',   label: '4.7 The Approval Timeline' },
+    { id: 'ol-ch4-7',   label: '4.8 The Ontario Land Tribunal (OLT)' },
+    { id: 'ol-ch4-8',   label: '4.9 Conditions of Approval & Fees' },
+    { id: 'ol-ch4-9',   label: '4.10 Key Metrics & Terms Reference' },
+    { id: 'ol-ch4-10',  label: 'Applied Exercises' },
     { id: 'ol-ch4-ae1', label: '↳ AE-4.4 Mapping Approval Pathway' },
     { id: 'ol-ch4-ae2', label: '↳ AE-4.6 Pre-Consultation Prep' },
     { id: 'ol-ch4-ae3', label: '↳ AE-4.7 Entitlement Timeline' }
   ],
   ch5: [
-    { id: 'ol-ch5-0',  label: '5.1 Why Team Assembly Matters' },
-    { id: 'ol-ch5-1',  label: '5.2 The Developer\'s Internal Team' },
-    { id: 'ol-ch5-2',  label: '5.3 The Construction Manager' },
-    { id: 'ol-ch5-3',  label: '5.4 The Architect & Design Consultants' },
-    { id: 'ol-ch5-4',  label: '5.5 The Legal Team' },
-    { id: 'ol-ch5-5',  label: '5.6 The Financial & Lending Team' },
-    { id: 'ol-ch5-6',  label: '5.7 The Planning & Entitlement Team' },
-    { id: 'ol-ch5-7',  label: '5.8 Procurement' },
-    { id: 'ol-ch5-8',  label: '5.9 Contracts & Scope of Work' },
-    { id: 'ol-ch5-9',  label: '5.10 Key Terms Reference' },
-    { id: 'ol-ch5-10', label: '5.11 HCRA & Tarion Licensing' },
-    { id: 'ol-ch5-11', label: '5.12 US/Canada Terminology' },
-    { id: 'ol-ch5-12', label: 'Applied Exercises' },
+    { id: 'ol-ch5-0',   label: '5.1 Why Team Assembly Matters' },
+    { id: 'ol-ch5-1',   label: "5.2 The Developer's Internal Team" },
+    { id: 'ol-ch5-2',   label: '5.3 The Construction Manager' },
+    { id: 'ol-ch5-3',   label: '5.4 The Architect & Design Consultants' },
+    { id: 'ol-ch5-4',   label: '5.5 The Legal Team' },
+    { id: 'ol-ch5-5',   label: '5.6 The Financial & Lending Team' },
+    { id: 'ol-ch5-6',   label: '5.7 The Planning & Entitlement Team' },
+    { id: 'ol-ch5-7',   label: '5.8 Procurement' },
+    { id: 'ol-ch5-8',   label: '5.9 Contracts & Scope of Work' },
+    { id: 'ol-ch5-9',   label: '5.10 Key Terms Reference' },
+    { id: 'ol-ch5-10',  label: '5.11 HCRA & Tarion Licensing' },
+    { id: 'ol-ch5-11',  label: '5.12 US/Canada Terminology' },
+    { id: 'ol-ch5-12',  label: 'Applied Exercises' },
     { id: 'ol-ch5-ae1', label: '↳ AE-5.3 CM Proposal Evaluation' },
     { id: 'ol-ch5-ae2', label: '↳ AE-5.8 Consultant RFP Process' }
   ],
   ch6: [
-    { id: 'ol-ch6-0',  label: '6.1 Role of Design in Development' },
-    { id: 'ol-ch6-1',  label: '6.2 The Design Team' },
-    { id: 'ol-ch6-2',  label: '6.3 The Architect\'s Scope' },
-    { id: 'ol-ch6-3',  label: '6.4 Design Stages' },
-    { id: 'ol-ch6-4',  label: '6.5 Zoning Compliance & Constraints' },
-    { id: 'ol-ch6-5',  label: '6.6 Building Code & Accessibility' },
-    { id: 'ol-ch6-6',  label: '6.7 Sustainability & LEED' },
-    { id: 'ol-ch6-7',  label: '6.8 Value Engineering' },
-    { id: 'ol-ch6-8',  label: '6.9 Design Reviews & Coordination' },
-    { id: 'ol-ch6-9',  label: '6.10 Key Metrics & Terms Reference' },
-    { id: 'ol-ch6-10', label: 'Applied Exercises' },
+    { id: 'ol-ch6-0',   label: '6.1 Role of Design in Development' },
+    { id: 'ol-ch6-1',   label: '6.2 The Design Team' },
+    { id: 'ol-ch6-2',   label: "6.3 The Architect's Scope" },
+    { id: 'ol-ch6-3',   label: '6.4 Design Stages' },
+    { id: 'ol-ch6-4',   label: '6.5 Zoning Compliance & Constraints' },
+    { id: 'ol-ch6-5',   label: '6.6 Building Code & Accessibility' },
+    { id: 'ol-ch6-6',   label: '6.7 Sustainability & LEED' },
+    { id: 'ol-ch6-7',   label: '6.8 Value Engineering' },
+    { id: 'ol-ch6-8',   label: '6.9 Design Reviews & Coordination' },
+    { id: 'ol-ch6-9',   label: '6.10 Key Metrics & Terms Reference' },
+    { id: 'ol-ch6-10',  label: 'Applied Exercises' },
     { id: 'ol-ch6-ae1', label: '↳ AE-6.4 Design Stage Deliverables' },
     { id: 'ol-ch6-ae2', label: '↳ AE-6.8 Value Engineering Proposals' },
     { id: 'ol-ch6-ae3', label: '↳ AE-6.9 Design Review Conflict' }
   ],
-  // ── CHAPTER 7 OUTLINE ── ADDED
-  // The outline array must mirror every h2 in the markdown in order —
-  // including solution headings — so sequential ID assignment stays in sync.
-  // Entries with visible:false are assigned an ID but not shown in the panel.
   ch7: [
-    { id: 'ol-ch7-0',        label: '7.1 What is Procurement?' },
-    { id: 'ol-ch7-1',        label: '7.2 Delivery Models' },
-    { id: 'ol-ch7-2',        label: '7.3 The Tendering Process' },
-    { id: 'ol-ch7-3',        label: '7.4 Evaluating Bids' },
-    { id: 'ol-ch7-4',        label: '7.5 Contract Types & Provisions' },
-    { id: 'ol-ch7-5',        label: '7.6 Trade Procurement' },
-    { id: 'ol-ch7-6',        label: '7.7 Bonding, Insurance & Risk' },
-    { id: 'ol-ch7-7',        label: '7.8 Ontario Context' },
-    { id: 'ol-ch7-8',        label: '7.9 Key Metrics & Terms' },
-    { id: 'ol-ch7-9',        label: 'Applied Exercises' },
-    { id: 'ol-ch7-ae1',      label: '↳ AE-7.3 Scope Gaps' },
-    { id: 'ol-ch7-ae1-sol',  label: null },
-    { id: 'ol-ch7-ae2',      label: '↳ AE-7.4 Bid Levelling' },
-    { id: 'ol-ch7-ae2-sol',  label: null },
-    { id: 'ol-ch7-ae3',      label: '↳ AE-7.5 Contract Clause Review' },
-    { id: 'ol-ch7-ae3-sol',  label: null }
+    { id: 'ol-ch7-0',       label: '7.1 What is Procurement?' },
+    { id: 'ol-ch7-1',       label: '7.2 Delivery Models' },
+    { id: 'ol-ch7-2',       label: '7.3 The Tendering Process' },
+    { id: 'ol-ch7-3',       label: '7.4 Evaluating Bids' },
+    { id: 'ol-ch7-4',       label: '7.5 Contract Types & Provisions' },
+    { id: 'ol-ch7-5',       label: '7.6 Trade Procurement' },
+    { id: 'ol-ch7-6',       label: '7.7 Bonding, Insurance & Risk' },
+    { id: 'ol-ch7-7',       label: '7.8 Ontario Context' },
+    { id: 'ol-ch7-8',       label: '7.9 Key Metrics & Terms' },
+    { id: 'ol-ch7-9',       label: 'Applied Exercises' },
+    { id: 'ol-ch7-ae1',     label: '↳ AE-7.3 Scope Gaps' },
+    { id: 'ol-ch7-ae1-sol', label: null },
+    { id: 'ol-ch7-ae2',     label: '↳ AE-7.4 Bid Levelling' },
+    { id: 'ol-ch7-ae2-sol', label: null },
+    { id: 'ol-ch7-ae3',     label: '↳ AE-7.5 Contract Clause Review' },
+    { id: 'ol-ch7-ae3-sol', label: null }
+  ],
+  ch8: [
+    { id: 'ol-ch8-0',   label: '8.1 What is Construction Management?' },
+    { id: 'ol-ch8-1',   label: '8.2 Pre-Construction & Mobilization' },
+    { id: 'ol-ch8-2',   label: '8.3 Meeting Cadence' },
+    { id: 'ol-ch8-3',   label: '8.4 Change Order Management' },
+    { id: 'ol-ch8-4',   label: '8.5 Schedule Management & Delay' },
+    { id: 'ol-ch8-5',   label: '8.6 Cost Reporting & Budget Control' },
+    { id: 'ol-ch8-6',   label: '8.7 The Draw Process in Detail' },
+    { id: 'ol-ch8-7',   label: '8.8 Substantial Performance & Occupancy' },
+    { id: 'ol-ch8-8',   label: '8.9 Key Metrics & Terms' },
+    { id: 'ol-ch8-ae',  label: 'Applied Exercises' },
+    { id: 'ol-ch8-ae1', label: null },
+    { id: 'ol-ch8-ae2', label: null },
+    { id: 'ol-ch8-ae3', label: null },
+    { id: 'ol-ch8-sum', label: null }
   ]
 };
 
@@ -387,7 +399,7 @@ var allScores = [];
 var chapterCache = {};
 
 // ─────────────────────────────────────────────
-// QUIZ SCRIPT LOADER — handles const/let/var
+// QUIZ SCRIPT LOADER
 // ─────────────────────────────────────────────
 function loadQuizScript(path, varName) {
   return fetch(path)
@@ -467,7 +479,7 @@ function loadChapter(chId) {
         if (outline[i]) h.id = outline[i].id;
       });
 
-      // Quiz button shell — questions built lazily on first click
+      // Quiz button shell
       var quizSection = document.createElement('div');
       quizSection.style.marginTop = '2rem';
       quizSection.innerHTML =
@@ -489,7 +501,7 @@ function loadChapter(chId) {
 }
 
 // ─────────────────────────────────────────────
-// QUIZ TOGGLE — lazy render on first open
+// QUIZ TOGGLE
 // ─────────────────────────────────────────────
 function toggleQuiz(chId) {
   var panel = document.getElementById('qpanel-' + chId);
@@ -625,7 +637,6 @@ function setupScrollSpy(chId) {
       if (el && el.getBoundingClientRect().top - containerTop <= 70) activeId = item.id;
     });
     document.querySelectorAll('.outline-item').forEach(function(el) { el.classList.remove('active'); });
-    // Walk back to find the nearest visible ancestor if activeId is a hidden entry
     var visibleItems = items.filter(function(i) { return i.label !== null; });
     var activeVisible = visibleItems[0] && visibleItems[0].id;
     for (var i = 0; i < items.length; i++) {
@@ -660,7 +671,7 @@ function buildPills() {
 }
 
 // ─────────────────────────────────────────────
-// INIT — load quiz scripts then preload chapters
+// INIT
 // ─────────────────────────────────────────────
 buildPills();
 
@@ -671,7 +682,8 @@ var quizScriptMap = [
   { path: 'quizzes/quiz-4.js', varName: 'quiz4' },
   { path: 'quizzes/quiz-5.js', varName: 'quiz5' },
   { path: 'quizzes/quiz-6.js', varName: 'quiz6' },
-  { path: 'quizzes/quiz-7.js', varName: 'quiz7' }   // ← ADDED
+  { path: 'quizzes/quiz-7.js', varName: 'quiz7' },
+  { path: 'quizzes/quiz-8.js', varName: 'quiz8' }
 ];
 
 Promise.all(quizScriptMap.map(function(q) {
