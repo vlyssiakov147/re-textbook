@@ -214,7 +214,7 @@
       <div class="chapter-view" id="view-ch6"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch7"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch8"><div class="chapter-loading">Loading chapter...</div></div>
-      <div class="chapter-view" id="view-ch9"><div class="chapter-loading">Loading chapter...</div></div>
+      <div class="chapter-view" id="view-ch9"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 9: Budget Management &amp; Cost Control</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
       <div class="chapter-view" id="view-ch10"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 10: Quality Control &amp; Inspections</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
       <div class="chapter-view" id="view-ch11"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 11: Risk Management &amp; Insurance</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
       <div class="chapter-view" id="view-ch12"><div class="md-content"><span class="phase-tag phase-post">Post-Construction</span><h1>Chapter 12: Certificate of Occupancy &amp; Closeout</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
@@ -248,8 +248,7 @@ var chapterConfig = {
   ch5: { file: 'chapters/chapter-5.md', quizVar: 'quiz5', phase: 'pre' },
   ch6: { file: 'chapters/chapter-6.md', quizVar: 'quiz6', phase: 'pre' },
   ch7: { file: 'chapters/chapter-7.md', quizVar: 'quiz7', phase: 'con' },
-  ch8: { file: 'chapters/chapter-8.md', quizVar: 'quiz8', phase: 'con' },
-  ch9: { file: 'chapters/chapter-9.md', quizVar: 'quiz9', phase: 'con' }
+  ch8: { file: 'chapters/chapter-8.md', quizVar: 'quiz8', phase: 'con' }
 };
 
 // ─────────────────────────────────────────────
@@ -384,26 +383,10 @@ var chapterOutlines = {
     { id: 'ol-ch8-8',   label: '8.9 Key Metrics & Terms' },
     { id: 'ol-ch8-9',   label: '8.10 Schedule Benchmarks by Scale' },
     { id: 'ol-ch8-ae',  label: 'Applied Exercises' },
-    { id: 'ol-ch8-sum', label: 'Chapter Summary' },
+    { id: 'ol-ch8-sum', label: null },
     { id: 'ol-ch8-ae1', label: '↳ AE-8.1 Cost Report Variance' },
     { id: 'ol-ch8-ae2', label: '↳ AE-8.2 Change Order Scenario' },
     { id: 'ol-ch8-ae3', label: '↳ AE-8.3 Occupancy & Holdback' }
-  ],
-  ch9: [
-    { id: 'ol-ch9-0',   label: '9.1 What Is Budget Management?' },
-    { id: 'ol-ch9-1',   label: '9.2 The Project Cost Report (PCR)' },
-    { id: 'ol-ch9-2',   label: '9.3 Buyout & the Construction Budget' },
-    { id: 'ol-ch9-3',   label: '9.4 Contingency — Sizing & Discipline' },
-    { id: 'ol-ch9-4',   label: '9.5 Variance Analysis' },
-    { id: 'ol-ch9-5',   label: '9.6 Cost-to-Complete & In-Balance Test' },
-    { id: 'ol-ch9-6',   label: '9.7 Loan Budget & LTC Reconciliation' },
-    { id: 'ol-ch9-7',   label: '9.8 Interest Reserve Management' },
-    { id: 'ol-ch9-8',   label: '9.9 Cost Reporting Cadence & Outputs' },
-    { id: 'ol-ch9-9',   label: '9.10 Common Sources of Budget Failure' },
-    { id: 'ol-ch9-10',  label: '9.11 Key Metrics & Terms' },
-    { id: 'ol-ch9-ae1', label: '↳ AE-9.1 Reading the Cost Report' },
-    { id: 'ol-ch9-ae2', label: '↳ AE-9.2 Buyout Reconciliation' },
-    { id: 'ol-ch9-ae3', label: '↳ AE-9.3 Interest Reserve & In-Balance' }
   ]
 };
 
@@ -701,8 +684,7 @@ var quizScriptMap = [
   { path: 'quizzes/quiz-5.js', varName: 'quiz5' },
   { path: 'quizzes/quiz-6.js', varName: 'quiz6' },
   { path: 'quizzes/quiz-7.js', varName: 'quiz7' },
-  { path: 'quizzes/quiz-8.js', varName: 'quiz8' },
-  { path: 'quizzes/quiz-9.js', varName: 'quiz9' }
+  { path: 'quizzes/quiz-8.js', varName: 'quiz8' }
 ];
 
 Promise.all(quizScriptMap.map(function(q) {
