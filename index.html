@@ -215,7 +215,7 @@
       <div class="chapter-view" id="view-ch7"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch8"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch9"><div class="chapter-loading">Loading chapter...</div></div>
-      <div class="chapter-view" id="view-ch10"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 10: Quality Control &amp; Inspections</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
+      <div class="chapter-view" id="view-ch10"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch11"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 11: Risk Management &amp; Insurance</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
       <div class="chapter-view" id="view-ch12"><div class="md-content"><span class="phase-tag phase-post">Post-Construction</span><h1>Chapter 12: Certificate of Occupancy &amp; Closeout</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
       <div class="chapter-view" id="view-ch13"><div class="md-content"><span class="phase-tag phase-post">Post-Construction</span><h1>Chapter 13: Leasing, Sales &amp; Marketing</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
@@ -241,15 +241,16 @@ var QUIZ_REGISTRY = {};
 // CHAPTER CONFIG
 // ─────────────────────────────────────────────
 var chapterConfig = {
-  ch1: { file: 'chapters/chapter-1.md', quizVar: 'quiz1', phase: 'pre' },
-  ch2: { file: 'chapters/chapter-2.md', quizVar: 'quiz2', phase: 'pre' },
-  ch3: { file: 'chapters/chapter-3.md', quizVar: 'quiz3', phase: 'pre' },
-  ch4: { file: 'chapters/chapter-4.md', quizVar: 'quiz4', phase: 'pre' },
-  ch5: { file: 'chapters/chapter-5.md', quizVar: 'quiz5', phase: 'pre' },
-  ch6: { file: 'chapters/chapter-6.md', quizVar: 'quiz6', phase: 'pre' },
-  ch7: { file: 'chapters/chapter-7.md', quizVar: 'quiz7', phase: 'con' },
-  ch8: { file: 'chapters/chapter-8.md', quizVar: 'quiz8', phase: 'con' },
-  ch9: { file: 'chapters/chapter-9.md', quizVar: 'quiz9', phase: 'con' }
+  ch1:  { file: 'chapters/chapter-1.md',  quizVar: 'quiz1',  phase: 'pre' },
+  ch2:  { file: 'chapters/chapter-2.md',  quizVar: 'quiz2',  phase: 'pre' },
+  ch3:  { file: 'chapters/chapter-3.md',  quizVar: 'quiz3',  phase: 'pre' },
+  ch4:  { file: 'chapters/chapter-4.md',  quizVar: 'quiz4',  phase: 'pre' },
+  ch5:  { file: 'chapters/chapter-5.md',  quizVar: 'quiz5',  phase: 'pre' },
+  ch6:  { file: 'chapters/chapter-6.md',  quizVar: 'quiz6',  phase: 'pre' },
+  ch7:  { file: 'chapters/chapter-7.md',  quizVar: 'quiz7',  phase: 'con' },
+  ch8:  { file: 'chapters/chapter-8.md',  quizVar: 'quiz8',  phase: 'con' },
+  ch9:  { file: 'chapters/chapter-9.md',  quizVar: 'quiz9',  phase: 'con' },
+  ch10: { file: 'chapters/chapter-10.md', quizVar: 'quiz10', phase: 'con' }
 };
 
 // ─────────────────────────────────────────────
@@ -408,6 +409,26 @@ var chapterOutlines = {
     { id: 'ol-ch9-ae2-sol', label: null },
     { id: 'ol-ch9-ae3',     label: '↳ AE-9.3 Interest Reserve & In-Balance' },
     { id: 'ol-ch9-ae3-sol', label: null }
+  ],
+  ch10: [
+    { id: 'ol-ch10-0',       label: '10.1 What Is Quality Control?' },
+    { id: 'ol-ch10-1',       label: '10.2 The Inspection Regime' },
+    { id: 'ol-ch10-2',       label: '10.3 Specifications & Submittals' },
+    { id: 'ol-ch10-3',       label: '10.4 Mock-Ups & Performance Testing' },
+    { id: 'ol-ch10-4',       label: '10.5 The Deficiency Log' },
+    { id: 'ol-ch10-5',       label: '10.6 OBC & Municipal Inspection' },
+    { id: 'ol-ch10-6',       label: '10.7 Tarion & Residential Warranty' },
+    { id: 'ol-ch10-7',       label: '10.8 Substantial Performance & Punch List' },
+    { id: 'ol-ch10-8',       label: '10.9 Closeout & Owner\u2019s Manual' },
+    { id: 'ol-ch10-9',       label: '10.10 Common Sources of Quality Failure' },
+    { id: 'ol-ch10-10',      label: '10.11 Key Metrics & Terms' },
+    { id: 'ol-ch10-ae',      label: 'Applied Exercises' },
+    { id: 'ol-ch10-ae1',     label: '↳ AE-10.1 Reading the Deficiency Log' },
+    { id: 'ol-ch10-ae1-sol', label: null },
+    { id: 'ol-ch10-ae2',     label: '↳ AE-10.2 Envelope Mock-Up Failure' },
+    { id: 'ol-ch10-ae2-sol', label: null },
+    { id: 'ol-ch10-ae3',     label: '↳ AE-10.3 Holdback & Warranty Reserve' },
+    { id: 'ol-ch10-ae3-sol', label: null }
   ]
 };
 
@@ -676,7 +697,7 @@ function setupScrollSpy(chId) {
 // ─────────────────────────────────────────────
 function buildPills() {
   var p1 = [[1,'Market Analysis & Feasibility'],[2,'Site Selection & Due Diligence'],[3,'Financing & Capital Stack'],[4,'Entitlements, Zoning & Permits'],[5,'Project Team Assembly'],[6,'Design & Architecture Process']];
-  var p2 = [[7,'Procurement & Contracting'],[8,'Construction Management'],[9,'Budget & Cost Control'],[10,'Quality Control'],[11,'Risk Management & Insurance']];
+  var p2 = [[7,'Procurement & Contracting'],[8,'Construction Management'],[9,'Budget & Cost Control'],[10,'Quality Control & Inspections'],[11,'Risk Management & Insurance']];
   var p3 = [[12,'CO & Closeout'],[13,'Leasing, Sales & Marketing'],[14,'Asset Management'],[15,'Disposition & Exit']];
   [[p1,'pills1'],[p2,'pills2'],[p3,'pills3']].forEach(function(pair) {
     var list = pair[0], cid = pair[1];
@@ -698,15 +719,16 @@ function buildPills() {
 buildPills();
 
 var quizScriptMap = [
-  { path: 'quizzes/quiz-1.js', varName: 'quiz1' },
-  { path: 'quizzes/quiz-2.js', varName: 'quiz2' },
-  { path: 'quizzes/quiz-3.js', varName: 'quiz3' },
-  { path: 'quizzes/quiz-4.js', varName: 'quiz4' },
-  { path: 'quizzes/quiz-5.js', varName: 'quiz5' },
-  { path: 'quizzes/quiz-6.js', varName: 'quiz6' },
-  { path: 'quizzes/quiz-7.js', varName: 'quiz7' },
-  { path: 'quizzes/quiz-8.js', varName: 'quiz8' },
-  { path: 'quizzes/quiz-9.js', varName: 'quiz9' }
+  { path: 'quizzes/quiz-1.js',  varName: 'quiz1' },
+  { path: 'quizzes/quiz-2.js',  varName: 'quiz2' },
+  { path: 'quizzes/quiz-3.js',  varName: 'quiz3' },
+  { path: 'quizzes/quiz-4.js',  varName: 'quiz4' },
+  { path: 'quizzes/quiz-5.js',  varName: 'quiz5' },
+  { path: 'quizzes/quiz-6.js',  varName: 'quiz6' },
+  { path: 'quizzes/quiz-7.js',  varName: 'quiz7' },
+  { path: 'quizzes/quiz-8.js',  varName: 'quiz8' },
+  { path: 'quizzes/quiz-9.js',  varName: 'quiz9' },
+  { path: 'quizzes/quiz-10.js', varName: 'quiz10' }
 ];
 
 Promise.all(quizScriptMap.map(function(q) {
