@@ -216,7 +216,7 @@
       <div class="chapter-view" id="view-ch8"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch9"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch10"><div class="chapter-loading">Loading chapter...</div></div>
-      <div class="chapter-view" id="view-ch11"><div class="md-content"><span class="phase-tag phase-con">Construction</span><h1>Chapter 11: Risk Management &amp; Insurance</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
+      <div class="chapter-view" id="view-ch11"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch12"><div class="md-content"><span class="phase-tag phase-post">Post-Construction</span><h1>Chapter 12: Certificate of Occupancy &amp; Closeout</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
       <div class="chapter-view" id="view-ch13"><div class="md-content"><span class="phase-tag phase-post">Post-Construction</span><h1>Chapter 13: Leasing, Sales &amp; Marketing</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
       <div class="chapter-view" id="view-ch14"><div class="md-content"><span class="phase-tag phase-post">Post-Construction</span><h1>Chapter 14: Asset Management &amp; Operations</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
@@ -250,7 +250,8 @@ var chapterConfig = {
   ch7:  { file: 'chapters/chapter-7.md',  quizVar: 'quiz7',  phase: 'con' },
   ch8:  { file: 'chapters/chapter-8.md',  quizVar: 'quiz8',  phase: 'con' },
   ch9:  { file: 'chapters/chapter-9.md',  quizVar: 'quiz9',  phase: 'con' },
-  ch10: { file: 'chapters/chapter-10.md', quizVar: 'quiz10', phase: 'con' }
+  ch10: { file: 'chapters/chapter-10.md', quizVar: 'quiz10', phase: 'con' },
+  ch11: { file: 'chapters/chapter-11.md', quizVar: 'quiz11', phase: 'con' }
 };
 
 // ─────────────────────────────────────────────
@@ -429,6 +430,26 @@ var chapterOutlines = {
     { id: 'ol-ch10-ae2-sol', label: null },
     { id: 'ol-ch10-ae3',     label: '↳ AE-10.3 Holdback & Warranty Reserve' },
     { id: 'ol-ch10-ae3-sol', label: null }
+  ],
+  ch11: [
+    { id: 'ol-ch11-0',       label: '11.1 What Is Risk Management?' },
+    { id: 'ol-ch11-1',       label: '11.2 The Risk Register & Framework' },
+    { id: 'ol-ch11-2',       label: '11.3 Insurance — The Risk Transfer Toolkit' },
+    { id: 'ol-ch11-3',       label: '11.4 The Insurance Procurement Process' },
+    { id: 'ol-ch11-4',       label: '11.5 Bonds & Other Guarantees' },
+    { id: 'ol-ch11-5',       label: '11.6 Indemnification & Contractual Risk' },
+    { id: 'ol-ch11-6',       label: '11.7 Lender Insurance Requirements' },
+    { id: 'ol-ch11-7',       label: '11.8 Claims Management' },
+    { id: 'ol-ch11-8',       label: '11.9 Force Majeure & Extraordinary Events' },
+    { id: 'ol-ch11-9',       label: '11.10 Common Sources of RM Failure' },
+    { id: 'ol-ch11-10',      label: '11.11 Key Metrics & Terms' },
+    { id: 'ol-ch11-ae',      label: 'Applied Exercises' },
+    { id: 'ol-ch11-ae1',     label: '↳ AE-11.1 Reading the Insurance Program' },
+    { id: 'ol-ch11-ae1-sol', label: null },
+    { id: 'ol-ch11-ae2',     label: '↳ AE-11.2 A Water Damage Claim' },
+    { id: 'ol-ch11-ae2-sol', label: null },
+    { id: 'ol-ch11-ae3',     label: '↳ AE-11.3 Risk Register Review' },
+    { id: 'ol-ch11-ae3-sol', label: null }
   ]
 };
 
@@ -728,7 +749,8 @@ var quizScriptMap = [
   { path: 'quizzes/quiz-7.js',  varName: 'quiz7' },
   { path: 'quizzes/quiz-8.js',  varName: 'quiz8' },
   { path: 'quizzes/quiz-9.js',  varName: 'quiz9' },
-  { path: 'quizzes/quiz-10.js', varName: 'quiz10' }
+  { path: 'quizzes/quiz-10.js', varName: 'quiz10' },
+  { path: 'quizzes/quiz-11.js', varName: 'quiz11' }
 ];
 
 Promise.all(quizScriptMap.map(function(q) {
