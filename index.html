@@ -175,7 +175,7 @@
     <div class="phase-label">Phase 3 — Post-Construction</div>
     <div class="chapter-item" data-target="ch12" onclick="showView('ch12',this)"><span class="ch-num">12</span>Marketing, Sales &amp; Leasing<span class="ch-status" id="st12"></span></div>
     <div class="chapter-item" data-target="ch13" onclick="showView('ch13',this)"><span class="ch-num">13</span>Condominium Registration &amp; Closing<span class="ch-status" id="st13"></span></div>
-    <div class="chapter-item" data-target="ch14" onclick="showView('ch14',this)"><span class="ch-num">14</span>Asset Management &amp; Operations<span class="ch-status" id="st14"></span></div>
+    <div class="chapter-item" data-target="ch14" onclick="showView('ch14',this)"><span class="ch-num">14</span>Project Completion &amp; Investor Reporting<span class="ch-status" id="st14"></span></div>
     <div class="chapter-item" data-target="ch15" onclick="showView('ch15',this)"><span class="ch-num">15</span>Disposition &amp; Exit Strategies<span class="ch-status" id="st15"></span></div>
   </div>
 
@@ -205,7 +205,7 @@
         </div>
       </div>
 
-      <!-- CHAPTER VIEWS ch1–ch12 (dynamic loaders) -->
+      <!-- CHAPTER VIEWS ch1–ch13 (dynamic loaders) -->
       <div class="chapter-view" id="view-ch1"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch2"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch3"><div class="chapter-loading">Loading chapter...</div></div>
@@ -218,12 +218,12 @@
       <div class="chapter-view" id="view-ch10"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch11"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch12"><div class="chapter-loading">Loading chapter...</div></div>
-
-      <!-- CHAPTER 13 — dynamic loader (MD file ready) -->
       <div class="chapter-view" id="view-ch13"><div class="chapter-loading">Loading chapter...</div></div>
 
-      <!-- CHAPTERS 14–15 — coming soon -->
-      <div class="chapter-view" id="view-ch14"><div class="md-content"><span class="phase-tag phase-post">Post-Construction</span><h1>Chapter 14: Asset Management &amp; Operations</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
+      <!-- CHAPTER 14 — dynamic loader -->
+      <div class="chapter-view" id="view-ch14"><div class="chapter-loading">Loading chapter...</div></div>
+
+      <!-- CHAPTER 15 — coming soon -->
       <div class="chapter-view" id="view-ch15"><div class="md-content"><span class="phase-tag phase-post">Post-Construction</span><h1>Chapter 15: Disposition &amp; Exit Strategies</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
 
     </div>
@@ -257,7 +257,8 @@ var chapterConfig = {
   ch10: { file: 'chapters/chapter-10.md', quizVar: 'quiz10', phase: 'con' },
   ch11: { file: 'chapters/chapter-11.md', quizVar: 'quiz11', phase: 'con' },
   ch12: { file: 'chapters/chapter-12.md', quizVar: 'quiz12', phase: 'post' },
-  ch13: { file: 'chapters/chapter-13.md', quizVar: 'quiz13', phase: 'post' }
+  ch13: { file: 'chapters/chapter-13.md', quizVar: 'quiz13', phase: 'post' },
+  ch14: { file: 'chapters/chapter-14.md', quizVar: 'quiz14', phase: 'post' }
 };
 
 // ─────────────────────────────────────────────
@@ -495,6 +496,25 @@ var chapterOutlines = {
     { id: 'ol-ch13-ae2-sol', label: null },
     { id: 'ol-ch13-ae3',     label: '↳ AE-13.3 Turnover & Initial Budget' },
     { id: 'ol-ch13-ae3-sol', label: null }
+  ],
+  ch14: [
+    { id: 'ol-ch14-0',       label: '14.1 The Post-Closing Financial Position' },
+    { id: 'ol-ch14-1',       label: '14.2 Project Return Calculations' },
+    { id: 'ol-ch14-2',       label: '14.3 The Investor Distribution Waterfall' },
+    { id: 'ol-ch14-3',       label: '14.4 The Project Completion Audit' },
+    { id: 'ol-ch14-4',       label: '14.5 Tax Considerations at Project Close' },
+    { id: 'ol-ch14-5',       label: '14.6 Investor Reporting Obligations' },
+    { id: 'ol-ch14-6',       label: '14.7 Project Post-Mortem' },
+    { id: 'ol-ch14-7',       label: '14.8 Winding Down the Project Entity' },
+    { id: 'ol-ch14-8',       label: '14.9 Common Failure Modes' },
+    { id: 'ol-ch14-9',       label: '14.10 Key Metrics & Terms' },
+    { id: 'ol-ch14-ae',      label: 'Applied Exercises' },
+    { id: 'ol-ch14-ae1',     label: '↳ AE-14.1 Return Calculation & Waterfall' },
+    { id: 'ol-ch14-ae1-sol', label: null },
+    { id: 'ol-ch14-ae2',     label: '↳ AE-14.2 Post-Mortem Variance Analysis' },
+    { id: 'ol-ch14-ae2-sol', label: null },
+    { id: 'ol-ch14-ae3',     label: '↳ AE-14.3 Preferred Return Calculation' },
+    { id: 'ol-ch14-ae3-sol', label: null }
   ]
 };
 
@@ -764,7 +784,7 @@ function setupScrollSpy(chId) {
 function buildPills() {
   var p1 = [[1,'Market Analysis & Feasibility'],[2,'Site Selection & Due Diligence'],[3,'Financing & Capital Stack'],[4,'Entitlements, Zoning & Permits'],[5,'Project Team Assembly'],[6,'Design & Architecture Process']];
   var p2 = [[7,'Procurement & Contracting'],[8,'Construction Management'],[9,'Budget & Cost Control'],[10,'Quality Control & Inspections'],[11,'Risk Management & Insurance']];
-  var p3 = [[12,'Marketing, Sales & Leasing'],[13,'Condominium Registration & Closing'],[14,'Asset Management'],[15,'Disposition & Exit']];
+  var p3 = [[12,'Marketing, Sales & Leasing'],[13,'Condominium Registration & Closing'],[14,'Project Completion & Investor Reporting'],[15,'Disposition & Exit']];
   [[p1,'pills1'],[p2,'pills2'],[p3,'pills3']].forEach(function(pair) {
     var list = pair[0], cid = pair[1];
     var c = document.getElementById(cid);
@@ -797,7 +817,8 @@ var quizScriptMap = [
   { path: 'quizzes/quiz-10.js', varName: 'quiz10' },
   { path: 'quizzes/quiz-11.js', varName: 'quiz11' },
   { path: 'quizzes/quiz-12.js', varName: 'quiz12' },
-  { path: 'quizzes/quiz-13.js', varName: 'quiz13' }
+  { path: 'quizzes/quiz-13.js', varName: 'quiz13' },
+  { path: 'quizzes/quiz-14.js', varName: 'quiz14' }
 ];
 
 Promise.all(quizScriptMap.map(function(q) {
