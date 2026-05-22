@@ -205,7 +205,7 @@
         </div>
       </div>
 
-      <!-- CHAPTER VIEWS ch1–ch13 (dynamic loaders) -->
+      <!-- CHAPTER VIEWS — dynamic loaders -->
       <div class="chapter-view" id="view-ch1"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch2"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch3"><div class="chapter-loading">Loading chapter...</div></div>
@@ -219,12 +219,8 @@
       <div class="chapter-view" id="view-ch11"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch12"><div class="chapter-loading">Loading chapter...</div></div>
       <div class="chapter-view" id="view-ch13"><div class="chapter-loading">Loading chapter...</div></div>
-
-      <!-- CHAPTER 14 — dynamic loader -->
       <div class="chapter-view" id="view-ch14"><div class="chapter-loading">Loading chapter...</div></div>
-
-      <!-- CHAPTER 15 — coming soon -->
-      <div class="chapter-view" id="view-ch15"><div class="md-content"><span class="phase-tag phase-post">Post-Construction</span><h1>Chapter 15: Disposition &amp; Exit Strategies</h1><div class="coming-soon"><span class="cs-icon">&#9998;</span><strong>Coming Soon</strong>This chapter is currently being written.</div></div></div>
+      <div class="chapter-view" id="view-ch15"><div class="chapter-loading">Loading chapter...</div></div>
 
     </div>
 
@@ -258,7 +254,8 @@ var chapterConfig = {
   ch11: { file: 'chapters/chapter-11.md', quizVar: 'quiz11', phase: 'con' },
   ch12: { file: 'chapters/chapter-12.md', quizVar: 'quiz12', phase: 'post' },
   ch13: { file: 'chapters/chapter-13.md', quizVar: 'quiz13', phase: 'post' },
-  ch14: { file: 'chapters/chapter-14.md', quizVar: 'quiz14', phase: 'post' }
+  ch14: { file: 'chapters/chapter-14.md', quizVar: 'quiz14', phase: 'post' },
+  ch15: { file: 'chapters/chapter-15.md', quizVar: 'quiz15', phase: 'post' }
 };
 
 // ─────────────────────────────────────────────
@@ -427,7 +424,7 @@ var chapterOutlines = {
     { id: 'ol-ch10-5',       label: '10.6 OBC & Municipal Inspection' },
     { id: 'ol-ch10-6',       label: '10.7 Tarion & Residential Warranty' },
     { id: 'ol-ch10-7',       label: '10.8 Substantial Performance & Punch List' },
-    { id: 'ol-ch10-8',       label: '10.9 Closeout & Owner\u2019s Manual' },
+    { id: 'ol-ch10-8',       label: "10.9 Closeout & Owner's Manual" },
     { id: 'ol-ch10-9',       label: '10.10 Common Sources of Quality Failure' },
     { id: 'ol-ch10-10',      label: '10.11 Key Metrics & Terms' },
     { id: 'ol-ch10-ae',      label: 'Applied Exercises' },
@@ -515,6 +512,25 @@ var chapterOutlines = {
     { id: 'ol-ch14-ae2-sol', label: null },
     { id: 'ol-ch14-ae3',     label: '↳ AE-14.3 Preferred Return Calculation' },
     { id: 'ol-ch14-ae3-sol', label: null }
+  ],
+  ch15: [
+    { id: 'ol-ch15-0',       label: '15.1 The Disposition Decision Framework' },
+    { id: 'ol-ch15-1',       label: '15.2 Valuation Methods for Disposition' },
+    { id: 'ol-ch15-2',       label: '15.3 The Investment Sales Process' },
+    { id: 'ol-ch15-3',       label: '15.4 Purpose-Built Rental: MLI Select' },
+    { id: 'ol-ch15-4',       label: '15.5 Tax Considerations in Disposition' },
+    { id: 'ol-ch15-5',       label: '15.6 Retained Commercial Units' },
+    { id: 'ol-ch15-6',       label: '15.7 Exit from the Joint Venture Structure' },
+    { id: 'ol-ch15-7',       label: '15.8 Portfolio-Level Disposition Strategy' },
+    { id: 'ol-ch15-8',       label: '15.9 Common Failure Modes' },
+    { id: 'ol-ch15-9',       label: '15.10 Key Metrics & Terms' },
+    { id: 'ol-ch15-ae',      label: 'Applied Exercises' },
+    { id: 'ol-ch15-ae1',     label: '↳ AE-15.1 Hold vs. Sell Analysis' },
+    { id: 'ol-ch15-ae1-sol', label: null },
+    { id: 'ol-ch15-ae2',     label: '↳ AE-15.2 CRU Disposition Analysis' },
+    { id: 'ol-ch15-ae2-sol', label: null },
+    { id: 'ol-ch15-ae3',     label: '↳ AE-15.3 JV Exit & Shotgun Analysis' },
+    { id: 'ol-ch15-ae3-sol', label: null }
   ]
 };
 
@@ -818,7 +834,8 @@ var quizScriptMap = [
   { path: 'quizzes/quiz-11.js', varName: 'quiz11' },
   { path: 'quizzes/quiz-12.js', varName: 'quiz12' },
   { path: 'quizzes/quiz-13.js', varName: 'quiz13' },
-  { path: 'quizzes/quiz-14.js', varName: 'quiz14' }
+  { path: 'quizzes/quiz-14.js', varName: 'quiz14' },
+  { path: 'quizzes/quiz-15.js', varName: 'quiz15' }
 ];
 
 Promise.all(quizScriptMap.map(function(q) {
